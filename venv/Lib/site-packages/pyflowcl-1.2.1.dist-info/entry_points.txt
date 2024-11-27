@@ -1,0 +1,3 @@
+[console_scripts]
+flow-cli=pyflowcl.cli:app
+

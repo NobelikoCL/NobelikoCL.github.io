@@ -555,3 +555,7 @@ Iniciando proceso de guest checkout
 Redirigiendo a Flow: https://sandbox.flow.cl/app/web/pay.php?token=4030FB8628D76706B95C89F0280ABC95AE9BD67V
 Iniciando proceso de guest checkout
 Iniciando proceso de guest checkout
+Iniciando proceso de guest checkout
+Iniciando proceso de pago con Flow
+Error en process_flow_payment: No hay datos de checkout disponibles
+Iniciando proceso de guest checkout

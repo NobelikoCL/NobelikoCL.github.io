@@ -1,0 +1,90 @@
+Metadata-Version: 2.1
+Name: django-payments-flow
+Version: 2024.9.23
+Summary: Soporte Flow para Django Payments
+Home-page: https://mariofix.github.io/django-payments-flow/
+License: MIT
+Keywords: flow,pagos,django,payment,django-payments
+Author: Mario Hernandez
+Author-email: mariofix@proton.me
+Requires-Python: >=3.9,<4.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: django-payments (>=2.0.0,<=3.1)
+Requires-Dist: pyflowcl (>=1.2,<2.0)
+Project-URL: Documentation, https://mariofix.github.io/django-payments-flow/
+Project-URL: Repository, https://github.com/mariofix/django-payments-flow
+Description-Content-Type: text/markdown
+
+# django-payments-flow
+
+`django-payments-flow` es una variante de Django Payments que implementa la
+creación, confirmación y expiración de pagos realizados a través de Flow. Este
+módulo proporciona integración con la API de Flow para facilitar el
+procesamiento y gestión de pagos en tu aplicación web Django.
+
+![PyPI - Status](https://img.shields.io/pypi/status/django-payments-flow)
+[![Downloads](https://pepy.tech/badge/django-payments-flow)](https://pepy.tech/project/django-payments-flow)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7dc3c8d6fe844fdaa1de0cb86c242934)](https://app.codacy.com/gh/mariofix/django-payments-flow/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/7dc3c8d6fe844fdaa1de0cb86c242934)](https://app.codacy.com/gh/mariofix/django-payments-flow/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/mariofix/django-payments-flow/main.svg)](https://results.pre-commit.ci/latest/github/mariofix/django-payments-flow/main)
+![PyPI](https://img.shields.io/pypi/v/django-payments-flow)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-payments-flow)
+![PyPI - Implementation](https://img.shields.io/pypi/implementation/django-payments-flow)
+![PyPI - License](https://img.shields.io/pypi/l/django-payments-flow)
+
+## Introducción
+
+`django-payments-flow` está diseñado para simplificar la integración de
+pagos de Flow en tu proyecto Django Payments. Con este módulo, puedes crear y
+gestionar pagos utilizando la pasarela de pago de Flow de manera sencilla.
+
+Características principales:
+
+- Crea y procesa pagos de forma segura con Flow.
+- Recibe notificaciones de confirmación de pago.
+- Maneja automáticamente la expiración y cancelación de pagos.
+
+## Instalación
+
+Puedes instalar django-payments-flow utilizando pip:
+
+```shell
+pip install django-payments-flow
+```
+
+O utilizando poetry:
+
+```shell
+poetry add django-payments-flow
+```
+
+## Configuración
+
+La configuracion se realiza como una variante de Django Payments
+
+```python
+PAYMENT_VARIANTS = {
+    "flow": ("django_payments_flow.FlowProvider", {
+        "key": 1,
+        "secret": "qwertyasdf0123456789",
+    })
+}
+```
+
+Puedes ver mas opciones de configuracion [en la documentacion](https://mariofix.github.io/django-payments-flow/uso/#variables-de-configuracion)
+
+## Licencia
+
+El código está bajo licencia MIT
+
