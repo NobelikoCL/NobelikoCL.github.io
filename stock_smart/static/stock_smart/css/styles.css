@@ -1,0 +1,425 @@
+:root {
+    --primary-color: #2196F3;
+    --secondary-color: #1976D2;
+    --text-color: #333;
+    --background-color: #f5f5f5;
+    --white: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1rem 0;
+}
+
+.search-form {
+    max-width: 500px;
+    width: 100%;
+}
+
+.btn-search {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.btn-search:hover {
+    background-color: #1565C0;
+    color: var(--white);
+}
+
+/* Barra de categorías */
+.categories-bar {
+    background-color: #333;
+    padding: 0.8rem 0;
+}
+
+.btn-categories {
+    color: var(--white);
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-categories:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: var(--white);
+}
+
+.offers-link {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.offers-link:hover {
+    color: #ffd700;
+}
+
+/* Footer */
+.footer {
+    background-color: #333;
+    color: #fff;
+}
+
+.footer h5 {
+    color: #fff;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+}
+
+.footer ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+}
+
+/* Alertas personalizadas */
+.alert {
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar-brand img {
+        height: 30px;
+    }
+    
+    .search-form {
+        margin: 1rem 0;
+    }
+}
+
+/* Secciones */
+.section-title {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+/* Tarjetas de productos */
+.product-card {
+    transition: transform 0.2s;
+    border: 1px solid #dee2e6;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: contain;
+    padding: 1rem;
+}
+
+.price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.final-price {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Categorías */
+.category-card {
+    transition: transform 0.2s;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-card .card-title {
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+/* Carousel */
+.hero-section .carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .hero-section .carousel-item img {
+        height: 200px;
+    }
+}
+
+/* Añade estos estilos a tu archivo CSS existente */
+
+.search-results {
+    margin-top: 2rem;
+}
+
+.product-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.product-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.alert-info {
+    background-color: #e3f2fd;
+    border-color: #90caf9;
+    color: #0d47a1;
+}
+
+/* Mega Menu Styles */
+.mega-menu-container {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.mega-menu-wrapper {
+    position: static !important;
+}
+
+.btn-categories {
+    padding: 0.8rem 1.5rem;
+    color: var(--text-color);
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-categories:hover,
+.btn-categories:focus {
+    color: var(--primary-color);
+    background-color: rgba(33, 150, 243, 0.1);
+}
+
+.mega-menu {
+    width: 100%;
+    padding: 2rem 0;
+    border: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    margin-top: 0;
+    background-color: #fff;
+}
+
+.mega-menu-category {
+    padding: 1rem;
+    height: 100%;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mega-menu-category:hover {
+    background-color: rgba(33, 150, 243, 0.05);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.category-header h6 {
+    margin: 0;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.category-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.subcategory-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.subcategory-list li {
+    margin-bottom: 0.5rem;
+}
+
+.subcategory-list a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0;
+    transition: all 0.2s ease;
+}
+
+.subcategory-list a:hover {
+    color: var(--primary-color);
+    padding-left: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .mega-menu {
+        padding: 1rem 0;
+    }
+
+    .mega-menu-category {
+        padding: 0.5rem;
+    }
+
+    .category-header {
+        margin-bottom: 0.5rem;
+    }
+
+    .subcategory-list li {
+        margin-bottom: 0.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mega-menu-category {
+        border-bottom: 1px solid #e9ecef;
+        border-radius: 0;
+    }
+
+    .col-md-6:last-child .mega-menu-category {
+        border-bottom: none;
+    }
+}
+
+/* About Page Styles */
+.display-4 {
+    font-weight: 600;
+}
+
+.lead {
+    font-size: 1.2rem;
+}
+
+.card {
+    border: none;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* Estilos para el placeholder de imagen */
+.no-image-placeholder {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.no-image-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.no-image-placeholder span {
+    font-size: 0.9rem;
+}
+
+/* Estilos para el checkout */
+.container {
+    max-width: 960px;
+}
+
+.needs-validation {
+    margin-bottom: 30px;
+}
+
+.list-group-item {
+    border-radius: 0;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+
+.form-select:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+
+/* Estilos para los iconos del header */
+.navbar .fa-shopping-cart,
+.navbar .fa-user-circle {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.navbar .badge {
+    font-size: 0.6rem;
+    padding: 0.25em 0.4em;
+}
+
+/* Ajuste de posición para el badge del carrito */
+.position-relative {
+    display: inline-block;
+}

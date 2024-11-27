@@ -1,0 +1,58 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Instrucciones de Transferencia - Stock Smart{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Instrucciones de Pago</h4>
+                    
+                    <div class="alert alert-info">
+                        <h5 class="alert-heading">Número de Orden: {{ order.order_number }}</h5>
+                        <p class="mb-0">Total a pagar: ${{ order.total_amount|format_price }}</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Datos para transferencia:</h5>
+                        <ul class="list-unstyled">
+                            <li><strong>Banco:</strong> {{ bank_info.bank_name }}</li>
+                            <li><strong>Tipo de Cuenta:</strong> {{ bank_info.account_type }}</li>
+                            <li><strong>N° de Cuenta:</strong> {{ bank_info.account_number }}</li>
+                            <li><strong>RUT:</strong> {{ bank_info.rut }}</li>
+                            <li><strong>Nombre:</strong> {{ bank_info.name }}</li>
+                            <li><strong>Email:</strong> {{ bank_info.email }}</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <h6 class="alert-heading">Importante:</h6>
+                        <ol class="mb-0">
+                            <li>Realiza la transferencia por el monto exacto</li>
+                            <li>En el comentario de la transferencia indica tu número de orden</li>
+                            <li>Envía el comprobante a {{ bank_info.email }}</li>
+                            <li>Tu orden será procesada una vez confirmado el pago</li>
+                        </ol>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'stock_smart:order_tracking' order.order_number %}" 
+                           class="btn btn-primary">
+                            <i class="fas fa-box me-2"></i>Seguimiento de Orden
+                        </a>
+                        
+                        <a href="{% url 'stock_smart:productos_lista' %}" 
+                           class="btn btn-outline-secondary ms-2">
+                            <i class="fas fa-home me-2"></i>Volver a la Tienda
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

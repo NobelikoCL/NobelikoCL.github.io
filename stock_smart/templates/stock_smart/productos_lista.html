@@ -1,0 +1,280 @@
+{% extends 'stock_smart/base.html' %}
+<<<<<<< HEAD
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Productos - Stock Smart{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        {% for producto in productos %}
+        <div class="col">
+            <div class="card h-100 product-card shadow-sm">
+                <div class="card-img-wrapper">
+                    {% if producto.image %}
+                        <img src="{{ producto.image.url }}" class="card-img-top" alt="{{ producto.name }}">
+                    {% else %}
+                        <img src="{% static 'stock_smart/img/no-image.png' %}" class="card-img-top" alt="No imagen disponible">
+                    {% endif %}
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-truncate" title="{{ producto.name }}">{{ producto.name }}</h5>
+                    
+                    <div class="pricing mb-3">
+                        {% if producto.discount_percentage > 0 %}
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="text-decoration-line-through text-muted me-2">
+                                    ${{ producto.published_price|format_price }}
+                                </span>
+                                <span class="badge bg-danger">
+                                    -{{ producto.discount_percentage }}%
+                                </span>
+                            </div>
+                            <div class="final-price">
+                                ${{ producto.final_price|format_price }}
+                            </div>
+                        {% else %}
+                            <div class="final-price">
+                                ${{ producto.published_price|format_price }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mt-auto">
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-outline-primary w-100 mb-2 add-to-cart-btn" 
+                                    data-product-id="{{ producto.id }}">
+                                <i class="fas fa-shopping-cart me-2"></i>Agregar al Carrito
+                            </button>
+                            <button type="button" class="btn btn-primary w-100 buy-now-btn" 
+                                    data-product-id="{{ producto.id }}">
+                                <i class="fas fa-bolt me-2"></i>Comprar Ahora
+                            </button>
+=======
+
+{% load static %}
+
+{% block title %}{{ titulo }} - Stock Smart{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="mb-4">{{ titulo }}</h1>
+    {% if descripcion %}
+        <p class="lead mb-4">{{ descripcion }}</p>
+    {% endif %}
+
+    {% if productos %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            {% for producto in productos %}
+            <div class="col">
+                <div class="card h-100">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+                    {% else %}
+                        <div class="text-center p-3 bg-light">Sin imagen disponible</div>
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        
+                        <div class="mb-3">
+                            {% if producto.precio_oferta %}
+                                <span class="text-danger h5">${{ producto.precio_oferta }}</span>
+                                <small class="text-muted text-decoration-line-through">${{ producto.precio }}</small>
+                            {% else %}
+                                <span class="h5">${{ producto.precio }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <form method="POST" action="{% url 'stock_smart:agregar_carrito' producto.id %}" class="mb-2">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-primary w-100">
+                                    <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                                </button>
+                            </form>
+                            
+                            <form method="POST" action="{% url 'stock_smart:comprar_ahora' producto.id %}" class="mb-2">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="bi bi-lightning-charge"></i> Comprar Ahora
+                                </button>
+                            </form>
+                            
+                            <a href="{% url 'stock_smart:producto_detalle' producto.slug %}" 
+                               class="btn btn-link w-100">Ver Detalles</a>
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+                        </div>
+                    </div>
+                </div>
+            </div>
+<<<<<<< HEAD
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Toast para mensajes -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="toast-notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Stock Smart</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body"></div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Agregar al carrito
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            addToCart(productId);
+        });
+    });
+
+    // Comprar ahora
+    document.querySelectorAll('.buy-now-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            buyNow(productId);
+        });
+    });
+});
+
+function addToCart(productId) {
+    fetch(`/cart/add/${productId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showToast('Éxito', data.message || 'Producto agregado al carrito');
+            updateCartCounter(data.cart_count);
+        } else {
+            showToast('Error', data.error || 'Error al agregar al carrito');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast('Error', 'Error al agregar al carrito');
+    });
+}
+
+function buyNow(productId) {
+    window.location.href = `/buy-now/${productId}/`;
+}
+
+function showToast(title, message) {
+    const toast = document.getElementById('toast-notification');
+    const toastBody = toast.querySelector('.toast-body');
+    toastBody.textContent = message;
+    
+    const bsToast = new bootstrap.Toast(toast);
+    bsToast.show();
+}
+
+function updateCartCounter(count) {
+    const counter = document.getElementById('cart-counter');
+    if (counter) {
+        counter.textContent = count;
+    }
+}
+</script>
+
+<style>
+.product-card {
+    transition: transform 0.2s;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-wrapper {
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+
+.card-img-wrapper img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.pricing {
+    font-size: 0.9rem;
+}
+
+.final-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+.badge {
+    padding: 0.5em 0.8em;
+}
+
+.buy-now-btn {
+    animation: shake 0.5s ease-in-out infinite;
+    animation-play-state: paused;
+}
+
+.buy-now-btn:hover {
+    animation-play-state: running;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(0); }
+    75% { transform: translateX(2px); }
+    100% { transform: translateX(0); }
+}
+
+/* Mejoras de responsive */
+@media (max-width: 768px) {
+    .card-img-wrapper {
+        height: 180px;
+    }
+    
+    .final-price {
+        font-size: 1.3rem;
+    }
+}
+</style>
+=======
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            {% if query %}
+                No se encontraron productos que coincidan con "{{ query }}"
+            {% else %}
+                No hay productos disponibles en este momento
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+{% endblock %}

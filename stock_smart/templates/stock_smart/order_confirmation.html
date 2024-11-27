@@ -1,0 +1,40 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Confirmación de Pedido - Stock Smart{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card shadow-sm">
+        <div class="card-body text-center">
+            <i class="fas fa-check-circle text-success fa-4x mb-3"></i>
+            <h2 class="card-title mb-4">¡Gracias por tu compra!</h2>
+            <p class="lead mb-4">Tu número de orden es: <strong>{{ order.order_number }}</strong></p>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Detalles del Pedido</h5>
+                            <p class="mb-2">Método de pago: {{ payment_method }}</p>
+                            <p class="mb-2">Método de envío: {{ shipping_method }}</p>
+                            <p class="mb-0">Estado: {{ order.get_status_display }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 col-md-8 mx-auto">
+                        <a href="{% url 'stock_smart:tracking' %}?order_number={{ order.order_number }}" 
+                           class="btn btn-primary">
+                            <i class="fas fa-truck me-2"></i>Seguir mi pedido
+                        </a>
+                        <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-shopping-bag me-2"></i>Seguir comprando
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'stock_smart/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Mi Cuenta</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Información Personal</h5>
+                    <p><strong>Nombre:</strong> {{ usuario.get_full_name }}</p>
+                    <p><strong>Email:</strong> {{ usuario.email }}</p>
+                    <p><strong>Teléfono:</strong> {{ perfil.telefono }}</p>
+                    <a href="{% url 'stock_smart:perfil_usuario' %}" class="btn btn-primary">Editar Perfil</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Acciones Rápidas</h5>
+                    <div class="list-group">
+                        <a href="{% url 'stock_smart:mis_pedidos' %}" class="list-group-item list-group-item-action">Mis Pedidos</a>
+                        <a href="{% url 'stock_smart:favoritos' %}" class="list-group-item list-group-item-action">Mis Favoritos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

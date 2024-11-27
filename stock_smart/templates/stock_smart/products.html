@@ -1,0 +1,90 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Productos Destacados -->
+    {% if featured_products %}
+    <section class="mb-5">
+        <h3 class="mb-4">Productos Destacados</h3>
+        <div class="row">
+            {% for product in featured_products %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <div class="no-image-placeholder">
+                            <span>Sin imagen</span>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <div class="price-container mb-3">
+                            <span class="final-price">${{ product.published_price|floatformat:0|intcomma }}</span>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-sm add-to-cart" 
+                                    data-product-id="{{ product.id }}"
+                                    onclick="addToCart('{{ product.id }}')">
+                                <i class="fas fa-cart-plus"></i> Añadir al carrito
+                            </button>
+                            <a href="{% url 'stock_smart:checkout' product.id %}" class="btn btn-success btn-sm">
+                                <i class="fas fa-shopping-bag"></i> Compra Rápida
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Productos con Descuento -->
+    {% if discounted_products %}
+    <section class="mb-5">
+        <h3 class="mb-4">Ofertas Especiales</h3>
+        <div class="row">
+            {% for product in discounted_products %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <div class="no-image-placeholder">
+                            <span>Sin imagen</span>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <div class="price-container mb-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="original-price">${{ product.published_price|format_price }}</span>
+                                <span class="discount-badge">-{{ product.discount_percentage|floatformat:0 }}%</span>
+                            </div>
+                            <div class="final-price-container">
+                                <span class="final-price">${{ product.get_final_price|format_price }}</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-sm add-to-cart" 
+                                    data-product-id="{{ product.id }}"
+                                    onclick="addToCart('{{ product.id }}')">
+                                <i class="fas fa-cart-plus"></i> Añadir al carrito
+                            </button>
+                            <a href="{% url 'stock_smart:checkout' product.id %}" class="btn btn-success btn-sm">
+                                <i class="fas fa-shopping-bag"></i> Compra Rápida
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}

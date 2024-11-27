@@ -1,0 +1,68 @@
+{% extends 'stock_smart/base.html' %}
+% load static %}
+% load custom_filters %}
+{% block title %}Checkout - Stock Smart{% endblock %}
+{% block content %}
+div class="container my-5">
+   <div class="row">
+       <!-- Resumen del pedido -->
+       <div class="col-md-8">
+           <div class="card shadow-sm mb-4">
+               <div class="card-body">
+                   <h5 class="card-title mb-4">Resumen del Pedido</h5>
+                   {% for item in cart_items %}
+                   <div class="d-flex mb-3 align-items-center">
+                       <div class="flex-shrink-0">
+                           {% if item.product.image %}
+                               <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" 
+                                    style="width: 80px; height: 80px; object-fit: contain;">
+                           {% else %}
+                               <img src="{% static 'stock_smart/img/no-image.png' %}" 
+                                    alt="No imagen" style="width: 80px; height: 80px; object-fit: contain;">
+                           {% endif %}
+                       </div>
+                       <div class="flex-grow-1 ms-3">
+                           <h6 class="mb-1">{{ item.product.name }}</h6>
+                           <p class="mb-1 text-muted">Cantidad: {{ item.quantity }}</p>
+                           <p class="mb-0 text-primary">${{ item.total|format_price }}</p>
+                       </div>
+                   </div>
+                   {% if not forloop.last %}<hr>{% endif %}
+                   {% endfor %}
+               </div>
+           </div>
+       </div>
+        <!-- Resumen de costos -->
+       <div class="col-md-4">
+           <div class="card shadow-sm">
+               <div class="card-body">
+                   <h5 class="card-title mb-4">Resumen</h5>
+                   <div class="d-flex justify-content-between mb-2">
+                       <span>Subtotal</span>
+                       <span>${{ subtotal|format_price }}</span>
+                   </div>
+                   <div class="d-flex justify-content-between mb-2">
+                       <span>IVA (19%)</span>
+                       <span>${{ iva|format_price }}</span>
+                   </div>
+                   <hr>
+                   <div class="d-flex justify-content-between mb-4">
+                       <strong>Total</strong>
+                       <strong class="text-primary">${{ total|format_price }}</strong>
+                   </div>
+                   <div class="d-grid">
+                       <button type="button" class="btn btn-primary" onclick="proceedToPayment()">
+                           <i class="fas fa-lock me-2"></i>Proceder al Pago
+                       </button>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+/div>
+<script>
+unction proceedToPayment() {
+   window.location.href = "{% url 'stock_smart:cart_payment' %}";
+
+/script>
+% endblock %}

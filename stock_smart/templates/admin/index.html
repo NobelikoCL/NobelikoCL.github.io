@@ -1,0 +1,187 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    .dashboard-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+    }
+
+    .stat-icon {
+        font-size: 2.5rem;
+        margin-right: 1rem;
+        color: var(--accent);
+    }
+
+    .stat-info h3 {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .stat-info p {
+        margin: 0.25rem 0 0;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .chart-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .chart-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .chart-card h3 {
+        margin: 0 0 1rem;
+        color: #333;
+    }
+
+    .recent-activity {
+        margin-top: 2rem;
+    }
+
+    .activity-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .activity-icon {
+        margin-right: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .activity-info {
+        flex-grow: 1;
+    }
+
+    .activity-time {
+        color: #666;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-stats">
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Ventas del Mes</h3>
+            <p>${{ ventas_mes|default:"0" }}</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Nuevos Clientes</h3>
+            <p>{{ nuevos_clientes|default:"0" }}</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-box"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Productos Activos</h3>
+            <p>{{ productos_activos|default:"0" }}</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-truck"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Pedidos Pendientes</h3>
+            <p>{{ pedidos_pendientes|default:"0" }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="chart-container">
+    <div class="chart-card">
+        <h3>Ventas por Mes</h3>
+        <canvas id="ventasChart"></canvas>
+    </div>
+    <div class="chart-card">
+        <h3>Top Categorías</h3>
+        <canvas id="categoriasChart"></canvas>
+    </div>
+</div>
+
+<div class="recent-activity">
+    <h2>Actividad Reciente</h2>
+    {% for actividad in actividades_recientes %}
+    <div class="activity-item">
+        <div class="activity-icon">
+            <i class="fas fa-{{ actividad.icono }}"></i>
+        </div>
+        <div class="activity-info">
+            <div>{{ actividad.descripcion }}</div>
+            <div class="activity-time">{{ actividad.fecha }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    // Gráfico de Ventas
+    const ventasCtx = document.getElementById('ventasChart').getContext('2d');
+    new Chart(ventasCtx, {
+        type: 'line',
+        data: {{ datos_ventas|safe }},
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+
+    // Gráfico de Categorías
+    const categoriasCtx = document.getElementById('categoriasChart').getContext('2d');
+    new Chart(categoriasCtx, {
+        type: 'doughnut',
+        data: {{ datos_categorias|safe }},
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

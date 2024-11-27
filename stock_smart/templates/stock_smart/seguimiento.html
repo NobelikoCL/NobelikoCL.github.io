@@ -1,0 +1,342 @@
+{% extends 'stock_smart/base.html' %}
+<<<<<<< HEAD
+{% load static %}
+
+{% block title %}Seguimiento de Pedido - Stock Smart{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="text-center mb-4">Seguimiento de Pedido</h1>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <form method="GET" class="mb-4">
+                        <div class="input-group">
+                            <input type="text" name="order_number" class="form-control" 
+                                   placeholder="Ingresa el número de pedido" 
+                                   value="{{ request.GET.order_number|default:'' }}">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search me-2"></i>
+=======
+
+{% block title %}Seguimiento de Envío - Stock Smart{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Seguimiento de Envío</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="mb-4">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" 
+                                   name="numero_seguimiento" 
+                                   class="form-control" 
+                                   placeholder="Ingrese número de seguimiento"
+                                   required>
+                            <button type="submit" class="btn btn-primary">
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+                                Buscar
+                            </button>
+                        </div>
+                    </form>
+
+<<<<<<< HEAD
+                    {% if order %}
+                        <div class="tracking-info">
+                            <!-- Encabezado del pedido -->
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="card-title mb-0">Pedido #{{ order.id }}</h5>
+                                <span class="badge {{ status_info.class }} p-2">
+                                    <i class="fas {{ status_info.icon }} me-2"></i>
+                                    {{ order.get_status_display }}
+                                </span>
+                            </div>
+                            
+                            <!-- Barra de progreso -->
+                            <div class="mb-4">
+                                <div class="progress" style="height: 25px;">
+                                    <div class="progress-bar {{ status_info.class }}" 
+                                         role="progressbar" 
+                                         style="width: {{ status_info.progress }}%">
+                                        {{ status_info.text }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Información del pedido y pago -->
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">
+                                                <i class="fas fa-info-circle text-primary me-2"></i>
+                                                Detalles del Pedido
+                                            </h6>
+                                            <ul class="list-unstyled">
+                                                <li class="mb-2">
+                                                    <strong>Fecha de creación:</strong><br>
+                                                    {{ order.created_at|date:"d/m/Y H:i" }}
+                                                </li>
+                                                <li class="mb-2">
+                                                    <strong>Total:</strong><br>
+                                                    ${{ order.total|floatformat:0 }}
+                                                </li>
+                                                {% if order.payment_method %}
+                                                <li class="mb-2">
+                                                    <strong>Método de pago:</strong><br>
+                                                    {{ order.get_payment_method_display }}
+                                                </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">
+                                                <i class="fas fa-shipping-fast text-primary me-2"></i>
+                                                Información de Envío
+                                            </h6>
+                                            <ul class="list-unstyled">
+                                                <li class="mb-2">
+                                                    <strong>Dirección:</strong><br>
+                                                    {{ order.shipping_address }}
+                                                </li>
+                                                <li class="mb-2">
+                                                    <strong>Ciudad:</strong><br>
+                                                    {{ order.shipping_city }}
+                                                </li>
+                                                <li class="mb-2">
+                                                    <strong>Teléfono:</strong><br>
+                                                    {{ order.shipping_phone }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Historial de seguimiento -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="fas fa-history text-primary me-2"></i>
+                                        Historial de Seguimiento
+                                    </h6>
+                                    <div class="timeline">
+                                        {% for event in order.tracking_history.all %}
+                                        <div class="timeline-item">
+                                            <div class="timeline-marker {{ status_info.class }}">
+                                                <i class="fas fa-circle"></i>
+                                            </div>
+                                            <div class="timeline-content">
+                                                <h6 class="mb-1">{{ event.get_status_display }}</h6>
+                                                <p class="text-muted mb-1">
+                                                    {{ event.created_at|date:"d/m/Y H:i" }}
+                                                </p>
+                                                {% if event.description %}
+                                                <p class="mb-0">{{ event.description }}</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Productos del pedido -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="fas fa-box text-primary me-2"></i>
+                                        Productos
+                                    </h6>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Producto</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Precio</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in order.cart.cartitem_set.all %}
+                                                <tr>
+                                                    <td>{{ item.product.name }}</td>
+                                                    <td>{{ item.quantity }}</td>
+                                                    <td>${{ item.product.get_price|floatformat:0 }}</td>
+                                                    <td>${{ item.subtotal|floatformat:0 }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+=======
+                    {% if numero_seguimiento %}
+                        <div class="tracking-result">
+                            <h5>Resultado de la búsqueda</h5>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <p><strong>Número de seguimiento:</strong> {{ numero_seguimiento }}</p>
+                                    <p><strong>Estado:</strong> 
+                                        <span class="badge bg-info">{{ estado }}</span>
+                                    </p>
+                                    
+                                    <!-- Timeline de seguimiento -->
+                                    <div class="timeline mt-4">
+                                        <div class="timeline-item">
+                                            <div class="timeline-marker bg-success"></div>
+                                            <div class="timeline-content">
+                                                <h6>Pedido recibido</h6>
+                                                <small class="text-muted">Fecha: {% now "d/m/Y" %}</small>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="timeline-marker"></div>
+                                            <div class="timeline-content">
+                                                <h6>En preparación</h6>
+                                                <small class="text-muted">Procesando pedido</small>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="timeline-marker"></div>
+                                            <div class="timeline-content">
+                                                <h6>En camino</h6>
+                                                <small class="text-muted">Pendiente</small>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="timeline-marker"></div>
+                                            <div class="timeline-content">
+                                                <h6>Entregado</h6>
+                                                <small class="text-muted">Pendiente</small>
+                                            </div>
+                                        </div>
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<<<<<<< HEAD
+                    {% else %}
+                        {% if request.GET.order_number %}
+                            <div class="alert alert-warning">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                No se encontró el pedido con el número especificado.
+                            </div>
+                        {% else %}
+                            <div class="text-center text-muted">
+                                <i class="fas fa-search fa-3x mb-3"></i>
+                                <p>Ingresa el número de tu pedido para ver su estado</p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+=======
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Información adicional -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5>Información importante</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-info-circle"></i> El seguimiento puede tardar hasta 24 horas en actualizarse.</li>
+                        <li><i class="bi bi-clock"></i> Los tiempos de entrega son estimados.</li>
+                        <li><i class="bi bi-question-circle"></i> Para consultas adicionales, contacte a nuestro servicio al cliente.</li>
+                    </ul>
+                </div>
+            </div>
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+        </div>
+    </div>
+</div>
+
+<style>
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 20px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+<<<<<<< HEAD
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #007bff;
+}
+
+.timeline-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #007bff;
+}
+</style>
+{% endblock %}
+=======
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #dee2e6;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #dee2e6;
+}
+
+.timeline-marker.bg-success {
+    background: #28a745;
+    box-shadow: 0 0 0 2px #28a745;
+}
+
+.timeline-content {
+    padding-bottom: 20px;
+    border-left: 2px solid #dee2e6;
+    padding-left: 20px;
+    margin-left: -2px;
+}
+
+.timeline-item:last-child .timeline-content {
+    border-left: none;
+}
+</style>
+{% endblock %}
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f

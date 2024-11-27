@@ -1,0 +1,55 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Instrucciones de Pago</h3>
+                    
+                    <div class="alert alert-info">
+                        <h5 class="alert-heading">Número de Orden: {{ order.order_number }}</h5>
+                        <p>Tu pedido está pendiente de confirmación. Por favor, realiza la transferencia bancaria con los siguientes datos:</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Datos Bancarios:</h5>
+                        <ul class="list-unstyled">
+                            <li><strong>Banco:</strong> {{ bank_info.bank_name }}</li>
+                            <li><strong>Tipo de Cuenta:</strong> {{ bank_info.account_type }}</li>
+                            <li><strong>Número de Cuenta:</strong> {{ bank_info.account_number }}</li>
+                            <li><strong>RUT:</strong> {{ bank_info.rut }}</li>
+                            <li><strong>Monto:</strong> ${{ order.total_amount|floatformat:0|intcomma }}</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Importante:</h5>
+                        <ul>
+                            <li>Envía el comprobante de transferencia a {{ bank_info.email }}</li>
+                            <li>O por WhatsApp al {{ bank_info.phone }}</li>
+                            <li>Incluye tu número de orden en el mensaje</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <p class="mb-0">
+                            <i class="fas fa-envelope me-2"></i>
+                            Hemos enviado estas instrucciones a tu correo electrónico junto con la boleta.
+                        </p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'stock_smart:index' %}" class="btn btn-primary">
+                            Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

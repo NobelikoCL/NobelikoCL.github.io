@@ -1,0 +1,386 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<<<<<<< HEAD
+<div class="container my-4">
+    <h2 class="mb-4">Carrito de Compras</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if cart_items %}
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col" class="text-center">Cantidad</th>
+                        <th scope="col" class="text-end">Subtotal</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                {% if item.product.image %}
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" 
+                                         class="img-thumbnail me-3" style="max-width: 80px;">
+                                {% endif %}
+                                <div>
+                                    <h6 class="mb-0">{{ item.product.name }}</h6>
+                                    {% if item.product.stock < 5 %}
+                                        <small class="text-danger">¡Últimas unidades!</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {% if item.product.discount_percentage > 0 %}
+                                <span class="text-danger">${{ item.product.final_price|intcomma }}</span>
+                                <small class="text-muted text-decoration-line-through d-block">
+                                    ${{ item.product.published_price|intcomma }}
+                                </small>
+                            {% else %}
+                                ${{ item.product.published_price|intcomma }}
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group" role="group">
+                                <form method="POST" action="{% url 'stock_smart:update_cart' item.id 'decrease' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            {% if item.quantity == 1 %}disabled{% endif %}>
+                                        <i class="bi bi-dash"></i>
+                                    </button>
+                                </form>
+                                <span class="btn btn-outline-secondary btn-sm disabled">{{ item.quantity }}</span>
+                                <form method="POST" action="{% url 'stock_smart:update_cart' item.id 'increase' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            {% if item.quantity >= item.product.stock %}disabled{% endif %}>
+                                        <i class="bi bi-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                        <td class="text-end">${{ item.total|intcomma }}</td>
+                        <td class="text-end">
+                            <form method="POST" action="{% url 'stock_smart:remove_from_cart' item.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                        <td class="text-end"><strong>${{ cart.total|intcomma }}</strong></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left"></i> Seguir Comprando
+            </a>
+            <a href="{% url 'stock_smart:checkout' %}" class="btn btn-success">
+                Proceder al Pago <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <p class="mb-0">Tu carrito está vacío. <a href="{% url 'stock_smart:productos_lista' %}">Ver productos disponibles</a></p>
+        </div>
+    {% endif %}
+</div>
+=======
+<div class="container my-5">
+    <h2 class="mb-4">Carrito de Compras</h2>
+    
+    {% if cart_items %}
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Lista de productos -->
+            {% for item in cart_items %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <!-- Imagen -->
+                        <div style="width: 80px;">
+                            {% if item.product.image %}
+                                <img src="{{ item.product.image.url }}" class="img-fluid rounded" alt="{{ item.product.name }}">
+                            {% else %}
+                                <img src="{% static 'stock_smart/images/no-image.png' %}" class="img-fluid rounded" alt="No imagen disponible">
+                            {% endif %}
+                        </div>
+
+                        <!-- Nombre y descripción -->
+                        <div class="flex-grow-1 mx-3" style="max-width: 250px;">
+                            <h6 class="mb-0">{{ item.product.name }}</h6>
+                            <small class="text-muted">{{ item.product.description|truncatechars:50 }}</small>
+                        </div>
+
+                        <!-- Controles de cantidad -->
+                        <div class="d-flex align-items-center mx-3">
+                            <button class="btn btn-outline-secondary btn-sm quantity-btn" 
+                                    data-product-id="{{ item.product.id }}" 
+                                    data-change="-1"
+                                    {% if item.quantity <= 1 %}disabled{% endif %}>
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="text" 
+                                   class="form-control form-control-sm text-center quantity-input mx-1" 
+                                   style="width: 40px;"
+                                   value="{{ item.quantity }}" 
+                                   data-product-id="{{ item.product.id }}" 
+                                   readonly>
+                            <button class="btn btn-outline-secondary btn-sm quantity-btn" 
+                                    data-product-id="{{ item.product.id }}" 
+                                    data-change="1">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <!-- Precios -->
+                        <div class="text-end mx-3" style="min-width: 120px;">
+                            {% if item.product.discount_percentage > 0 %}
+                                <div class="text-decoration-line-through text-muted">
+                                    ${{ item.product.price|floatformat:0|intcomma }}
+                                </div>
+                                <div class="text-success" id="item-price-{{ item.product.id }}" 
+                                     data-price="{{ item.product.get_final_price }}">
+                                    ${{ item.product.get_final_price|floatformat:0|intcomma }}
+                                </div>
+                                <small class="text-success">{{ item.product.discount_percentage }}% OFF</small>
+                            {% else %}
+                                <div id="item-price-{{ item.product.id }}" 
+                                     data-price="{{ item.product.price }}">
+                                    ${{ item.product.price|floatformat:0|intcomma }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Botón eliminar -->
+                        <div>
+                            <button class="btn btn-link text-danger remove-item" 
+                                    data-product-id="{{ item.product.id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Resumen del carrito -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Resumen</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span id="subtotal" class="price-display" data-price="{{ subtotal }}">
+                            ${{ subtotal|floatformat:0 }}
+                        </span>
+                    </div>
+                    {% if total_discount > 0 %}
+                    <div class="d-flex justify-content-between mb-2 text-success">
+                        <span>Descuento</span>
+                        <span id="discount" class="price-display" data-price="-{{ total_discount }}">
+                            -${{ total_discount|floatformat:0 }}
+                        </span>
+                    </div>
+                    {% endif %}
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong>Total</strong>
+                        <strong id="total" class="price-display" data-price="{{ total }}">
+                            ${{ total|floatformat:0 }}
+                        </strong>
+                    </div>
+                    <a href="{% url 'stock_smart:checkout_options' %}" class="btn btn-primary w-100">
+                        Proceder al pago
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center my-5">
+        <i class="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
+        <h3>Tu carrito está vacío</h3>
+        <p class="text-muted">¡Agrega algunos productos para comenzar!</p>
+        <a href="{% url 'stock_smart:products' %}" class="btn btn-primary mt-3">
+            Ir a la tienda
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function formatPrice(number) {
+        return new Intl.NumberFormat('es-CL', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+            useGrouping: true
+        }).format(Math.abs(parseFloat(number)));
+    }
+
+    function updateItemPrice(productId, newPrice) {
+        const itemPriceElement = document.querySelector(`#item-price-${productId}`);
+        if (itemPriceElement) {
+            itemPriceElement.textContent = `$${formatPrice(newPrice)}`;
+            itemPriceElement.dataset.price = newPrice;
+        }
+    }
+
+    function updateCartTotals(data) {
+        // Actualizar subtotal
+        const subtotalElement = document.querySelector('#subtotal');
+        subtotalElement.textContent = `$${formatPrice(data.subtotal)}`;
+        subtotalElement.dataset.price = data.subtotal;
+
+        // Actualizar descuento si existe
+        const discountElement = document.querySelector('#discount');
+        if (discountElement && data.total_discount > 0) {
+            discountElement.textContent = `-$${formatPrice(data.total_discount)}`;
+            discountElement.dataset.price = -data.total_discount;
+        }
+
+        // Actualizar total
+        const totalElement = document.querySelector('#total');
+        totalElement.textContent = `$${formatPrice(data.total)}`;
+        totalElement.dataset.price = data.total;
+
+        // Actualizar contador del carrito en el header
+        const cartCountElement = document.querySelector('#global-cart-count');
+        if (cartCountElement) {
+            cartCountElement.textContent = data.cart_count;
+        }
+    }
+
+    function updateQuantity(productId, change) {
+        const quantityInput = document.querySelector(`input[data-product-id="${productId}"]`);
+        const currentQuantity = parseInt(quantityInput.value);
+        
+        if (currentQuantity + change < 1) return;
+
+        fetch('{% url "stock_smart:update_cart" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                'product_id': productId,
+                'change': change
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Actualizar cantidad
+                quantityInput.value = currentQuantity + change;
+                
+                // Actualizar precio del item
+                updateItemPrice(productId, data.item_total);
+                
+                // Actualizar totales del carrito
+                updateCartTotals(data);
+                
+                // Deshabilitar botón de restar si la cantidad es 1
+                const minusButton = quantityInput.parentElement.querySelector('[data-change="-1"]');
+                if (minusButton) {
+                    minusButton.disabled = (currentQuantity + change) <= 1;
+                }
+            }
+        });
+    }
+
+    // Event listeners para los botones de cantidad
+    document.querySelectorAll('.quantity-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            const change = parseInt(this.dataset.change);
+            updateQuantity(productId, change);
+        });
+    });
+
+    // Función para obtener el CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+</script>
+
+<style>
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-input {
+    height: 30px;
+}
+
+.btn-link {
+    padding: 0;
+    color: #dc3545;
+}
+
+.btn-link:hover {
+    color: #bb2d3b;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.form-control-sm {
+    font-size: 0.875rem;
+}
+
+.btn-sm {
+    font-size: 0.875rem;
+}
+</style>
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+{% endblock %}

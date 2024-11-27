@@ -1,0 +1,501 @@
+{% load static %}
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Stock Smart{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'stock_smart/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/megamenu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+    {% csrf_token %}
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <!-- Logo y nombre -->
+                <a class="navbar-brand d-flex align-items-center" href="{% url 'stock_smart:productos_lista' %}">
+                    <i class="fas fa-store fa-lg me-2"></i>
+                    <span>Stock Smart</span>
+                </a>
+
+                <!-- Buscador y iconos -->
+                <div class="d-flex align-items-center flex-grow-1 justify-content-end">
+                    <!-- Buscador -->
+                    <form class="d-flex mx-4 flex-grow-1" method="GET" action="{% url 'stock_smart:productos_lista' %}">
+                        <input class="form-control me-2" type="search" placeholder="Buscar productos..." name="q" value="{{ request.GET.q }}">
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+
+                    <!-- Iconos de carrito y perfil -->
+                    <div class="d-flex align-items-center">
+                        <!-- Carrito -->
+                        <a href="{% url 'stock_smart:cart_view' %}" class="text-dark text-decoration-none me-4">
+                            <div class="position-relative d-inline-block">
+                                <i class="fas fa-shopping-cart"></i>
+                                {% if cart_item_count > 0 %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{ cart_item_count }}
+                                </span>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Barra de categorías -->
+        <div class="categories-bar">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light border-top">
+                    <div class="container-fluid p-0">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#megaMenu">
+                            <i class="fas fa-bars"></i> Categorías
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="megaMenu">
+                            <ul class="navbar-nav w-100">
+                                {% for category in main_categories %}
+                                <li class="nav-item dropdown position-static">
+                                    <a class="nav-link dropdown-toggle" 
+                                       href="/categoria/{{ category.id }}/"
+                                       id="navbarDropdown{{ category.id }}"
+                                       role="button" 
+                                       data-bs-toggle="dropdown" 
+                                       aria-expanded="false">
+                                        {{ category.name }}
+                                    </a>
+                                    {% if category.children.all %}
+                                    <div class="dropdown-menu mega-menu w-100" 
+                                         aria-labelledby="navbarDropdown{{ category.id }}">
+                                        <div class="container">
+                                            <div class="row">
+                                                {% for subcategory in category.children.all %}
+                                                <div class="col-md-4 mb-3">
+                                                    <a href="/categoria/{{ subcategory.id }}/" 
+                                                       class="dropdown-header text-decoration-none">
+                                                        {{ subcategory.name }}
+                                                    </a>
+                                                    {% if subcategory.children.all %}
+                                                    <ul class="list-unstyled">
+                                                        {% for sub_sub in subcategory.children.all %}
+                                                        <li>
+                                                            <a class="dropdown-item" 
+                                                               href="/categoria/{{ sub_sub.id }}/">
+                                                                {{ sub_sub.name }}
+                                                            </a>
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% endif %}
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mensajes -->
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Contenido principal -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Sobre Nosotros</h5>
+                    <p>Tu tienda de tecnología de confianza</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Enlaces Útiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'stock_smart:about' %}">Quiénes Somos</a></li>
+                        <li><a href="{% url 'stock_smart:contacto' %}">Contacto</a></li>
+                        <li><a href="{% url 'stock_smart:terminos' %}">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Ayuda</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'stock_smart:tracking' %}">Seguimiento de Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Síguenos</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'stock_smart/js/main.js' %}"></script>
+    <script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function addToCart(productId) {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        
+        fetch('/add-to-cart/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': csrftoken
+            },
+            body: `product_id=${productId}&quantity=1`
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                // Actualizar contador del carrito
+                const cartCount = document.querySelector('.cart-count');
+                if (cartCount) {
+                    cartCount.textContent = data.cart_count;
+                }
+                alert('Producto agregado al carrito');
+            } else {
+                alert(data.message || 'Error al agregar el producto');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al agregar el producto al carrito');
+        });
+    }
+
+    function showToast(message, type = 'success') {
+        // Crear el toast
+        const toast = document.createElement('div');
+        toast.className = `toast position-fixed bottom-0 end-0 m-3 ${type === 'success' ? 'bg-success' : 'bg-danger'} text-white`;
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.setAttribute('aria-atomic', 'true');
+        
+        toast.innerHTML = `
+            <div class="toast-body">
+                ${message}
+            </div>
+        `;
+        
+        // Agregar el toast al documento
+        document.body.appendChild(toast);
+        
+        // Mostrar el toast
+        const bsToast = new bootstrap.Toast(toast, {
+            autohide: true,
+            delay: 3000
+        });
+        bsToast.show();
+        
+        // Eliminar el toast después de ocultarse
+        toast.addEventListener('hidden.bs.toast', function () {
+            document.body.removeChild(toast);
+        });
+    }
+    </script>
+    <style>
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+
+    .navbar-brand i {
+        color: #0d6efd;  /* Color primario de Bootstrap */
+    }
+
+    .navbar-brand:hover i {
+        transform: scale(1.1);
+        transition: transform 0.2s ease;
+    }
+
+    .categories-bar {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .mega-menu {
+        width: 100%;
+        padding: 2rem;
+        border: none;
+        border-radius: 0;
+        margin-top: 0;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        background-color: white;
+    }
+
+    .mega-menu .container {
+        max-width: 1200px;
+    }
+
+    .mega-menu .row {
+        margin: 0 -15px;
+    }
+
+    .mega-menu .col-md-4 {
+        padding: 15px 25px;
+        border-right: 1px solid #e9ecef;
+    }
+
+    .mega-menu .col-md-4:last-child {
+        border-right: none;
+    }
+
+    .mega-menu .dropdown-header {
+        color: #0d6efd;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+        border-bottom: 2px solid #e9ecef;
+        margin-bottom: 1rem;
+    }
+
+    .mega-menu .list-unstyled {
+        margin-bottom: 0;
+    }
+
+    .mega-menu .dropdown-item {
+        padding: 0.6rem 0;
+        color: #495057;
+        transition: all 0.2s ease;
+        font-size: 0.95rem;
+    }
+
+    .mega-menu .dropdown-item:hover {
+        background: none;
+        color: #0d6efd;
+        padding-left: 5px;
+    }
+
+    @media (max-width: 992px) {
+        .mega-menu {
+            padding: 1rem;
+        }
+        
+        .mega-menu .col-md-4 {
+            border-right: none;
+            border-bottom: 1px solid #e9ecef;
+            padding: 15px;
+        }
+        
+        .mega-menu .col-md-4:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .navbar-nav .nav-link {
+        padding: 1rem;
+        font-weight: 500;
+    }
+
+    .navbar-nav .dropdown:hover .mega-menu {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .header-cart {
+        position: relative;
+    }
+
+    .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #dc3545;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 12px;
+        min-width: 18px;
+        text-align: center;
+    }
+
+    .cart-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* Estilos para los iconos del navbar */
+    .navbar .fa-shopping-cart {
+        font-size: 1.2rem;
+        padding: 8px;
+    }
+
+    /* Espacio entre iconos */
+    .navbar .me-4 {
+        margin-right: 1.5rem !important;
+    }
+
+    /* Hover effect */
+    .navbar .fa-shopping-cart:hover {
+        color: #0d6efd;
+        transition: color 0.3s ease;
+    }
+
+    /* Badge positioning */
+    .position-relative .badge {
+        font-size: 0.75rem;
+        padding: 0.25em 0.6em;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Mega Menu */
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarMegaMenu">
+                <ul class="navbar-nav">
+                    {% for category in categories %}
+                    {% if not category.parent %}
+                    <li class="nav-item dropdown position-static">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ category.name }}
+                        </a>
+                        <div class="mega-menu dropdown-menu w-100">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row menu-items">
+                                            {% for subcategory in category.children.all %}
+                                            <div class="col-md-3 menu-item">
+                                                <a class="dropdown-item" href="{% url 'stock_smart:category' subcategory.slug %}">
+                                                    {{ subcategory.name }}
+                                                </a>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- JavaScript para animaciones adicionales -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdowns = document.querySelectorAll('.dropdown');
+        
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('mouseenter', function() {
+                const items = this.querySelectorAll('.menu-item');
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateX(0)';
+                    }, index * 50);
+                });
+            });
+
+            dropdown.addEventListener('mouseleave', function() {
+                const items = this.querySelectorAll('.menu-item');
+                items.forEach(item => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateX(-10px)';
+                });
+            });
+        });
+    });
+    </script>
+
+    <style>
+    .no-image-placeholder {
+        height: 200px;  /* Ajusta según necesites */
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .no-image-placeholder span {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    /* Para mantener todas las imágenes del mismo tamaño */
+    .card-img-top {
+        height: 200px;  /* Mismo alto que el placeholder */
+        object-fit: cover;
+    }
+    </style>
+</body>
+</html>

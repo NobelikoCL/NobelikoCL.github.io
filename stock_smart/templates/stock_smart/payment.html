@@ -1,0 +1,127 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Pago y Envío - Stock Smart{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Formulario de datos -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Datos de Envío</h5>
+                    <form id="shipping-form" method="post" action="{% url 'stock_smart:process_payment' %}">
+                        {% csrf_token %}
+                        
+                        <!-- Datos personales -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control" name="first_name" 
+                                       value="{{ user_data.first_name|default:'' }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Apellido</label>
+                                <input type="text" class="form-control" name="last_name" 
+                                       value="{{ user_data.last_name|default:'' }}" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" 
+                                       value="{{ user_data.email|default:'' }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" name="phone" 
+                                       value="{{ user_data.phone|default:'' }}" required>
+                            </div>
+                        </div>
+                        
+                        <!-- Método de envío -->
+                        <h6 class="mb-3">Método de Envío</h6>
+                        <div class="mb-4">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="shipping_method" 
+                                       id="starken" value="STARKEN" required>
+                                <label class="form-check-label" for="starken">
+                                    <i class="fas fa-truck me-2"></i>Starken (por pagar)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="shipping_method" 
+                                       id="pickup" value="PICKUP" required>
+                                <label class="form-check-label" for="pickup">
+                                    <i class="fas fa-store me-2"></i>Retiro en tienda
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Método de pago -->
+                        <h6 class="mb-3">Método de Pago</h6>
+                        <div class="mb-4">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="payment_method" 
+                                       id="flow" value="FLOW" required>
+                                <label class="form-check-label" for="flow">
+                                    <img src="{% static 'stock_smart/img/flow.png' %}" alt="Flow" 
+                                         style="height: 30px;"> Flow - Redcompra
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" 
+                                       id="transfer" value="TRANSFER" required>
+                                <label class="form-check-label" for="transfer">
+                                    <i class="fas fa-university me-2"></i>Transferencia Bancaria
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-lock me-2"></i>Confirmar Pedido
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resumen de la compra -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Resumen del Pedido</h5>
+                    <!-- ... (mantener el resumen existente) ... -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const shippingForm = document.getElementById('shipping-form');
+    const starkenRadio = document.getElementById('starken');
+    const addressFields = document.querySelectorAll('.address-field');
+    
+    function toggleAddressFields() {
+        const isStarken = starkenRadio.checked;
+        addressFields.forEach(field => {
+            field.required = isStarken;
+            field.closest('.mb-3').style.display = isStarken ? 'block' : 'none';
+        });
+    }
+    
+    document.querySelectorAll('input[name="shipping_method"]').forEach(radio => {
+        radio.addEventListener('change', toggleAddressFields);
+    });
+    
+    toggleAddressFields();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'stock_smart/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Mis Pedidos</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fecha de Compra</th>
+                    <th>N° Orden</th>
+                    <th>Estado</th>
+                    <th>N° Seguimiento</th>
+                    <th>Total</th>
+                    <th>Documento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidos %}
+                <tr>
+                    <td>{{ pedido.fecha_compra|date:"d/m/Y" }}</td>
+                    <td>{{ pedido.numero_orden }}</td>
+                    <td>
+                        <span class="badge bg-{{ pedido.get_estado_color }}">
+                            {{ pedido.get_estado_display }}
+                        </span>
+                    </td>
+                    <td>{{ pedido.numero_seguimiento|default:"Pendiente" }}</td>
+                    <td>${{ pedido.total }}</td>
+                    <td>
+                        <a href="{% url 'descargar_boleta' pedido.id %}" class="btn btn-sm btn-primary">
+                            <i class="bi bi-file-pdf"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No tienes pedidos realizados</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

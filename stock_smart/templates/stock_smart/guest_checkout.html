@@ -1,0 +1,334 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+<<<<<<< HEAD
+{% load custom_filters %}
+=======
+{% load humanize %}
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+<<<<<<< HEAD
+        <!-- Formulario principal -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="mb-3">Información de contacto</h4>
+                    
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="post" action="{% url 'stock_smart:process_flow_payment' %}" id="checkoutForm">
+                        {% csrf_token %}
+                        
+                        <!-- Campos del formulario -->
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre</label>
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.first_name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Apellido</label>
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.last_name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.email.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Teléfono</label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.phone.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Método de envío -->
+                        <h4 class="mt-4 mb-3">Método de envío</h4>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="shipping_method" 
+                                       id="pickup" value="pickup" checked>
+                                <label class="form-check-label" for="pickup">
+                                    Retiro en tienda (Gratis)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="shipping_method" 
+                                       id="delivery" value="delivery">
+                                <label class="form-check-label" for="delivery">
+                                    Envío a domicilio ($3.990)
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Método de pago -->
+                        <h4 class="mt-4 mb-3">Método de pago</h4>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" 
+                                       id="flow" value="flow" checked>
+                                <label class="form-check-label" for="flow">
+                                    <img src="{% static 'stock_smart/img/flow-logo.png' %}" alt="Flow" height="20">
+                                    Pago con Flow (Débito/Crédito)
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Botón de pago -->
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                Continuar con el pago
+                            </button>
+=======
+        <!-- Columna izquierda: Formulario -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Datos de Contacto</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" id="checkoutForm">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nombre *</label>
+                                {{ form.first_name }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Apellido *</label>
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email *</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Teléfono *</label>
+                                {{ form.phone }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Dirección de Envío *</label>
+                            {{ form.address }}
+                        </div>
+                        <div class="form-group">
+                            <label>Método de Pago</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" 
+                                       name="payment_method" id="transfer" 
+                                       value="transfer" checked>
+                                <label class="form-check-label" for="transfer">
+                                    Transferencia Bancaria
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" 
+                                       name="payment_method" id="webpay" 
+                                       value="webpay">
+                                <label class="form-check-label" for="webpay">
+                                    WebPay
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Método de Envío</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" 
+                                       name="shipping_method" id="standard" 
+                                       value="standard" checked>
+                                <label class="form-check-label" for="standard">
+                                    Envío Estándar (Gratis)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" 
+                                       name="shipping_method" id="express" 
+                                       value="express">
+                                <label class="form-check-label" for="express">
+                                    Envío Express ($5,990)
+                                </label>
+                            </div>
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+<<<<<<< HEAD
+        <!-- Resumen de compra -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Resumen de compra</h4>
+                    {% if is_buy_now %}
+                        <!-- Compra rápida -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ product.name }}</span>
+                            <span>${{ product.final_price|format_price }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Cantidad</span>
+                            <span>1</span>
+                        </div>
+                    {% else %}
+                        <!-- Compra desde carrito -->
+                        {% for item in cart_items %}
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ item.product.name }} x {{ item.quantity }}</span>
+                            <span>${{ item.total|format_price }}</span>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <hr>
+                    <!-- Envío (se actualizará via JS) -->
+                    <div class="d-flex justify-content-between mb-2 shipping-cost" style="display: none;">
+                        <span>Envío</span>
+                        <span>$3.990</span>
+                    </div>
+                    <!-- Total -->
+                    <div class="d-flex justify-content-between">
+                        <strong>Total</strong>
+                        <strong class="total-amount">${{ total|format_price }}</strong>
+                    </div>
+=======
+        <!-- Columna derecha: Resumen -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Resumen del Pedido</h5>
+                    {% if order %}
+                    <small class="text-muted">Orden #{{ order.order_number }}</small>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% for item in cart_items %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>
+                            {{ item.quantity }}x {{ item.product.name }}
+                        </span>
+                        <span>${{ item.subtotal|floatformat:0|intcomma }}</span>
+                    </div>
+                    {% endfor %}
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span>${{ cart_total|floatformat:0|intcomma }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>IVA (19%)</span>
+                        <span>${{ tax_amount|floatformat:0|intcomma }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Envío</span>
+                        <span id="shipping_cost">Gratis</span>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong>Total</strong>
+                        <strong>${{ total_with_tax|floatformat:0|intcomma }}</strong>
+                    </div>
+
+                    <button type="submit" form="checkoutForm" class="btn btn-primary w-100 mb-2">
+                        Confirmar Pedido
+                    </button>
+                    <a href="{% url 'stock_smart:cart' %}" class="btn btn-outline-secondary w-100">
+                        Volver al Carrito
+                    </a>
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<<<<<<< HEAD
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var shippingInputs = document.querySelectorAll('input[name="shipping_method"]');
+    var totalElement = document.querySelector('.total-amount');
+    var baseTotal = parseFloat('{{ total|default:0 }}'.replace(/\./g, '').replace(',', '.'));
+
+    shippingInputs.forEach(function(input) {
+        input.addEventListener('change', function() {
+            var shippingCost = this.value === 'delivery' ? 3990 : 0;
+            var newTotal = baseTotal + shippingCost;
+            totalElement.textContent = '$' + newTotal.toLocaleString('es-CL');
+=======
+<style>
+.card {
+    border: 1px solid rgba(0,0,0,.125);
+    box-shadow: 0 2px 4px rgba(0,0,0,.05);
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const shippingInputs = document.querySelectorAll('input[name="shipping_method"]');
+    const shippingCostElement = document.getElementById('shipping_cost');
+    
+    shippingInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            if (this.value === 'express') {
+                shippingCostElement.textContent = '$5.990';
+                // Aquí puedes actualizar el total
+            } else {
+                shippingCostElement.textContent = 'Gratis';
+                // Aquí puedes actualizar el total
+            }
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+        });
+    });
+});
+</script>
+<<<<<<< HEAD
+{% endblock %}
+
+=======
+>>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+{% endblock %}

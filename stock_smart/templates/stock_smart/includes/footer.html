@@ -1,0 +1,126 @@
+{% load static %}
+
+<!-- Footer -->
+<footer class="footer bg-dark text-white pt-5 pb-3">
+    <div class="container">
+        <div class="row">
+            <!-- Columna 1: Sobre Nosotros -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="text-uppercase mb-4">Stock Smart</h5>
+                <p class="mb-4">Tu marketplace de confianza para comprar y vender productos de calidad.</p>
+                <div class="social-links">
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+
+            <!-- Columna 2: Enlaces Rápidos -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="text-uppercase mb-4">Enlaces Rápidos</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="{% url 'stock_smart:index' %}" class="text-white text-decoration-none">
+                            <i class="bi bi-chevron-right"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-white text-decoration-none">
+                            <i class="bi bi-chevron-right"></i> Productos
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-white text-decoration-none">
+                            <i class="bi bi-chevron-right"></i> Categorías
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-white text-decoration-none">
+                            <i class="bi bi-chevron-right"></i> Ofertas
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Ayuda -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="text-uppercase mb-4">Ayuda</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="#" class="text-white text-decoration-none">
+                            <i class="bi bi-question-circle"></i> Centro de Ayuda
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-white text-decoration-none">
+                            <i class="bi bi-truck"></i> Envíos
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-white text-decoration-none">
+                            <i class="bi bi-arrow-return-left"></i> Devoluciones
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-white text-decoration-none">
+                            <i class="bi bi-shield-check"></i> Política de Privacidad
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Contacto -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="text-uppercase mb-4">Contacto</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="bi bi-geo-alt"></i> Santiago, Chile
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-envelope"></i> contacto@stocksmart.cl
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-telephone"></i> +56 9 1234 5678
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-clock"></i> Lun-Vie: 9:00 - 18:00
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="row mt-3 mb-4">
+            <div class="col-12">
+                <div class="bg-secondary bg-opacity-10 p-4 rounded">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h5 class="mb-md-0">Suscríbete a nuestro newsletter</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="d-flex">
+                                <input type="email" class="form-control me-2" placeholder="Tu email">
+                                <button class="btn btn-primary">Suscribir</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Línea divisoria -->
+        <hr class="my-4">
+
+        <!-- Copyright -->
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0">&copy; {% now "Y" %} Stock Smart. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="{% url 'stock_smart:terminos' %}" class="text-white text-decoration-none me-3">Términos y Condiciones</a>
+                <a href="{% url 'stock_smart:privacidad' %}" class="text-white text-decoration-none">Política de Privacidad</a>
+            </div>
+        </div>
+    </div>
+</footer>

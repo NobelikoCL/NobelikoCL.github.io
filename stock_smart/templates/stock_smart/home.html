@@ -1,0 +1,112 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Sección de Ofertas -->
+    {% if offer_products %}
+    <section class="offers-section mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-title">Súper Ofertas</h2>
+        </div>
+        <div class="row g-4">
+            {% for product in offer_products %}
+            <div class="col-6 col-md-3">
+                <div class="product-card card h-100">
+                    {% if product.discount_percentage > 0 %}
+                    <div class="discount-badge">
+                        -{{ product.discount_percentage }}%
+                    </div>
+                    {% endif %}
+                    
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <div class="no-image-placeholder">
+                            <i class="fas fa-image"></i>
+                            <span>Sin imagen</span>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <div class="price-container mb-3">
+                            {% if product.discount_percentage > 0 %}
+                                <span class="original-price">${{ product.price|price_format }}</span>
+                                <span class="final-price">${{ product.get_final_price|price_format }}</span>
+                            {% else %}
+                                <span class="final-price">${{ product.price|price_format }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-sm add-to-cart" 
+                                    data-product-id="{{ product.id }}"
+                                    onclick="addToCart({{ product.id }})">
+                                <i class="fas fa-cart-plus"></i> 
+                                Añadir al carrito
+                            </button>
+                            <a href="{% url 'stock_smart:checkout' product.id %}" class="btn btn-success btn-sm">
+                                <i class="fas fa-shopping-bag"></i> Comprar ahora
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Productos Destacados -->
+    <section class="featured-products">
+        <h2 class="section-title mb-4">Productos Destacados</h2>
+        <div class="row g-4">
+            {% for product in featured_products %}
+            <div class="col-6 col-md-3">
+                <div class="product-card card h-100">
+                    {% if product.discount_percentage > 0 %}
+                    <div class="discount-badge">
+                        -{{ product.discount_percentage }}%
+                    </div>
+                    {% endif %}
+                    
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <div class="no-image-placeholder">
+                            <i class="fas fa-image"></i>
+                            <span>Sin imagen</span>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <div class="price-container mb-3">
+                            {% if product.discount_percentage > 0 %}
+                                <span class="original-price">${{ product.price|price_format }}</span>
+                                <span class="final-price">${{ product.get_final_price|price_format }}</span>
+                            {% else %}
+                                <span class="final-price">${{ product.price|price_format }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-sm add-to-cart" 
+                                    data-product-id="{{ product.id }}"
+                                    onclick="addToCart({{ product.id }})">
+                                <i class="fas fa-cart-plus"></i> 
+                                Añadir al carrito
+                            </button>
+                            <a href="{% url 'stock_smart:checkout' product.id %}" class="btn btn-success btn-sm">
+                                <i class="fas fa-shopping-bag"></i> Comprar ahora
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

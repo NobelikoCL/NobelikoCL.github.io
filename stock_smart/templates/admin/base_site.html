@@ -1,0 +1,102 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Stock Smart') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        Stock Smart Administración
+    </a>
+</h1>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    :root {
+        --primary: #2c3e50;
+        --secondary: #34495e;
+        --accent: #3498db;
+        --primary-fg: #fff;
+    }
+
+    /* Header y navegación */
+    #header {
+        background: var(--primary);
+        color: var(--primary-fg);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    #header a:link, #header a:visited {
+        color: var(--primary-fg);
+    }
+
+    /* Sidebar */
+    .module h2, .module caption {
+        background: var(--secondary);
+        padding: 8px;
+        border-radius: 4px 4px 0 0;
+    }
+    
+    div.breadcrumbs {
+        background: var(--secondary);
+        padding: 15px;
+    }
+    
+    /* Botones y acciones */
+    .button, input[type=submit], input[type=button], .submit-row input, a.button {
+        background: var(--accent);
+        padding: 10px 15px;
+        border-radius: 4px;
+        border: none;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    
+    .button:hover, input[type=submit]:hover, input[type=button]:hover {
+        background: #2980b9;
+    }
+
+    /* Tablas y listas */
+    #changelist table {
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    #changelist table thead th {
+        background: var(--secondary);
+        color: white;
+        padding: 12px 8px;
+    }
+
+    #changelist table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    /* Formularios */
+    .form-row {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .form-row input, .form-row select, .form-row textarea {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    /* Dashboard */
+    .dashboard .module table td a {
+        color: var(--accent);
+    }
+
+    .dashboard .module table td a:hover {
+        color: #2980b9;
+    }
+</style>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

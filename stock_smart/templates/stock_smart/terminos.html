@@ -1,0 +1,41 @@
+{% extends 'stock_smart/base.html' %}
+
+{% block title %}Términos y Condiciones - Stock Smart{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Términos y Condiciones</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <h2>1. Aceptación de los términos</h2>
+            <p>Al acceder y utilizar este sitio web, usted acepta estar sujeto a estos términos y condiciones de uso.</p>
+
+            <h2>2. Uso del sitio</h2>
+            <p>Este sitio web está destinado para uso personal y no comercial.</p>
+
+            <h2>3. Cuentas de usuario</h2>
+            <p>Para realizar compras en el sitio, deberá crear una cuenta de usuario. Usted es responsable de mantener la confidencialidad de su cuenta y contraseña.</p>
+
+            <h2>4. Precios y disponibilidad</h2>
+            <p>Todos los precios están en pesos chilenos e incluyen IVA. La disponibilidad de los productos está sujeta a cambios sin previo aviso.</p>
+
+            <h2>5. Envíos</h2>
+            <p>Los tiempos de envío son estimados y pueden variar según la ubicación y disponibilidad.</p>
+
+            <h2>6. Devoluciones</h2>
+            <p>Aceptamos devoluciones dentro de los 10 días posteriores a la recepción del producto, siempre que el producto esté en su estado original.</p>
+
+            <h2>7. Privacidad</h2>
+            <p>Su privacidad es importante para nosotros. Consulte nuestra política de privacidad para obtener más información sobre cómo manejamos sus datos.</p>
+
+            <h2>8. Modificaciones</h2>
+            <p>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio.</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{% url 'index' %}" class="btn btn-primary">Volver al inicio</a>
+    </div>
+</div>
+{% endblock %}

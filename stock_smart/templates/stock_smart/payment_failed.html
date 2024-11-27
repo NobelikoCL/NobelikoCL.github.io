@@ -1,0 +1,24 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-times-circle text-danger fa-5x mb-3"></i>
+                    <h2 class="card-title">Pago No Procesado</h2>
+                    <p class="card-text">Lo sentimos, hubo un problema al procesar tu pago.</p>
+                    <p class="card-text">Por favor, intenta nuevamente o contacta con soporte si el problema persiste.</p>
+                    <div class="mt-4">
+                        <a href="{% url 'stock_smart:checkout' %}" class="btn btn-primary">
+                            Intentar nuevamente
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

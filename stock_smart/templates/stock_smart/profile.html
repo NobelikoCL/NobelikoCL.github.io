@@ -1,0 +1,61 @@
+{% extends 'stock_smart/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Información del perfil -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Mi Perfil</h5>
+                    <p class="card-text">
+                        <strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}<br>
+                        <strong>Email:</strong> {{ user.email }}<br>
+                        <strong>Usuario desde:</strong> {{ user.date_joined|date:"d/m/Y" }}
+                    </p>
+                    <a href="#" class="btn btn-primary">Editar Perfil</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historial de pedidos -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Mis Pedidos</h5>
+                    {% if orders %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nº Pedido</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                        <th>Total</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                    <tr>
+                                        <td>#{{ order.id }}</td>
+                                        <td>{{ order.created_at|date:"d/m/Y" }}</td>
+                                        <td>{{ order.get_status_display }}</td>
+                                        <td>${{ order.total|floatformat:0|intcomma }}</td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-info">Ver detalles</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted">No tienes pedidos realizados.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

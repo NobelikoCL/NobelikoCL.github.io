@@ -1,0 +1,111 @@
+<!-- stock_smart/templates/stock_smart/boleta_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Boleta {{ pedido.numero }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .info {
+            margin-bottom: 20px;
+        }
+        .info p {
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+        .total {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 100px;
+            color: rgba(200, 200, 200, 0.1);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="watermark">STOCK SMART</div>
+    
+    <div class="header">
+        <div class="logo">STOCK SMART</div>
+        <p>Av. Ejemplo 1234, Santiago</p>
+        <p>RUT: 12.345.678-9</p>
+    </div>
+
+    <div class="info">
+        <h2>BOLETA ELECTRÓNICA</h2>
+        <p><strong>Nº:</strong> {{ pedido.numero }}</p>
+        <p><strong>Fecha:</strong> {{ fecha_emision }}</p>
+        <p><strong>Cliente:</strong> {{ pedido.usuario.get_full_name }}</p>
+        <p><strong>RUT:</strong> ________________</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unit.</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in pedido.items %}
+            <tr>
+                <td>{{ item.producto }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>${{ item.precio|floatformat:0 }}</td>
+                <td>${{ item.subtotal|floatformat:0 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="total">
+        <p>Total: ${{ pedido.total|floatformat:0 }}</p>
+    </div>
+
+    <div class="footer">
+        <p>Gracias por su compra</p>
+        <p>Este documento es una representación impresa de un documento tributario electrónico</p>
+        <p>www.stocksmart.cl</p>
+    </div>
+</body>
+</html>

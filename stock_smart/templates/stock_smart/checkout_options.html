@@ -1,0 +1,93 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Opciones de Checkout - Stock Smart{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Selecciona tu tipo de compra</h5>
+                    
+                    <div class="d-grid gap-3 mt-4">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'stock_smart:cart_checkout' %}" class="btn btn-primary btn-lg">
+                                <i class="fas fa-user me-2"></i>Continuar como {{ user.email }}
+                            </a>
+                        {% else %}
+                            <!-- Opciones para usuarios no autenticados -->
+                            <a href="{% url 'stock_smart:login' %}?next={{ request.path }}" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                            </a>
+                            
+                            <a href="{% url 'stock_smart:register' %}?next={{ request.path }}" class="btn btn-success btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>Registrarse
+                            </a>
+                            
+                            <div class="text-center my-3">
+                                <span class="text-muted">- o -</span>
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Botón de compra como invitado -->
+                        <form method="get" action="{% url 'stock_smart:guest_checkout' %}">
+                            {% if is_buy_now %}
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                            {% endif %}
+                            <button type="submit" class="btn btn-outline-primary btn-lg w-100">
+                                <i class="fas fa-user-clock me-2"></i>Continuar como invitado
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen del pedido -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Resumen de Pedido</h5>
+                    
+                    {% if cart_items %}
+                        {% for item in cart_items %}
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span>{{ item.product.name }}</span>
+                                <br>
+                                <small class="text-muted">Cantidad: {{ item.quantity }}</small>
+                            </div>
+                            <span>${{ item.subtotal|format_price }}</span>
+                        </div>
+                        {% endfor %}
+                        
+                        <hr>
+                    {% endif %}
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>${{ subtotal|format_price }}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>IVA (19%):</span>
+                        <span>${{ iva|format_price }}</span>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong>Total (IVA incluido):</strong>
+                        <strong>${{ total|format_price }}</strong>
+                    </div>
+
+                    <p class="text-muted small">* Los precios mostrados incluyen IVA</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
