@@ -1,0 +1,87 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Resumen del carrito -->
+        <div class="col-md-4 order-md-2 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Resumen de Compra</h4>
+                    <ul class="list-group mb-3">
+                        {% for item in cart_items %}
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">{{ item.product.name }}</h6>
+                                <small class="text-muted">Cantidad: {{ item.quantity }}</small>
+                            </div>
+                            <span class="text-muted">${{ item.total|stringformat:".0f"|rjust:"1"|slice:"1:"|default:"0"|stringformat:"s"|slice:"-15:"|groupby:3|join:"." }}</span>
+                        </li>
+                        {% endfor %}
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total (CLP)</span>
+                            <strong>${{ total|stringformat:".0f"|rjust:"1"|slice:"1:"|default:"0"|stringformat:"s"|slice:"-15:"|groupby:3|join:"." }}</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario de checkout para invitado -->
+        <div class="col-md-8 order-md-1">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Información de Contacto y Envío</h4>
+                    <form class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Nombre</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Apellido</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                            <small class="text-muted">Para recibir confirmación de tu compra</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address">Dirección de Envío</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+
+                        <!-- Método de pago -->
+                        <hr class="mb-4">
+                        <h4 class="mb-3">Método de Pago</h4>
+                        
+                        <div class="d-block my-3">
+                            <div class="custom-control custom-radio">
+                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                                <label class="custom-control-label" for="credit">Tarjeta de Crédito</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                <label class="custom-control-label" for="debit">Tarjeta de Débito</label>
+                            </div>
+                        </div>
+
+                        <hr class="mb-4">
+                        <button class="btn btn-primary btn-lg btn-block w-100" type="submit">Confirmar Compra</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -22,9 +22,9 @@ urlpatterns = [
     # Carrito y proceso de compra múltiple
     path('cart/', views.cart_view, name='cart_view'),
     path('cart/', views.cart_view, name='cart'),
-    path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
-    path('cart/remove/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
-    path('cart/update/<int:item_id>/', views.update_cart, name='update_cart'),
+    path('cart/add/', views.add_to_cart, name='add_to_cart'),
+    path('cart/remove/', views.remove_from_cart, name='remove_from_cart'),
+    path('cart/update/', views.update_cart, name='update_cart'),
     path('cart/checkout/', views.cart_checkout, name='cart_checkout'),
     path('cart/payment/', views.cart_payment, name='cart_payment'),
     path('cart/confirm/', views.cart_confirm, name='cart_confirm'),
@@ -52,7 +52,7 @@ urlpatterns = [
     path('payment/return/', views.flow_return, name='flow_return'),
     path('payment/notify/', views.payment_notify, name='payment_notify'),
     path('payment/success/', views.payment_success, name='payment_success'),
-    path('payment/failed/', views.payment_failed, name='payment_failed'),
+    path('payment/cancel/', views.payment_cancel, name='payment_cancel'),
     path('payments/', include('payments.urls')),
     
     # URLs para Flow
@@ -60,4 +60,24 @@ urlpatterns = [
     path('flow/return/', views.flow_return, name='flow_return'),
     path('checkout/<int:product_id>/', views.checkout_options, name='checkout'),
     path('checkout/guest/<int:product_id>/', views.checkout_guest, name='checkout_guest'),
+    # Checkout rápido (un solo producto)
+    path('checkout/<int:product_id>/', views.checkout_options, name='checkout'),
+    # Checkout para usuarios registrados
+    path('checkout/user/', views.user_checkout, name='user_checkout'),
+    # Checkout para invitados
+    path('checkout/guest/', views.guest_checkout, name='guest_checkout'),
+    
+    # Nuevas rutas para carrito
+    path('cart/checkout/', views.cart_checkout_options, name='cart_checkout_options'),
+    path('cart/checkout/user/', views.user_cart_checkout, name='user_cart_checkout'),
+    path('cart/checkout/guest/', views.guest_cart_checkout, name='guest_cart_checkout'),
+    path('api/validate-product/<int:product_id>/', views.validate_product, name='validate_product'),
+    path('checkout/options/<int:product_id>/', views.checkout_options, name='checkout_options'),
+    path('checkout/guest/', views.guest_checkout, name='guest_checkout'),
+    path('checkout/process-payment/', views.process_payment, name='process_payment'),
+    path('payment/success/', views.payment_success, name='payment_success'),
+    path('payment/cancel/', views.payment_cancel, name='payment_cancel'),
+    path('payment/confirm/', views.payment_confirm, name='payment_confirm'),
+    path('producto/<int:producto_id>/', views.detalle_producto, name='detalle_producto'),
+    path('checkout/<int:producto_id>/', views.iniciar_checkout, name='iniciar_checkout'),
 ]

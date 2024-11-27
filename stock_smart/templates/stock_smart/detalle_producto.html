@@ -1,0 +1,7 @@
+<form method="POST" action="{% url 'stock_smart:guest_checkout' %}"></form>
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+    <button type="submit" class="btn btn-primary btn-lg">
+        Comprar Ahora
+    </button>
+</form>

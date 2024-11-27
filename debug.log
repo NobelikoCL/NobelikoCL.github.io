@@ -556,6 +556,264 @@ Redirigiendo a Flow: https://sandbox.flow.cl/app/web/pay.php?token=4030FB8628D76
 Iniciando proceso de guest checkout
 Iniciando proceso de guest checkout
 Iniciando proceso de guest checkout
+<<<<<<< Updated upstream
 Iniciando proceso de pago con Flow
 Error en process_flow_payment: No hay datos de checkout disponibles
 Iniciando proceso de guest checkout
+=======
+Iniciando proceso de guest checkout
+Iniciando proceso de guest checkout
+Iniciando proceso de pago con Flow
+Error en process_flow_payment: No hay datos de checkout disponibles
+Iniciando proceso de pago con Flow
+Error en process_flow_payment: No hay datos de checkout disponibles
+Iniciando proceso de pago con Flow
+Error en process_flow_payment: No hay datos de checkout disponibles
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['BQ1yGgLiuEcKlZENZrYY9x1fCsMgv4qoqS4EL3ZYntjGtcf0tg904Q5Nxhuwucrq'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['Pasaje de la merceria 1872']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Error al crear la orden: module 'datetime' has no attribute 'now'
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['myvIW7HDTmxEzInQiIUCIaaoyHmkXInrbAyO1UVjMbEAHVY3Mx5EDteWtw4AWQot'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Error al crear la orden: module 'datetime' has no attribute 'now'
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['BYWIUlT3HkpkYobA7wkTK9e8tB2Ut9xrq0ZOZ87JA9wg6BMNBlvVFsiGoqKashyt'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 1
+ID de orden guardado en sesión: 1
+Iniciando process_payment
+ID de orden en sesión: 1
+Orden encontrada: 271124001
+No se pudo generar la URL de pago
+Error en process_payment: Reverse for 'checkout_options' with arguments '(1,)' not found. 1 pattern(s) tried: ['checkout/options/\\Z']
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['QKK3RoUz2ntjZE22oea7tIpykTNpNrCyFMN9Wb8fVcAf7RDfS3l9o1t6fIvFMzDA'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 2
+ID de orden guardado en sesión: 2
+Iniciando process_payment
+ID de orden en sesión: 2
+Orden encontrada: 271124002
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['IidFBUIC5PsNWqHe882nYWJocTJU8w5nxkgLGHWiYEzJ4DirCXdpTfNW7Ira7E6p'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 3
+ID de orden guardado en sesión: 3
+Iniciando process_payment
+ID de orden en sesión: 3
+Orden encontrada: 271124003
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['bayAyARY0BncSlTjj4tcaw48nnsjwr6F0cBGDn5ETqu80yuwNTEe5P8Gicazvz7H'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 4
+ID de orden guardado en sesión: 4
+Iniciando process_payment
+ID de orden en sesión: 4
+Orden encontrada: 271124004
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['gN9ZY56LrgmCkKYAbLkyWBwbsMZEMDR05Pc53Skrk5tysXzNFAvARUAJnBHULLS2'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 5
+ID de orden guardado en sesión: 5
+Iniciando process_payment
+ID de orden en sesión: 5
+Orden encontrada: 271124005
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['uuQ9vjJWfcJSJOeQNlB0d6OqwJw2teChjwTfA6XC81QOR1P3haM28pSYryeismDj'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 6
+ID de orden guardado en sesión: 6
+Iniciando process_payment
+ID de orden en sesión: 6
+Orden encontrada: 271124006
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['z3fe7KMZyZhDBRzPPHRIHkdD3QlZHWHDo5ikcx0FrOozJ4a2jw2KCDhbYF3fG4IF'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 7
+ID de orden guardado en sesión: 7
+Iniciando process_payment
+ID de orden en sesión: 7
+Orden encontrada: 271124007
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['qvlp5pMoWWR63D74tXFXeE6IASqXEziPfxovac04PLY2bQIhXMQZ9XagvH8dDHjR'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 8
+ID de orden guardado en sesión: 8
+Iniciando process_payment
+ID de orden en sesión: 8
+Orden encontrada: 271124008
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['Fx3J3PWBQMLXi42giTjwlYawt5XHz3Dtuz6P8CahJBSTqhDtMIuyghe4oUFXybEv'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 9
+ID de orden guardado en sesión: 9
+Iniciando process_payment
+ID de orden en sesión: 9
+Orden encontrada: 271124009
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['8uDlrCI7QoViJOROVoxCrKbFuFNyejl6XwGrwpWNJd2eR1s1pdIEm3fdpuvOdrm8'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 10
+ID de orden guardado en sesión: 10
+Iniciando process_payment
+ID de orden en sesión: 10
+Orden encontrada: 271124010
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['BAVOB0sQ31Aa1LzagTDBVjkB10mVZ9i4qCYUGNGwWQH69YanKIODQCo9WP4bYhj6'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 11
+ID de orden guardado en sesión: 11
+Iniciando process_payment
+ID de orden en sesión: 11
+Orden encontrada: 271124011
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['UnbPrZ7TiXMXimUsCLQ0ylIH7ceWah3XJpeVwMlzbMTTqzvF6A12tEMf21Wc9p4Z'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 12
+ID de orden guardado en sesión: 12
+Iniciando process_payment
+ID de orden en sesión: 12
+Orden encontrada: 271124012
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['m5mjBqJMsC6SDeKo4A1ENRTI67g99eP1b7ppGdXslrdOLrlBypcGIaXg1WYp8mQ3'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 13
+ID de orden guardado en sesión: 13
+Iniciando process_payment
+ID de orden en sesión: 13
+Orden encontrada: 271124013
+No se pudo generar la URL de pago
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Iniciando guest_checkout
+Product ID from session: 1
+Producto encontrado: xbox serie x
+Procesando POST request
+POST data: <QueryDict: {'csrfmiddlewaretoken': ['YUI8eEZYEEjZlfskSV6n8GSypdYFMjYINWLejrdExtqVts3xmKhp3ZW6k2GVLrZK'], 'nombre': ['Maria'], 'apellido': ['Mesa'], 'email': ['maria.mesa.neira@gmail.com'], 'telefono': ['934504484'], 'shipping': ['pickup'], 'direccion': ['']}>
+Precios calculados: base=499990.00, final=349993.0000, total=349993.0000
+Orden creada exitosamente: 14
+ID de orden guardado en sesión: 14
+Iniciando process_payment
+ID de orden en sesión: 14
+Orden encontrada: 271124014
+URL de pago generada: https://sandbox.flow.cl/app/web/pay.php?token=3EFF8FFB6C097A424F1707042AFF15586C0EC95Z
+Iniciando guest_checkout
+Error en guest_checkout: Invalid block tag on line 187: 'endblock'. Did you forget to register or load this tag?
+ID de producto en sesión: None
+ID de producto en sesión: None
+ID de producto en sesión: None
+ID de producto en sesión: None
+ID de producto en sesión: None
+Product ID obtenido de la sesión: None
+No se encontró product_id en POST ni en sesión
+ID de producto en sesión: None
+>>>>>>> Stashed changes

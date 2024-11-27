@@ -29,9 +29,8 @@
                                 {% endif %}
                                 <div class="card-actions">
                                     <a href="{% url 'stock_smart:producto_detalle' producto.slug %}" class="btn btn-primary">Ver Detalles</a>
-                                    <button class="btn btn-outline-primary agregar-carrito" 
-                                            data-producto-id="{{ producto.id }}">
-                                        <i class="bi bi-cart-plus"></i>
+                                    <button onclick="addToCart({{ producto.id }})" class="btn btn-outline-primary">
+                                        <i class="fas fa-shopping-cart"></i> Añadir al Carrito
                                     </button>
                                 </div>
                             </div>
@@ -60,9 +59,8 @@
                                 <p class="precio">${{ producto.precio }}</p>
                                 <div class="card-actions">
                                     <a href="{% url 'stock_smart:producto_detalle' producto.slug %}" class="btn btn-primary">Ver Detalles</a>
-                                    <button class="btn btn-outline-primary agregar-carrito" 
-                                            data-producto-id="{{ producto.id }}">
-                                        <i class="bi bi-cart-plus"></i>
+                                    <button onclick="addToCart({{ producto.id }})" class="btn btn-outline-primary">
+                                        <i class="fas fa-shopping-cart"></i> Añadir al Carrito
                                     </button>
                                 </div>
                             </div>

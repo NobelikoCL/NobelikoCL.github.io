@@ -1,5 +1,4 @@
 {% extends 'stock_smart/base.html' %}
-<<<<<<< HEAD
 {% load static %}
 {% load custom_filters %}
 
@@ -47,69 +46,18 @@
                                     data-product-id="{{ producto.id }}">
                                 <i class="fas fa-shopping-cart me-2"></i>Agregar al Carrito
                             </button>
-                            <button type="button" class="btn btn-primary w-100 buy-now-btn" 
-                                    data-product-id="{{ producto.id }}">
+                            <a href="{% url 'stock_smart:iniciar_checkout' producto.id %}" 
+                               class="btn btn-primary w-100 buy-now-btn"
+                               data-product-id="{{ producto.id }}"
+                               data-price="{% if producto.discount_percentage > 0 %}{{ producto.final_price }}{% else %}{{ producto.published_price }}{% endif %}"
+                               data-stock="{{ producto.stock }}"
+                               onclick="return validateAndBuyNow(event, this)">
                                 <i class="fas fa-bolt me-2"></i>Comprar Ahora
-                            </button>
-=======
-
-{% load static %}
-
-{% block title %}{{ titulo }} - Stock Smart{% endblock %}
-
-{% block content %}
-<div class="container my-4">
-    <h1 class="mb-4">{{ titulo }}</h1>
-    {% if descripcion %}
-        <p class="lead mb-4">{{ descripcion }}</p>
-    {% endif %}
-
-    {% if productos %}
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            {% for producto in productos %}
-            <div class="col">
-                <div class="card h-100">
-                    {% if producto.imagen %}
-                        <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-                    {% else %}
-                        <div class="text-center p-3 bg-light">Sin imagen disponible</div>
-                    {% endif %}
-                    
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">{{ producto.nombre }}</h5>
-                        
-                        <div class="mb-3">
-                            {% if producto.precio_oferta %}
-                                <span class="text-danger h5">${{ producto.precio_oferta }}</span>
-                                <small class="text-muted text-decoration-line-through">${{ producto.precio }}</small>
-                            {% else %}
-                                <span class="h5">${{ producto.precio }}</span>
-                            {% endif %}
-                        </div>
-                        
-                        <div class="mt-auto">
-                            <form method="POST" action="{% url 'stock_smart:agregar_carrito' producto.id %}" class="mb-2">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-outline-primary w-100">
-                                    <i class="bi bi-cart-plus"></i> Agregar al Carrito
-                                </button>
-                            </form>
-                            
-                            <form method="POST" action="{% url 'stock_smart:comprar_ahora' producto.id %}" class="mb-2">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-primary w-100">
-                                    <i class="bi bi-lightning-charge"></i> Comprar Ahora
-                                </button>
-                            </form>
-                            
-                            <a href="{% url 'stock_smart:producto_detalle' producto.slug %}" 
-                               class="btn btn-link w-100">Ver Detalles</a>
->>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
         </div>
         {% endfor %}
     </div>
@@ -135,15 +83,50 @@ document.addEventListener('DOMContentLoaded', function() {
             addToCart(productId);
         });
     });
-
-    // Comprar ahora
-    document.querySelectorAll('.buy-now-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.dataset.productId;
-            buyNow(productId);
-        });
-    });
 });
+
+function validateAndBuyNow(event, button) {
+    event.preventDefault();
+    
+    const productId = button.dataset.productId;
+    const stock = parseInt(button.dataset.stock);
+    const price = parseFloat(button.dataset.price);
+
+    // Validaciones básicas
+    if (stock <= 0) {
+        showToast('Error', 'Producto sin stock disponible');
+        return false;
+    }
+
+    if (price <= 0) {
+        showToast('Error', 'Precio no válido');
+        return false;
+    }
+
+    // Validación en servidor
+    fetch(`/api/validate-product/${productId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Redirigir al checkout
+            window.location.href = button.href;
+        } else {
+            showToast('Error', data.message || 'No se puede proceder con la compra');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast('Error', 'Error al procesar la solicitud');
+    });
+
+    return false;
+}
 
 function addToCart(productId) {
     fetch(`/cart/add/${productId}/`, {
@@ -166,10 +149,6 @@ function addToCart(productId) {
         console.error('Error:', error);
         showToast('Error', 'Error al agregar al carrito');
     });
-}
-
-function buyNow(productId) {
-    window.location.href = `/buy-now/${productId}/`;
 }
 
 function showToast(title, message) {
@@ -263,18 +242,4 @@ function updateCartCounter(count) {
     }
 }
 </style>
-=======
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="alert alert-info">
-            {% if query %}
-                No se encontraron productos que coincidan con "{{ query }}"
-            {% else %}
-                No hay productos disponibles en este momento
-            {% endif %}
-        </div>
-    {% endif %}
-</div>
->>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
 {% endblock %}

@@ -135,44 +135,95 @@ def generate_order_number():
     return f"ORD-{uuid.uuid4().hex[:8].upper()}"
 
 class Order(models.Model):
+    SHIPPING_CHOICES = [
+        ('pickup', 'Retiro en tienda'),
+        ('starken', 'Envío Starken'),
+    ]
+    
+    PAYMENT_CHOICES = [
+        ('flow', 'Pago con Flow'),
+        ('transfer', 'Transferencia Bancaria'),
+    ]
+    
     STATUS_CHOICES = [
-        ('PENDING', 'Pendiente'),
-        ('PAID', 'Pagado'),
-        ('FAILED', 'Fallido'),
-        ('CANCELLED', 'Cancelado'),
+        ('pending', 'Pendiente'),
+        ('paid', 'Pagado'),
+        ('shipped', 'Enviado'),
+        ('delivered', 'Entregado'),
+        ('cancelled', 'Cancelado'),
     ]
 
-    order_number = models.CharField(max_length=50, unique=True)
-    created_at = models.DateTimeField(default=timezone.now)
+    order_number = models.CharField(max_length=11, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     
-    # Información del cliente
-    first_name = models.CharField(max_length=100, default='')
-    last_name = models.CharField(max_length=100, default='')
-    email = models.EmailField(default='')
-    phone = models.CharField(max_length=20, default='')
-    
-    # Información del pago
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    # Campos de Flow
     flow_token = models.CharField(max_length=100, blank=True, null=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
+    flow_order = models.CharField(max_length=100, blank=True, null=True)
+    payment_url = models.URLField(max_length=300, blank=True, null=True)
     
-    # Información de envío
-    shipping_method = models.CharField(max_length=20, default='pickup')
-    shipping_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    # Campos de envío
+    shipping_method = models.CharField(max_length=10, choices=SHIPPING_CHOICES)
+    shipping_cost = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+    shipping_address = models.TextField(null=True, blank=True)
     
-    # Agregar relación con el usuario
-    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    # Campos de cliente
+    customer_name = models.CharField(max_length=200)
+    customer_email = models.EmailField()
+    customer_phone = models.CharField(max_length=15)
     
+    # Campos de precio (todos con defaults)
+    base_price = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+    discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    final_price = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+    iva_amount = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    # Relación con el producto (permitir null para órdenes existentes)
+    product = models.ForeignKey(
+        'Product', 
+        on_delete=models.PROTECT,
+        null=True,  # Permitir null para órdenes existentes
+        blank=True
+    )
+
+    # Nuevos campos
+    region = models.CharField(max_length=100)
+    ciudad = models.CharField(max_length=100)
+    comuna = models.CharField(max_length=100)
+    shipping_address = models.TextField(blank=True, null=True)
+    payment_method = models.CharField(max_length=10, choices=PAYMENT_CHOICES)
+    observaciones = models.TextField(blank=True, null=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.order_number:
+            today = timezone.now()
+            date_prefix = today.strftime('%d%m%y')
+            
+            last_order = Order.objects.filter(
+                order_number__startswith=date_prefix
+            ).order_by('-order_number').first()
+            
+            if last_order:
+                last_number = int(last_order.order_number[-3:])
+                new_number = str(last_number + 1).zfill(3)
+            else:
+                new_number = '001'
+            
+            self.order_number = f"{date_prefix}{new_number}"
+        
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Orden {self.order_number} - {self.customer_name}"
+
     class Meta:
         ordering = ['-created_at']
 
-    def __str__(self):
-        return f"Orden #{self.order_number}"
-
     @property
     def full_name(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.customer_name} {self.customer_email}"
 
     @property
     def total_with_shipping(self):
@@ -341,16 +392,8 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True, null=True)
     description = models.TextField()
-    published_price = models.PositiveIntegerField(
-        verbose_name="Precio publicado",
-        help_text="Precio final que verá el cliente (IVA incluido)"
-    )
-    discount_percentage = models.PositiveIntegerField(
-        verbose_name="Porcentaje de descuento",
-        default=0,
-        validators=[MaxValueValidator(100)],
-        help_text="Porcentaje de descuento (0-100)"
-    )
+    published_price = models.DecimalField(max_digits=10, decimal_places=2)
+    discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
     stock = models.PositiveIntegerField(default=0)
@@ -396,10 +439,14 @@ class Product(models.Model):
 
     @property
     def get_final_price(self):
-        if self.discount_percentage > 0:
-            discount = (self.published_price * Decimal(str(self.discount_percentage))) / Decimal('100')
-            return self.published_price - discount
-        return self.published_price
+        try:
+            if self.discount_percentage and self.discount_percentage > 0:
+                discount = (self.published_price * self.discount_percentage) / Decimal('100')
+                return self.published_price - discount
+            return self.published_price
+        except Exception as e:
+            print(f"Error calculando precio final: {str(e)}")
+            return Decimal('0')
 
 class Profile(models.Model):
     user = models.OneToOneField(

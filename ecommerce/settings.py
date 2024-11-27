@@ -127,7 +127,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'stock_smart/static'),
+    os.path.join(BASE_DIR, 'stock_smart', 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -207,6 +207,7 @@ LOGGING = {
         'stock_smart': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
+            'propagate': True,
         },
     },
 }
@@ -232,6 +233,17 @@ else:
 # Flow settings
 FLOW_API_KEY = '4B00FE26-91DE-4BF0-83A7-577C6L8AA65A'
 FLOW_SECRET_KEY = 'deef495f20d1307e2ebed5b1f9c5f33da3aeaee9'
+FLOW_API_URL = 'https://sandbox.flow.cl/api'
+FLOW_CONFIRM_URL = 'http://127.0.0.1:8000/payment/confirm/'
+FLOW_RETURN_URL = 'http://127.0.0.1:8000/payment/success/'
+FLOW_COMMERCE_ID = '1F90971E-8C84-4C67-834F-8B487AF2C550'
+FLOW_PAYMENT_URL = 'https://sandbox.flow.cl/app/web/pay.php'
+SITE_URL = 'http://127.0.0.1:8000'  # URL base de tu sitio
+
+# URLs completas para Flow
+FLOW_RETURN_URL = f"{SITE_URL}/payment/success/"
+FLOW_CANCEL_URL = f"{SITE_URL}/payment/cancel/"
+FLOW_CONFIRM_URL = f"{SITE_URL}/payment/confirm/"
 
 # CSRF Settings
 CSRF_TRUSTED_ORIGINS = [

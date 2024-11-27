@@ -8,51 +8,24 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = [
-        'order_number', 
-        'full_name', 
-        'total_with_shipping',
-        'status', 
-        'created_at'
-    ]
-    list_filter = ['status', 'created_at']
-    search_fields = [
-        'order_number', 
-        'first_name', 
-        'last_name', 
-        'email'
-    ]
-    readonly_fields = [
-        'order_number',
-        'created_at',
-        'updated_at',
-        'flow_token',
-        'total_with_shipping'
-    ]
+    list_display = ['order_number', 'customer_name', 'status', 'total_amount', 'created_at']
+    list_filter = ['status', 'shipping_method', 'created_at']
+    search_fields = ['order_number', 'customer_name', 'customer_email']
+    readonly_fields = ['order_number', 'created_at']
+    
     fieldsets = [
-        ('Información de la Orden', {
-            'fields': [
-                'order_number',
-                'status',
-                'created_at',
-                'updated_at'
-            ]
+        ('Información de Orden', {
+            'fields': ('order_number', 'status', 'created_at')
         }),
-        ('Información del Cliente', {
-            'fields': [
-                'first_name',
-                'last_name',
-                'email',
-                'phone'
-            ]
+        ('Cliente', {
+            'fields': ('customer_name', 'customer_email', 'customer_phone')
         }),
-        ('Información de Pago', {
-            'fields': [
-                'total_amount',
-                'shipping_method',
-                'shipping_cost',
-                'flow_token'
-            ]
+        ('Envío', {
+            'fields': ('shipping_method', 'shipping_cost', 'shipping_address')
+        }),
+        ('Producto y Precios', {
+            'fields': ('product', 'base_price', 'discount_percentage', 'final_price', 
+                      'iva_amount', 'total_amount')
         })
     ]
     inlines = [OrderItemInline]

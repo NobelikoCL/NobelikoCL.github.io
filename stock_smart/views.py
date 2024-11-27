@@ -176,48 +176,70 @@ def category_view(request, slug):
 @require_POST
 @ensure_csrf_cookie
 def add_to_cart(request):
-    try:
-        product_id = request.POST.get('product_id')
-        quantity = int(request.POST.get('quantity', 1))
-        
-        if not product_id:
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            product_id = data.get('product_id')
+            
+            # Obtener el producto
+            product = get_object_or_404(Product, id=product_id)
+            
+            # Inicializar o obtener el carrito de la sesión
+            cart = request.session.get('cart', {})
+            
+            # Convertir el ID a string ya que las keys de session deben ser strings
+            product_id_str = str(product_id)
+            
+            # Si el producto ya está en el carrito, incrementar cantidad
+            if product_id_str in cart:
+                # Verificar stock disponible
+                if cart[product_id_str]['quantity'] < product.stock:
+                    cart[product_id_str]['quantity'] += 1
+                else:
+                    return JsonResponse({
+                        'success': False,
+                        'error': 'Stock no disponible'
+                    })
+            else:
+                # Agregar nuevo producto al carrito
+                if product.stock > 0:
+                    cart[product_id_str] = {
+                        'quantity': 1,
+                        'price': str(product.get_final_price),
+                        'name': product.name
+                    }
+                else:
+                    return JsonResponse({
+                        'success': False,
+                        'error': 'Producto sin stock'
+                    })
+            
+            # Guardar carrito actualizado en la sesión
+            request.session['cart'] = cart
+            request.session.modified = True
+            
+            # Calcular total de items en el carrito
+            cart_count = sum(item['quantity'] for item in cart.values())
+            
             return JsonResponse({
-                'status': 'error',
-                'message': 'Product ID is required'
-            }, status=400)
-        
-        # Obtener el producto
-        product = get_object_or_404(Product, id=product_id)
-        
-        # Obtener o crear carrito
-        cart = Cart.get_active_cart(request.visitor_id)
-        
-        # Agregar o actualizar item en el carrito
-        cart_item, created = CartItem.objects.get_or_create(
-            cart=cart,
-            product=product,
-            defaults={'quantity': quantity}
-        )
-        
-        if not created:
-            cart_item.quantity += quantity
-            cart_item.save()
-        
-        # Obtener el nuevo total de items
-        cart_count = CartItem.objects.filter(cart=cart).count()
-        
-        return JsonResponse({
-            'status': 'success',
-            'message': 'Producto agregado al carrito',
-            'cart_count': cart_count
-        })
-        
-    except Exception as e:
-        print(f"Error en add_to_cart: {str(e)}")  # Para debugging
-        return JsonResponse({
-            'status': 'error',
-            'message': 'Error al agregar el producto al carrito'
-        }, status=500)
+                'success': True,
+                'cart_count': cart_count,
+                'message': 'Producto agregado al carrito'
+            })
+            
+        except Product.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'error': 'Producto no encontrado'
+            })
+        except Exception as e:
+            print(f"Error en add_to_cart: {str(e)}")
+            return JsonResponse({
+                'success': False,
+                'error': str(e)
+            })
+    
+    return JsonResponse({'success': False})
 
 def products(request):
     products_list = Product.objects.all()
@@ -228,7 +250,7 @@ def products(request):
         products_list = products_list.filter(
             Q(name__icontains=query) |
             Q(description__icontains=query)
-        )
+        )  # Aquí faltaba cerrar el paréntesis
     
     # Ordenamiento
     order = request.GET.get('order')
@@ -301,76 +323,125 @@ def cart_checkout(request):
 
 def checkout_options(request, product_id=None):
     if product_id:
-        # Obtener el producto
-        product = get_object_or_404(Product, id=product_id)
-        
-        # Calcular precios
-        precio_original = product.published_price
-        precio_con_descuento = product.get_final_price
-        descuento = precio_original - precio_con_descuento if product.discount_percentage > 0 else Decimal('0')
-        iva = precio_con_descuento * Decimal('0.19')
-        total = precio_con_descuento + iva
+        try:
+            # Obtener el producto
+            product = get_object_or_404(Product, id=product_id)
+            
+            # Debug del producto
+            logger.debug("="*50)
+            logger.debug("INFORMACIÓN DEL PRODUCTO")
+            logger.debug(f"ID: {product.id}")
+            logger.debug(f"Nombre: {product.name}")
+            logger.debug(f"Precio publicado: {product.published_price}")
+            logger.debug(f"Tipo de precio publicado: {type(product.published_price)}")
+            logger.debug(f"Descuento %: {product.discount_percentage}")
+            logger.debug(f"Tipo de descuento: {type(product.discount_percentage)}")
+            
+            # Calcular valores
+            precio_original = Decimal(str(product.published_price))
+            
+            # Debug de cálculos
+            logger.debug("\nCÁLCULOS DE PRECIOS")
+            logger.debug(f"Precio original: {precio_original}")
+            
+            # Calcular descuento
+            if product.discount_percentage and product.discount_percentage > 0:
+                descuento_decimal = Decimal(str(product.discount_percentage)) / Decimal('100')
+                descuento_monto = precio_original * descuento_decimal
+                precio_con_descuento = precio_original - descuento_monto
+                
+                logger.debug(f"Descuento decimal: {descuento_decimal}")
+                logger.debug(f"Monto descuento: {descuento_monto}")
+            else:
+                descuento_monto = Decimal('0')
+                precio_con_descuento = precio_original
+                
+                logger.debug("No hay descuento aplicado")
+            
+            # Calcular IVA y total
+            iva = precio_con_descuento * Decimal('0.19')
+            total = precio_con_descuento + iva
+            
+            logger.debug(f"Precio con descuento: {precio_con_descuento}")
+            logger.debug(f"IVA: {iva}")
+            logger.debug(f"Total: {total}")
+            logger.debug("="*50)
+            
+            # También imprimir en consola para desarrollo
+            print("\n=== DEBUG INFORMACIÓN PRODUCTO ===")
+            print(f"ID: {product.id}")
+            print(f"Nombre: {product.name}")
+            print(f"Precio publicado: {product.published_price}")
+            print(f"Descuento %: {product.discount_percentage}")
+            print(f"\n=== CÁLCULOS ===")
+            print(f"Precio original: {precio_original}")
+            print(f"Descuento: {descuento_monto}")
+            print(f"Precio con descuento: {precio_con_descuento}")
+            print(f"IVA: {iva}")
+            print(f"Total: {total}")
+            print("="*30)
 
-        context = {
-            'product': product,
-            'precio_original': precio_original,
-            'descuento': descuento,
-            'precio_con_descuento': precio_con_descuento,
-            'iva': iva,
-            'total': total,
-            'cart_count': get_cart_count(request),
-        }
-        
-        return render(request, 'stock_smart/checkout_options.html', context)
+            context = {
+                'product': product,
+                'precio_original': precio_original,
+                'descuento': descuento_monto,
+                'precio_con_descuento': precio_con_descuento,
+                'iva': iva,
+                'total': total,
+                'cart_count': get_cart_count(request),
+            }
+            
+            return render(request, 'stock_smart/checkout_options.html', context)
+            
+        except Exception as e:
+            logger.error(f"Error en checkout_options: {str(e)}")
+            print(f"Error en checkout_options: {str(e)}")
+            return redirect('stock_smart:home')
     
-    return redirect('stock_smart:home')  # Redirigir si no hay product_id
+    return redirect('stock_smart:home')
 
 def process_payment(request):
-    """Procesar el pago y crear la orden"""
-    if request.method == 'POST':
-        # Generar número de orden
-        order_number = generate_order_number()
+    try:
+        logger.info("Iniciando process_payment")
         
-        # Obtener método de pago y envío
-        payment_method = request.POST.get('payment_method')
-        shipping_method = request.POST.get('shipping_method')
+        order_id = request.session.get('order_id')
+        logger.info(f"ID de orden en sesión: {order_id}")
         
-        # Crear la orden
-        order = Order.objects.create(
-            order_number=order_number,
-            user=request.user if request.user.is_authenticated else None,
-            payment_method=payment_method,
-            shipping_method=shipping_method,
-            status='PENDING',
-            # ... otros campos ...
-        )
+        if not order_id:
+            messages.error(request, 'No se encontró la orden')
+            return redirect('stock_smart:productos_lista')
         
-        # Crear el primer evento de tracking
-        OrderTracking.objects.create(
-            order=order,
-            status='PENDING',
-            description='Orden creada, esperando pago'
-        )
+        try:
+            order = Order.objects.get(id=order_id)
+            logger.info(f"Orden encontrada: {order.order_number}")
+        except Order.DoesNotExist:
+            logger.error(f"No se encontró la orden con ID: {order_id}")
+            messages.error(request, 'Orden no encontrada')
+            return redirect('stock_smart:productos_lista')
         
-        # Guardar número de orden en sesión
-        request.session['order_number'] = order_number
+        # Crear pago en Flow
+        flow_service = FlowPaymentService()
+        payment_url = flow_service.create_payment(order)
         
-        # Redireccionar según método de pago
-        if payment_method == 'FLOW':
-            return redirect('stock_smart:flow_payment')
-        else:  # Transferencia
-            return redirect('stock_smart:transfer_instructions')
+        if payment_url:
+            logger.info(f"URL de pago generada: {payment_url}")
+            return redirect(payment_url)
+        else:
+            logger.error("No se pudo generar la URL de pago")
+            messages.error(request, 'Error al procesar el pago')
+            return redirect('stock_smart:productos_lista')
             
-    return redirect('stock_smart:checkout')
+    except Exception as e:
+        logger.error(f"Error en process_payment: {str(e)}")
+        messages.error(request, 'Error al procesar el pago')
+        return redirect('stock_smart:productos_lista')
 
 def auth_page(request):
-    """Página única para login/registro/recuperación"""
-    if request.user.is_authenticated:
+    try:
+        return render(request, 'stock_smart/auth.html')
+    except Exception as e:
+        print(f"Error en auth_page: {str(e)}")
         return redirect('stock_smart:productos_lista')
-    
-    return render(request, 'stock_smart/auth_page.html', {
-        'titulo': 'Acceso'
-    })
 
 def checkout(request):
     """Checkout para usuarios registrados"""
@@ -388,67 +459,65 @@ def checkout(request):
     })
 
 def guest_checkout(request):
-    """Vista para proceso de checkout como invitado"""
     try:
-        logger.info("Iniciando proceso de guest checkout")
+        # Obtener producto de la sesión
+        product_id = request.session.get('product_id')
+        logger.info(f"ID de producto en sesión: {product_id}")
         
-        # Verificar si viene de compra rápida
-        buy_now_data = request.session.get('buy_now_data')
+        if not product_id:
+            messages.error(request, 'No se encontró el producto en la sesión')
+            return redirect('stock_smart:productos_lista')
+        
+        # Obtener el producto
+        product = get_object_or_404(Product, id=product_id)
+        logger.info(f"Producto encontrado: {product.nombre}")
         
         if request.method == 'POST':
-            # Procesar el formulario
             form = GuestCheckoutForm(request.POST)
             if form.is_valid():
-                # Crear el pago
-                payment = Payment.objects.create(
-                    variant='flow',
-                    description='Compra en Stock Smart',
-                    total=Decimal(str(buy_now_data.get('total', '0'))),
-                    currency='CLP',
-                    billing_first_name=form.cleaned_data['first_name'],
-                    billing_last_name=form.cleaned_data['last_name'],
-                    billing_email=form.cleaned_data['email']
+                # Crear la orden
+                order = Order(
+                    customer_name=f"{form.cleaned_data['nombre']} {form.cleaned_data['apellido']}",
+                    customer_email=form.cleaned_data['email'],
+                    customer_phone=form.cleaned_data['telefono'],
+                    region=form.cleaned_data['region'],
+                    ciudad=form.cleaned_data['ciudad'],
+                    comuna=form.cleaned_data['comuna'],
+                    shipping_method=form.cleaned_data['shipping'],
+                    payment_method=form.cleaned_data['payment_method'],
+                    total_amount=product.precio_final
                 )
                 
-                try:
-                    # Esto redirigirá automáticamente a Flow
-                    return redirect(payment.get_payment_url())
-                except RedirectNeeded as redirect_to:
-                    return redirect(str(redirect_to))
-
+                if form.cleaned_data['shipping'] == 'starken':
+                    order.shipping_address = form.cleaned_data['direccion']
+                
+                if form.cleaned_data['observaciones']:
+                    order.observaciones = form.cleaned_data['observaciones']
+                
+                order.save()
+                
+                # Guardar ID de orden en sesión
+                request.session['order_id'] = order.id
+                logger.info(f"Orden creada y guardada en sesión: {order.id}")
+                
+                # Redireccionar según método de pago
+                if form.cleaned_data['payment_method'] == 'flow':
+                    return redirect('stock_smart:process_payment')
+                else:
+                    return redirect('stock_smart:transfer_instructions')
         else:
-            # GET request - mostrar formulario
             form = GuestCheckoutForm()
-
-        # Preparar contexto
+        
         context = {
             'form': form,
-            'is_buy_now': bool(buy_now_data)
+            'product': product
         }
-
-        if buy_now_data:
-            product = get_object_or_404(Product, id=buy_now_data['product_id'])
-            context.update({
-                'product': product,
-                'total': buy_now_data['total']
-            })
-        else:
-            cart = Cart.get_active_cart(request)
-            if not cart or not cart.cartitem_set.exists():
-                messages.warning(request, 'No hay productos en el carrito')
-                return redirect('stock_smart:productos_lista')
-            
-            context.update({
-                'cart': cart,
-                'cart_items': cart.cartitem_set.all(),
-                'total': cart.get_total()
-            })
-
+        
         return render(request, 'stock_smart/guest_checkout.html', context)
-
+        
     except Exception as e:
-        logger.error(f"Error en guest_checkout: {str(e)}\n{traceback.format_exc()}")
-        messages.error(request, 'Error al procesar el checkout. Por favor, intente nuevamente.')
+        logger.error(f"Error en guest_checkout: {str(e)}")
+        messages.error(request, 'Error al procesar el checkout')
         return redirect('stock_smart:productos_lista')
 
 def categories(request):
@@ -666,7 +735,6 @@ def flow_confirm(request):
             
             if payment_data['status'] == 2:  # Pago exitoso
                 order.status = 'PAID'
-                order.payment_date = timezone.now()
                 order.save()
                 
                 # Actualizar stock
@@ -872,7 +940,7 @@ def cart_payment(request):
         messages.error(request, 'No hay información de checkout')
         return redirect('stock_smart:productos_lista')
     
-    # Si el usuario est�� autenticado, prellenar datos
+    # Si el usuario est autenticado, prellenar datos
     if request.user.is_authenticated:
         context = {
             'user_data': {
@@ -1217,6 +1285,7 @@ def flow_confirm(request):
     except Exception as e:
         logger.error(f"Error en flow_confirm: {str(e)}")
         return HttpResponse(status=500)
+    return HttpResponse(status=405)
 
 def buy_now_confirm(request, product_id):
     """
@@ -1417,34 +1486,33 @@ def process_guest_order(request):
 
     return redirect('stock_smart:productos_lista')
 
-def transfer_instructions(request, order_id):
-    """
-    Muestra las instrucciones para transferencia bancaria
-    """
+def transfer_instructions(request):
     try:
+        order_id = request.session.get('order_id')
+        if not order_id:
+            messages.error(request, 'No se encontró la orden')
+            return redirect('stock_smart:productos_lista')
+            
         order = get_object_or_404(Order, id=order_id)
         
-        context = {
-            'order': order,
-            'bank_info': {
-                'bank_name': 'Banco Estado',
-                'account_type': 'Cuenta Corriente',
-                'account_number': '123456789',
-                'rut': '76.543.210-K',
-                'name': 'Stock Smart SpA',
-                'email': 'pagos@stocksmart.cl'
-            }
+        bank_info = {
+            'banco': 'Banco Estado',
+            'tipo_cuenta': 'Cuenta Corriente',
+            'numero_cuenta': '123456789',
+            'rut': '76.543.210-K',
+            'nombre': 'Tu Empresa SPA',
+            'email': 'pagos@tuempresa.cl'
         }
         
-        return render(request, 'stock_smart/transfer_instructions.html', context)
+        return render(request, 'stock_smart/transfer_instructions.html', {
+            'order': order,
+            'bank_info': bank_info
+        })
         
-    except Order.DoesNotExist:
-        messages.error(request, 'Orden no encontrada')
-        return redirect('stock_smart:checkout_options')
     except Exception as e:
-        logger.error(f"Error al mostrar instrucciones de transferencia: {str(e)}")
-        messages.error(request, 'Error al procesar la solicitud')
-        return redirect('stock_smart:checkout_options')
+        logger.error(f"Error en transfer_instructions: {str(e)}")
+        messages.error(request, 'Error al mostrar instrucciones de pago')
+        return redirect('stock_smart:productos_lista')
 
 @csrf_exempt
 def flow_confirmation(request):
@@ -1669,20 +1737,37 @@ def payment_notify(request):
         return HttpResponse(status=500)
 
 def payment_success(request):
-    """Vista para pago exitoso"""
-    payment_id = request.GET.get('payment_id')
     try:
-        payment = Payment.objects.get(id=payment_id)
-        messages.success(request, '¡Pago procesado exitosamente!')
-        return render(request, 'stock_smart/payment_success.html', {'payment': payment})
-    except Payment.DoesNotExist:
-        messages.error(request, 'Pago no encontrado')
-        return redirect('stock_smart:checkout')
+        token = request.GET.get('token')
+        if not token:
+            messages.error(request, 'Token no válido')
+            return redirect('stock_smart:productos_lista')
+            
+        order = get_object_or_404(Order, flow_token=token)
+        
+        # Actualizar estado de la orden
+        order.status = 'paid'
+        order.save()
+        
+        # Limpiar sesión
+        if 'order_id' in request.session:
+            del request.session['order_id']
+        
+        messages.success(request, '¡Pago exitoso!')
+        return render(request, 'stock_smart/payment_success.html', {'order': order})
+        
+    except Exception as e:
+        print(f"Error en payment_success: {str(e)}")
+        messages.error(request, 'Error al procesar el pago')
+        return redirect('stock_smart:productos_lista')
 
-def payment_failed(request):
-    """Vista para pago fallido"""
-    messages.error(request, 'El pago no pudo ser procesado')
-    return redirect('stock_smart:checkout')
+def payment_cancel(request):
+    try:
+        messages.warning(request, 'El pago ha sido cancelado')
+        return redirect('stock_smart:productos_lista')
+    except Exception as e:
+        print(f"Error en payment_cancel: {str(e)}")
+        return redirect('stock_smart:productos_lista')
 
 def generate_signature(params):
     """Genera la firma HMAC para Flow"""
@@ -1713,77 +1798,138 @@ def get_or_create_cart(request):
     return cart
 
 def cart_view(request):
-    cart = Cart.get_active_cart(request.visitor_id)
-    cart_items = CartItem.objects.filter(cart=cart)
-    
-    # Calcular totales
-    subtotal = sum(item.product.price * item.quantity for item in cart_items)
-    total_discount = sum(
-        (item.product.price - item.product.get_final_price) * item.quantity 
-        for item in cart_items
-    )
-    total = subtotal - total_discount
-
-    context = {
-        'cart_items': cart_items,
-        'subtotal': subtotal,
-        'total_discount': total_discount,
-        'total': total,
-        'main_categories': Category.objects.filter(parent=None, is_active=True)
-    }
-    
-    return render(request, 'stock_smart/cart.html', context)
+    try:
+        cart = request.session.get('cart', {})
+        cart_items = []
+        total = Decimal('0')
+        
+        # Procesar cada item en el carrito
+        for product_id, item_data in cart.items():
+            try:
+                product = Product.objects.get(id=product_id)
+                quantity = item_data['quantity']
+                
+                # Calcular precio con descuento si aplica
+                if product.discount_percentage:
+                    discount = (product.published_price * product.discount_percentage) / Decimal('100')
+                    price = product.published_price - discount
+                else:
+                    price = product.published_price
+                
+                item_total = price * quantity
+                
+                cart_items.append({
+                    'product': product,
+                    'quantity': quantity,
+                    'price': price,
+                    'total': item_total
+                })
+                
+                total += item_total
+                
+            except Product.DoesNotExist:
+                continue
+        
+        context = {
+            'cart_items': cart_items,
+            'total': total,
+            'cart_count': sum(item['quantity'] for item in cart.values())
+        }
+        
+        return render(request, 'stock_smart/cart.html', context)
+        
+    except Exception as e:
+        print(f"Error en cart_view: {str(e)}")
+        return render(request, 'stock_smart/cart.html', {
+            'error': 'Error al cargar el carrito'
+        })
 
 def update_cart(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        product_id = data.get('product_id')
-        change = data.get('change')
-        
-        cart = Cart.get_active_cart(request.visitor_id)
-        product = get_object_or_404(Product, id=product_id)
-        cart_item = get_object_or_404(CartItem, cart=cart, product=product)
-        
-        # Actualizar cantidad
-        cart_item.quantity = max(1, cart_item.quantity + change)
-        cart_item.save()
-        
-        # Recalcular totales
-        cart_items = CartItem.objects.filter(cart=cart)
-        subtotal = sum(item.product.price * item.quantity for item in cart_items)
-        total_discount = sum(
-            (item.product.price - item.product.get_final_price) * item.quantity 
-            for item in cart_items
-        )
-        total = subtotal - total_discount
-        
-        return JsonResponse({
-            'success': True,
-            'item_total': cart_item.product.get_final_price * cart_item.quantity,
-            'subtotal': subtotal,
-            'total_discount': total_discount,
-            'total': total,
-            'cart_count': sum(item.quantity for item in cart_items)
-        })
+        try:
+            data = json.loads(request.body)
+            product_id = str(data.get('product_id'))
+            new_quantity = int(data.get('quantity'))
+            
+            # Verificar stock disponible
+            product = get_object_or_404(Product, id=product_id)
+            if new_quantity > product.stock:
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Stock no disponible'
+                })
+            
+            # Actualizar carrito
+            cart = request.session.get('cart', {})
+            if product_id in cart:
+                cart[product_id]['quantity'] = new_quantity
+                request.session['cart'] = cart
+                request.session.modified = True
+                
+                # Calcular nuevos totales
+                item_total = int(float(cart[product_id]['price']) * new_quantity)
+                cart_total = sum(int(float(item['price']) * item['quantity']) for item in cart.values())
+                cart_count = sum(item['quantity'] for item in cart.values())
+                
+                # Formatear números con separador de miles
+                from django.contrib.humanize.templatetags.humanize import intcomma
+                return JsonResponse({
+                    'success': True,
+                    'new_quantity': new_quantity,
+                    'item_total': intcomma(item_total),
+                    'cart_total': intcomma(cart_total),
+                    'cart_count': cart_count
+                })
+            
+            return JsonResponse({
+                'success': False,
+                'error': 'Producto no encontrado en el carrito'
+            })
+            
+        except Exception as e:
+            print(f"Error en update_cart: {str(e)}")
+            return JsonResponse({
+                'success': False,
+                'error': str(e)
+            })
     
-    return JsonResponse({'success': False}, status=400)
+    return JsonResponse({'success': False})
 
 def remove_from_cart(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        product_id = data.get('product_id')
-        
-        if request.user.is_authenticated:
-            cart = Cart.objects.get(user=request.user)
-            cart.cartitem_set.filter(product_id=product_id).delete()
-        else:
+        try:
+            data = json.loads(request.body)
+            product_id = str(data.get('product_id'))
+            
+            # Eliminar del carrito
             cart = request.session.get('cart', {})
-            if str(product_id) in cart:
-                del cart[str(product_id)]
+            if product_id in cart:
+                del cart[product_id]
                 request.session['cart'] = cart
                 request.session.modified = True
-        
-        return JsonResponse({'success': True})
+                
+                # Calcular nuevo total
+                cart_total = sum(float(item['price']) * item['quantity'] for item in cart.values())
+                cart_count = sum(item['quantity'] for item in cart.values())
+                
+                return JsonResponse({
+                    'success': True,
+                    'cart_total': f"{cart_total:,.0f}",
+                    'cart_count': cart_count
+                })
+            
+            return JsonResponse({
+                'success': False,
+                'error': 'Producto no encontrado en el carrito'
+            })
+            
+        except Exception as e:
+            print(f"Error en remove_from_cart: {str(e)}")
+            return JsonResponse({
+                'success': False,
+                'error': str(e)
+            })
+    
     return JsonResponse({'success': False})
 
 def category_products(request, category_id):
@@ -1851,14 +1997,52 @@ def checkout_direct(request, product_id):
     # Redirigir al proceso de checkout
     return redirect('stock_smart:cart_view')  # O a tu vista de checkout existente
 
-def checkout_options(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    context = {
-        'product': product,
-        'final_price': product.get_final_price,
-        'cart_count': get_cart_count(request),
-    }
-    return render(request, 'stock_smart/checkout_options.html', context)
+def checkout_options(request, product_id=None):
+    try:
+        if not product_id:
+            messages.error(request, 'No se especificó un producto')
+            return redirect('stock_smart:productos_lista')
+            
+        product = get_object_or_404(Product, id=product_id)
+        request.session['quick_buy_product_id'] = product_id
+        
+        # 1. Precio base (incluye IVA)
+        base_price = product.published_price
+        
+        # 2. Aplicar descuento si existe
+        if product.discount_percentage > 0:
+            discount = (base_price * Decimal(str(product.discount_percentage))) / Decimal('100')
+            final_price = base_price - discount
+        else:
+            final_price = base_price
+            
+        # 3. Calcular IVA (que ya está incluido)
+        # Precio sin IVA = Precio final / 1.19
+        price_without_iva = final_price / Decimal('1.19')
+        iva_amount = final_price - price_without_iva
+        
+        # Debug de cálculos
+        print(f"Precio base (con IVA): ${base_price}")
+        print(f"Descuento: {product.discount_percentage}%")
+        print(f"Precio final (con IVA): ${final_price}")
+        print(f"Precio sin IVA: ${price_without_iva}")
+        print(f"Monto IVA: ${iva_amount}")
+        
+        context = {
+            'product': product,
+            'base_price': base_price,
+            'final_price': final_price,
+            'price_without_iva': price_without_iva,
+            'iva': iva_amount,
+            'total': final_price,  # Este es el precio final que incluye IVA
+            'is_quick_buy': True
+        }
+        
+        return render(request, 'stock_smart/checkout_options.html', context)
+        
+    except Exception as e:
+        print(f"Error en checkout_options: {str(e)}")
+        return redirect('stock_smart:productos_lista')
 
 def checkout_guest(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -1867,3 +2051,340 @@ def checkout_guest(request, product_id):
         'cart_count': get_cart_count(request),
     }
     return render(request, 'stock_smart/guest_checkout.html', context)
+
+def add_to_cart(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            product_id = str(data.get('product_id'))
+            
+            print("\n=== DEBUG ADD TO CART ===")
+            print(f"Sesión ID: {request.session.session_key}")
+            print(f"Product ID recibido: {product_id}")
+            
+            product = get_object_or_404(Product, id=product_id)
+            print(f"Producto encontrado: {product.name}")
+            
+            # Asegurarse de que existe un carrito en la sesión
+            if 'cart' not in request.session:
+                request.session['cart'] = {}
+                print("Nuevo carrito creado en sesión")
+            
+            cart = request.session.get('cart', {})
+            print(f"Carrito actual: {cart}")
+            
+            # Agregar o actualizar producto
+            if product_id in cart:
+                cart[product_id]['quantity'] += 1
+                print(f"Incrementada cantidad para producto {product_id}")
+            else:
+                cart[product_id] = {
+                    'quantity': 1,
+                    'price': str(product.get_final_price),
+                    'name': product.name
+                }
+                print(f"Nuevo producto agregado al carrito: {cart[product_id]}")
+            
+            # Guardar carrito actualizado
+            request.session['cart'] = cart
+            request.session.modified = True
+            
+            print(f"Carrito actualizado: {cart}")
+            cart_count = sum(item['quantity'] for item in cart.values())
+            print(f"Total items en carrito: {cart_count}")
+            print("=== FIN DEBUG ===\n")
+            
+            return JsonResponse({
+                'success': True,
+                'cart_count': cart_count
+            })
+            
+        except Exception as e:
+            print(f"ERROR en add_to_cart: {str(e)}")
+            return JsonResponse({
+                'success': False,
+                'error': str(e)
+            })
+
+@login_required
+def user_checkout(request):
+    try:
+        # Obtener el carrito
+        cart = request.session.get('cart', {})
+        cart_items = []
+        total = Decimal('0')
+        
+        # Procesar items del carrito
+        for product_id, item_data in cart.items():
+            product = get_object_or_404(Product, id=product_id)
+            quantity = item_data['quantity']
+            price = Decimal(item_data['price'])
+            item_total = price * quantity
+            
+            cart_items.append({
+                'product': product,
+                'quantity': quantity,
+                'price': price,
+                'total': item_total
+            })
+            total += item_total
+        
+        # Obtener datos del usuario
+        user = request.user
+        context = {
+            'cart_items': cart_items,
+            'total': total,
+            'user': user,
+            'cart_count': sum(item['quantity'] for item in cart.values())
+        }
+        
+        return render(request, 'stock_smart/user_checkout.html', context)
+        
+    except Exception as e:
+        print(f"Error en user_checkout: {str(e)}")
+        return redirect('stock_smart:cart')
+
+def cart_checkout_options(request):
+    try:
+        cart = request.session.get('cart', {})
+        if not cart:
+            messages.warning(request, 'Tu carrito está vacío')
+            return redirect('stock_smart:cart')
+            
+        cart_items = []
+        total = Decimal('0')
+        
+        # Procesar items del carrito
+        for product_id, item_data in cart.items():
+            try:
+                product = Product.objects.get(id=product_id)
+                quantity = item_data['quantity']
+                price = Decimal(item_data['price'])
+                item_total = price * quantity
+                
+                cart_items.append({
+                    'product': product,
+                    'quantity': quantity,
+                    'price': price,
+                    'total': item_total
+                })
+                
+                total += item_total
+                
+            except Product.DoesNotExist:
+                continue
+        
+        # Calcular IVA
+        iva = total * Decimal('0.19')
+        total_con_iva = total + iva
+        
+        context = {
+            'cart_items': cart_items,
+            'subtotal': total,
+            'iva': iva,
+            'total': total_con_iva,
+            'cart_count': sum(item['quantity'] for item in cart.values())
+        }
+        
+        return render(request, 'stock_smart/cart_checkout_options.html', context)
+        
+    except Exception as e:
+        print(f"Error en cart_checkout_options: {str(e)}")
+        return redirect('stock_smart:cart')
+
+@login_required
+def user_cart_checkout(request):
+    try:
+        cart = request.session.get('cart', {})
+        if not cart:
+            return redirect('stock_smart:cart')
+            
+        # Reutilizar lógica existente pero con template específico
+        cart_items = []
+        total = Decimal('0')
+        
+        for product_id, item_data in cart.items():
+            product = get_object_or_404(Product, id=product_id)
+            quantity = item_data['quantity']
+            price = Decimal(item_data['price'])
+            item_total = price * quantity
+            
+            cart_items.append({
+                'product': product,
+                'quantity': quantity,
+                'price': price,
+                'total': item_total
+            })
+            total += item_total
+        
+        context = {
+            'cart_items': cart_items,
+            'total': total,
+            'user': request.user,
+            'cart_count': sum(item['quantity'] for item in cart.values())
+        }
+        
+        return render(request, 'stock_smart/user_cart_checkout.html', context)
+        
+    except Exception as e:
+        print(f"Error en user_cart_checkout: {str(e)}")
+        return redirect('stock_smart:cart')
+
+def guest_cart_checkout(request):
+    try:
+        cart = request.session.get('cart', {})
+        if not cart:
+            return redirect('stock_smart:cart')
+            
+        # Similar a guest_checkout pero con template específico
+        cart_items = []
+        total = Decimal('0')
+        
+        for product_id, item_data in cart.items():
+            product = get_object_or_404(Product, id=product_id)
+            quantity = item_data['quantity']
+            price = Decimal(item_data['price'])
+            item_total = price * quantity
+            
+            cart_items.append({
+                'product': product,
+                'quantity': quantity,
+                'price': price,
+                'total': item_total
+            })
+            total += item_total
+        
+        context = {
+            'cart_items': cart_items,
+            'total': total,
+            'cart_count': sum(item['quantity'] for item in cart.values())
+        }
+        
+        return render(request, 'stock_smart/guest_cart_checkout.html', context)
+        
+    except Exception as e:
+        print(f"Error en guest_cart_checkout: {str(e)}")
+        return redirect('stock_smart:cart')
+
+def validate_product(request, product_id):
+    if request.method == 'POST':
+        try:
+            product = get_object_or_404(Product, id=product_id)
+            
+            # Validar stock
+            if product.stock <= 0:
+                return JsonResponse({
+                    'success': False,
+                    'message': 'Producto sin stock disponible'
+                })
+            
+            # Calcular precio final
+            price = product.published_price
+            if product.discount_percentage > 0:
+                discount = (price * product.discount_percentage) / Decimal('100')
+                price = price - discount
+            
+            # Validar precio
+            if price <= 0:
+                return JsonResponse({
+                    'success': False,
+                    'message': 'Precio no válido'
+                })
+            
+            return JsonResponse({
+                'success': True,
+                'product': {
+                    'id': product.id,
+                    'name': product.name,
+                    'price': float(price),
+                    'stock': product.stock,
+                    'discount': product.discount_percentage
+                }
+            })
+            
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'message': str(e)
+            })
+    
+    return JsonResponse({'success': False, 'message': 'Método no permitido'})
+
+@csrf_exempt  # Necesario para recibir POST de Flow
+def payment_confirm(request):
+    try:
+        logger.info("Iniciando payment_confirm")
+        logger.info(f"Método: {request.method}")
+        logger.info(f"POST data: {request.POST}")
+        
+        if request.method != 'POST':
+            return HttpResponse('Método no permitido', status=405)
+        
+        # Obtener token de Flow
+        token = request.POST.get('token')
+        if not token:
+            logger.error("No se recibió token de Flow")
+            return HttpResponse('Token no recibido', status=400)
+            
+        try:
+            # Buscar orden por token
+            order = Order.objects.get(flow_token=token)
+            
+            # Verificar estado del pago
+            flow_service = FlowPaymentService()
+            payment_status = flow_service.get_payment_status(token)
+            
+            if payment_status.get('status') == 2:  # Pago exitoso
+                # Actualizar estado de la orden
+                order.status = 'paid'
+                order.save()
+                
+                logger.info(f"Pago confirmado para orden: {order.order_number}")
+                return HttpResponse('OK', status=200)
+            else:
+                logger.error(f"Estado de pago inválido: {payment_status}")
+                return HttpResponse('Estado de pago inválido', status=400)
+                
+        except Order.DoesNotExist:
+            logger.error(f"No se encontró orden para el token: {token}")
+            return HttpResponse('Orden no encontrada', status=404)
+            
+    except Exception as e:
+        logger.error(f"Error en payment_confirm: {str(e)}")
+        return HttpResponse('Error interno', status=500)
+
+def detalle_producto(request, producto_id):
+    try:
+        product = get_object_or_404(Product, id=producto_id)
+        
+        # Guardar el producto en la sesión cuando se ve el detalle
+        request.session['product_id'] = product.id
+        logger.info(f"Producto guardado en sesión: {product.id}")
+        
+        context = {
+            'product': product,
+        }
+        
+        return render(request, 'stock_smart/detalle_producto.html', context)
+        
+    except Exception as e:
+        logger.error(f"Error en detalle_producto: {str(e)}")
+        messages.error(request, 'Error al mostrar el producto')
+        return redirect('stock_smart:productos_lista')
+
+def iniciar_checkout(request, producto_id):
+    try:
+        # Obtener el producto
+        product = get_object_or_404(Product, id=producto_id)
+        
+        # Guardar en sesión
+        request.session['product_id'] = product.id
+        logger.info(f"Producto guardado en sesión: {product.id}")
+        
+        # Redirigir al checkout
+        return redirect('stock_smart:guest_checkout')
+        
+    except Exception as e:
+        logger.error(f"Error al iniciar checkout: {str(e)}")
+        messages.error(request, 'Error al iniciar el proceso de compra')
+        return redirect('stock_smart:productos_lista')

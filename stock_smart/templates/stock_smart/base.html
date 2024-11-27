@@ -15,13 +15,14 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'stock_smart/css/styles.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    {% csrf_token %}
     <!-- Header -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- Logo y nombre -->
                 <a class="navbar-brand d-flex align-items-center" href="{% url 'stock_smart:productos_lista' %}">
@@ -42,15 +43,11 @@
                     <!-- Iconos de carrito y perfil -->
                     <div class="d-flex align-items-center">
                         <!-- Carrito -->
-                        <a href="{% url 'stock_smart:cart_view' %}" class="text-dark text-decoration-none me-4">
-                            <div class="position-relative d-inline-block">
-                                <i class="fas fa-shopping-cart"></i>
-                                {% if cart_item_count > 0 %}
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ cart_item_count }}
-                                </span>
-                                {% endif %}
-                            </div>
+                        <a href="{% url 'stock_smart:cart' %}" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="badge bg-danger">
+                                {{ cart_count|default:'0' }}
+                            </span>
                         </a>
                     </div>
                 </div>
@@ -169,88 +166,44 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'stock_smart/js/main.js' %}"></script>
+    <script src="{% static 'stock_smart/js/theme.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+
+    <!-- Script inline para funciones del carrito -->
     <script>
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
+        function addToCart(productId) {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            
+            fetch("{% url 'stock_smart:add_to_cart' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    'product_id': productId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    const cartCount = document.getElementById('cart-count');
+                    if (cartCount) {
+                        cartCount.textContent = data.cart_count;
+                    }
+                    alert('Producto agregado al carrito');
+                } else {
+                    alert(data.error || 'Error al agregar al carrito');
                 }
-            }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al agregar al carrito');
+            });
         }
-        return cookieValue;
-    }
-
-    function addToCart(productId) {
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        
-        fetch('/add-to-cart/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-CSRFToken': csrftoken
-            },
-            body: `product_id=${productId}&quantity=1`
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.status === 'success') {
-                // Actualizar contador del carrito
-                const cartCount = document.querySelector('.cart-count');
-                if (cartCount) {
-                    cartCount.textContent = data.cart_count;
-                }
-                alert('Producto agregado al carrito');
-            } else {
-                alert(data.message || 'Error al agregar el producto');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al agregar el producto al carrito');
-        });
-    }
-
-    function showToast(message, type = 'success') {
-        // Crear el toast
-        const toast = document.createElement('div');
-        toast.className = `toast position-fixed bottom-0 end-0 m-3 ${type === 'success' ? 'bg-success' : 'bg-danger'} text-white`;
-        toast.setAttribute('role', 'alert');
-        toast.setAttribute('aria-live', 'assertive');
-        toast.setAttribute('aria-atomic', 'true');
-        
-        toast.innerHTML = `
-            <div class="toast-body">
-                ${message}
-            </div>
-        `;
-        
-        // Agregar el toast al documento
-        document.body.appendChild(toast);
-        
-        // Mostrar el toast
-        const bsToast = new bootstrap.Toast(toast, {
-            autohide: true,
-            delay: 3000
-        });
-        bsToast.show();
-        
-        // Eliminar el toast después de ocultarse
-        toast.addEventListener('hidden.bs.toast', function () {
-            document.body.removeChild(toast);
-        });
-    }
     </script>
 </body>
 </html>

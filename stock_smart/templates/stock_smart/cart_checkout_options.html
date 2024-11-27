@@ -1,48 +1,41 @@
 {% extends 'stock_smart/base.html' %}
 {% load static %}
-{% load custom_filters %}
 
 {% block content %}
 <div class="container mt-4">
     <div class="row">
-        <!-- Resumen del producto -->
+        <!-- Resumen del carrito -->
         <div class="col-md-4 order-md-2 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-3">Resumen de Compra</h4>
-                    <div class="mb-3">
-                        {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}" 
-                                 class="img-fluid mb-2" style="max-height: 150px; object-fit: contain;">
-                        {% endif %}
-                        <h5>{{ product.name }}</h5>
-                    </div>
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Tu Carrito</span>
+                        <span class="badge bg-primary rounded-pill">{{ cart_count }}</span>
+                    </h4>
                     <ul class="list-group mb-3">
+                        {% for item in cart_items %}
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
-                                <h6 class="my-0">Precio Base</h6>
-                                {% if product.discount_percentage > 0 %}
-                                    <small class="text-success">{{ product.discount_percentage }}% descuento</small>
-                                {% endif %}
+                                <h6 class="my-0">{{ item.product.name }}</h6>
+                                <small class="text-muted">Cantidad: {{ item.quantity }}</small>
                             </div>
-                            <span class="text-muted">
-                                {% if product.discount_percentage > 0 %}
-                                    <del class="text-muted">${{ base_price|format_price }}</del><br>
-                                    <strong>${{ final_price|format_price }}</strong>
-                                {% else %}
-                                    ${{ base_price|format_price }}
-                                {% endif %}
-                            </span>
+                            <span class="text-muted">${{ item.total|stringformat:".0f"|rjust:"1"|slice:"1:"|default:"0"|stringformat:"s"|slice:"-15:"|groupby:3|join:"." }}</span>
+                        </li>
+                        {% endfor %}
+                        
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Subtotal</span>
+                            <strong>${{ subtotal|stringformat:".0f"|rjust:"1"|slice:"1:"|default:"0"|stringformat:"s"|slice:"-15:"|groupby:3|join:"." }}</strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between">
                             <span>IVA (19%)</span>
-                            <strong>${{ iva|format_price }}</strong>
+                            <strong>${{ iva|stringformat:".0f"|rjust:"1"|slice:"1:"|default:"0"|stringformat:"s"|slice:"-15:"|groupby:3|join:"." }}</strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between bg-light">
                             <span class="text-success">
                                 <strong>Total (CLP)</strong>
                             </span>
-                            <strong class="text-success">${{ final_price|format_price }}</strong>
+                            <strong class="text-success">${{ total|stringformat:".0f"|rjust:"1"|slice:"1:"|default:"0"|stringformat:"s"|slice:"-15:"|groupby:3|join:"." }}</strong>
                         </li>
                     </ul>
                 </div>
@@ -59,7 +52,7 @@
                     <div class="mb-4">
                         <h5>¿Ya tienes una cuenta?</h5>
                         <p>Accede para una compra más rápida y seguimiento de tu pedido.</p>
-                        <a href="{% url 'stock_smart:login' %}?next={% url 'stock_smart:user_checkout' %}" 
+                        <a href="{% url 'stock_smart:login' %}?next={% url 'stock_smart:user_cart_checkout' %}" 
                            class="btn btn-primary">
                             Iniciar Sesión
                         </a>
@@ -71,7 +64,7 @@
                     <div class="mb-4">
                         <h5>¿Eres nuevo?</h5>
                         <p>Crea una cuenta para gestionar tus pedidos y acceder a beneficios exclusivos.</p>
-                        <a href="{% url 'stock_smart:register' %}?next={% url 'stock_smart:user_checkout' %}" 
+                        <a href="{% url 'stock_smart:register' %}?next={% url 'stock_smart:user_cart_checkout' %}" 
                            class="btn btn-success">
                             Registrarse
                         </a>
@@ -83,7 +76,7 @@
                     <div>
                         <h5>¿Prefieres no registrarte?</h5>
                         <p>Continúa como invitado para realizar tu compra rápidamente.</p>
-                        <a href="{% url 'stock_smart:guest_checkout' %}" 
+                        <a href="{% url 'stock_smart:guest_cart_checkout' %}" 
                            class="btn btn-outline-primary">
                             Continuar como Invitado
                         </a>
