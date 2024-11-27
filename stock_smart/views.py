@@ -300,45 +300,30 @@ def cart_checkout(request):
         return redirect('stock_smart:productos_lista')
 
 def checkout_options(request, product_id=None):
-    cart_items = []
-    subtotal = Decimal('0')
-    iva = Decimal('0')
-    total = Decimal('0')
-    
     if product_id:
-        # Compra rápida de un solo producto
-        try:
-            product = get_object_or_404(Product, id=product_id)
-            final_price = Decimal(str(product.get_final_price))  # Convertir a Decimal
-            
-            cart_items = [{
-                'product': product,
-                'quantity': 1,
-                'subtotal': final_price
-            }]
-            
-            subtotal = final_price
-            iva = subtotal * Decimal('0.19')  # 19% IVA
-            total = subtotal + iva  # Total incluye IVA
-            
-            print(f"Debug - Product: {product.name}")  # Debug
-            print(f"Debug - Final Price: {final_price}")  # Debug
-            print(f"Debug - Subtotal: {subtotal}")  # Debug
-            print(f"Debug - IVA: {iva}")  # Debug
-            print(f"Debug - Total: {total}")  # Debug
-            
-        except Exception as e:
-            print(f"Error: {str(e)}")  # Debug
+        # Obtener el producto
+        product = get_object_or_404(Product, id=product_id)
+        
+        # Calcular precios
+        precio_original = product.published_price
+        precio_con_descuento = product.get_final_price
+        descuento = precio_original - precio_con_descuento if product.discount_percentage > 0 else Decimal('0')
+        iva = precio_con_descuento * Decimal('0.19')
+        total = precio_con_descuento + iva
+
+        context = {
+            'product': product,
+            'precio_original': precio_original,
+            'descuento': descuento,
+            'precio_con_descuento': precio_con_descuento,
+            'iva': iva,
+            'total': total,
+            'cart_count': get_cart_count(request),
+        }
+        
+        return render(request, 'stock_smart/checkout_options.html', context)
     
-    context = {
-        'cart_items': cart_items,
-        'subtotal': subtotal,
-        'iva': iva,
-        'total': total,
-        'cart_count': get_cart_count(request),
-    }
-    
-    return render(request, 'stock_smart/checkout_options.html', context)
+    return redirect('stock_smart:home')  # Redirigir si no hay product_id
 
 def process_payment(request):
     """Procesar el pago y crear la orden"""
@@ -887,7 +872,7 @@ def cart_payment(request):
         messages.error(request, 'No hay información de checkout')
         return redirect('stock_smart:productos_lista')
     
-    # Si el usuario está autenticado, prellenar datos
+    # Si el usuario est�� autenticado, prellenar datos
     if request.user.is_authenticated:
         context = {
             'user_data': {
@@ -1874,3 +1859,11 @@ def checkout_options(request, product_id):
         'cart_count': get_cart_count(request),
     }
     return render(request, 'stock_smart/checkout_options.html', context)
+
+def checkout_guest(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    context = {
+        'product': product,
+        'cart_count': get_cart_count(request),
+    }
+    return render(request, 'stock_smart/guest_checkout.html', context)

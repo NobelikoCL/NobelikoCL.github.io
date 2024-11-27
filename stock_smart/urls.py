@@ -59,4 +59,5 @@ urlpatterns = [
     path('flow/confirm/', csrf_exempt(views.flow_confirm), name='flow_confirm'),
     path('flow/return/', views.flow_return, name='flow_return'),
     path('checkout/<int:product_id>/', views.checkout_options, name='checkout'),
+    path('checkout/guest/<int:product_id>/', views.checkout_guest, name='checkout_guest'),
 ]
