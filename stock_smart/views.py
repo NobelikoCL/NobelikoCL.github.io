@@ -462,7 +462,7 @@ def guest_checkout(request):
     try:
         # Obtener producto de la sesión
         product_id = request.session.get('product_id')
-        logger.info(f"ID de producto en sesión: {product_id}")
+        logger.info(f"Recuperando producto ID de la sesión: {product_id}")
         
         if not product_id:
             messages.error(request, 'No se encontró el producto en la sesión')
@@ -470,7 +470,33 @@ def guest_checkout(request):
         
         # Obtener el producto
         product = get_object_or_404(Product, id=product_id)
-        logger.info(f"Producto encontrado: {product.nombre}")
+        logger.info(f"Producto encontrado: {product.name}")
+        
+        # Calcular precios
+        base_price = product.published_price
+        
+        # Calcular descuento si existe
+        if product.discount_percentage > 0:
+            discount_amount = (base_price * Decimal(str(product.discount_percentage))) / Decimal('100')
+            final_price = base_price - discount_amount
+        else:
+            final_price = base_price
+            discount_amount = Decimal('0')
+        
+        # Calcular IVA (19%)
+        price_without_iva = final_price / Decimal('1.19')
+        iva_amount = final_price - price_without_iva
+        
+        # Debug de precios
+        logger.info(f"""
+            Precios calculados para {product.name}:
+            Base: ${base_price}
+            Descuento: {product.discount_percentage}%
+            Monto descuento: ${discount_amount}
+            Final: ${final_price}
+            Sin IVA: ${price_without_iva}
+            IVA: ${iva_amount}
+        """)
         
         if request.method == 'POST':
             form = GuestCheckoutForm(request.POST)
@@ -485,13 +511,13 @@ def guest_checkout(request):
                     comuna=form.cleaned_data['comuna'],
                     shipping_method=form.cleaned_data['shipping'],
                     payment_method=form.cleaned_data['payment_method'],
-                    total_amount=product.precio_final
+                    total_amount=final_price
                 )
                 
                 if form.cleaned_data['shipping'] == 'starken':
                     order.shipping_address = form.cleaned_data['direccion']
                 
-                if form.cleaned_data['observaciones']:
+                if form.cleaned_data.get('observaciones'):
                     order.observaciones = form.cleaned_data['observaciones']
                 
                 order.save()
@@ -510,13 +536,19 @@ def guest_checkout(request):
         
         context = {
             'form': form,
-            'product': product
+            'product': product,
+            'base_price': base_price,
+            'final_price': final_price,
+            'price_without_iva': price_without_iva,
+            'iva': iva_amount,
+            'discount_amount': discount_amount,
+            'cart_count': get_cart_count(request)
         }
         
         return render(request, 'stock_smart/guest_checkout.html', context)
         
     except Exception as e:
-        logger.error(f"Error en guest_checkout: {str(e)}")
+        logger.error(f"Error en guest_checkout: {str(e)}\n{traceback.format_exc()}")
         messages.error(request, 'Error al procesar el checkout')
         return redirect('stock_smart:productos_lista')
 
@@ -1017,6 +1049,9 @@ def buy_now(request, product_id):
             'total': float(total),
             'timestamp': str(timezone.now())
         }
+        
+        # Asegúrate de guardar el product_id en la sesión
+        request.session['product_id'] = product_id
         
         context = {
             'product': product,
@@ -2004,7 +2039,12 @@ def checkout_options(request, product_id=None):
             return redirect('stock_smart:productos_lista')
             
         product = get_object_or_404(Product, id=product_id)
-        request.session['quick_buy_product_id'] = product_id
+        
+        # Guardar explícitamente en la sesión
+        request.session['product_id'] = product_id
+        request.session.modified = True  # Forzar guardado de la sesión
+        
+        logger.info(f"Producto ID guardado en sesión: {product_id}")
         
         # 1. Precio base (incluye IVA)
         base_price = product.published_price
@@ -2017,7 +2057,6 @@ def checkout_options(request, product_id=None):
             final_price = base_price
             
         # 3. Calcular IVA (que ya está incluido)
-        # Precio sin IVA = Precio final / 1.19
         price_without_iva = final_price / Decimal('1.19')
         iva_amount = final_price - price_without_iva
         
@@ -2027,6 +2066,7 @@ def checkout_options(request, product_id=None):
         print(f"Precio final (con IVA): ${final_price}")
         print(f"Precio sin IVA: ${price_without_iva}")
         print(f"Monto IVA: ${iva_amount}")
+        print(f"ID del producto en sesión: {request.session.get('product_id')}")
         
         context = {
             'product': product,
@@ -2034,14 +2074,16 @@ def checkout_options(request, product_id=None):
             'final_price': final_price,
             'price_without_iva': price_without_iva,
             'iva': iva_amount,
-            'total': final_price,  # Este es el precio final que incluye IVA
-            'is_quick_buy': True
+            'total': final_price,
+            'is_quick_buy': True,
+            'cart_count': get_cart_count(request)
         }
         
         return render(request, 'stock_smart/checkout_options.html', context)
         
     except Exception as e:
-        print(f"Error en checkout_options: {str(e)}")
+        logger.error(f"Error en checkout_options: {str(e)}")
+        messages.error(request, f'Error al procesar el checkout: {str(e)}')
         return redirect('stock_smart:productos_lista')
 
 def checkout_guest(request, product_id):

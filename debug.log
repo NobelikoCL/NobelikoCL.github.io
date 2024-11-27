@@ -817,3 +817,108 @@ Product ID obtenido de la sesión: None
 No se encontró product_id en POST ni en sesión
 ID de producto en sesión: None
 >>>>>>> Stashed changes
+ID de producto en sesión: None
+ID de producto en sesión: None
+ID de producto en sesión: None
+Producto ID guardado en sesión: 1
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Resumen de precios para producto xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Final: $349993.0000
+            IVA: $55881.2352941176470588235294
+        
+Producto ID guardado en sesión: 1
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Resumen de precios para producto xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Final: $349993.0000
+            IVA: $55881.2352941176470588235294
+        
+Producto ID guardado en sesión: 1
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Precios calculados para xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Monto descuento: $149997.0000
+            Final: $349993.0000
+            Sin IVA: $294111.7647058823529411764706
+            IVA: $55881.2352941176470588235294
+        
+Error en guest_checkout: Invalid filter: 'intcomma'
+Producto ID guardado en sesión: 1
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Precios calculados para xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Monto descuento: $149997.0000
+            Final: $349993.0000
+            Sin IVA: $294111.7647058823529411764706
+            IVA: $55881.2352941176470588235294
+        
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Precios calculados para xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Monto descuento: $149997.0000
+            Final: $349993.0000
+            Sin IVA: $294111.7647058823529411764706
+            IVA: $55881.2352941176470588235294
+        
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Precios calculados para xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Monto descuento: $149997.0000
+            Final: $349993.0000
+            Sin IVA: $294111.7647058823529411764706
+            IVA: $55881.2352941176470588235294
+        
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Precios calculados para xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Monto descuento: $149997.0000
+            Final: $349993.0000
+            Sin IVA: $294111.7647058823529411764706
+            IVA: $55881.2352941176470588235294
+        
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Precios calculados para xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Monto descuento: $149997.0000
+            Final: $349993.0000
+            Sin IVA: $294111.7647058823529411764706
+            IVA: $55881.2352941176470588235294
+        
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Precios calculados para xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Monto descuento: $149997.0000
+            Final: $349993.0000
+            Sin IVA: $294111.7647058823529411764706
+            IVA: $55881.2352941176470588235294
+        

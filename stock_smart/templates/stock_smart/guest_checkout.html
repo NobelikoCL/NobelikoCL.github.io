@@ -1,192 +1,184 @@
 {% extends 'stock_smart/base.html' %}
 {% load static %}
+{% load humanize %}
+{% load custom_filters %}
 
 {% block content %}
-<div class="container my-5">
+<div class="container mt-4">
     <div class="row">
-        <!-- Formulario Principal -->
+        <!-- Formulario de checkout -->
         <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Datos de Compra</h4>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Datos de Envío</h4>
                 </div>
-                
                 <div class="card-body">
-                    <form method="post" id="checkoutForm">
+                    <form method="post">
                         {% csrf_token %}
                         
-                        <!-- 1. DATOS DEL CLIENTE -->
-                        <div class="section-customer mb-4">
-                            <h5 class="border-bottom pb-2">Datos del Cliente</h5>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre *</label>
-                                    <input type="text" 
-                                           name="{{ form.nombre.name }}"
-                                           class="form-control"
-                                           placeholder="Ingrese su nombre"
-                                           required
-                                           {% if form.nombre.value %}value="{{ form.nombre.value }}"{% endif %}
-                                    >
-                                    {% if form.nombre.errors %}
-                                    <div class="text-danger small">{{ form.nombre.errors }}</div>
-                                    {% endif %}
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <label for="{{ form.apellido.id_for_label }}" class="form-label">Apellido *</label>
-                                    <input type="text" 
-                                           name="{{ form.apellido.name }}"
-                                           class="form-control"
-                                           placeholder="Ingrese su apellido"
-                                           required
-                                           {% if form.apellido.value %}value="{{ form.apellido.value }}"{% endif %}
-                                    >
-                                </div>
+                        <!-- Datos personales -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="id_nombre" class="form-label">Nombre:</label>
+                                {{ form.nombre }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_apellido" class="form-label">Apellido:</label>
+                                {{ form.apellido }}
+                            </div>
+                        </div>
 
-                                <div class="col-md-6">
-                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email *</label>
-                                    <input type="email" 
-                                           name="{{ form.email.name }}"
-                                           class="form-control"
-                                           placeholder="ejemplo@email.com"
-                                           required
-                                           {% if form.email.value %}value="{{ form.email.value }}"{% endif %}
-                                    >
-                                </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="id_email" class="form-label">Email:</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_telefono" class="form-label">Teléfono:</label>
+                                {{ form.telefono }}
+                            </div>
+                        </div>
 
-                                <div class="col-md-6">
-                                    <label for="{{ form.telefono.id_for_label }}" class="form-label">Teléfono *</label>
-                                    <input type="tel" 
-                                           name="{{ form.telefono.name }}"
-                                           class="form-control"
-                                           placeholder="+569XXXXXXXX"
-                                           value="+569"
-                                           pattern="\+569\d{8}"
-                                           required
-                                    >
+                        <!-- Dirección de envío -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="id_region" class="form-label">Región:</label>
+                                {{ form.region }}
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_ciudad" class="form-label">Ciudad:</label>
+                                {{ form.ciudad }}
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_comuna" class="form-label">Comuna:</label>
+                                {{ form.comuna }}
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="id_direccion" class="form-label">Dirección de envío:</label>
+                                {{ form.direccion }}
+                            </div>
+                        </div>
+
+                        <!-- Método de envío y pago -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Método de envío:</label>
+                                <div class="d-flex gap-3">
+                                    {% for radio in form.shipping %}
+                                    <div class="form-check">
+                                        {{ radio }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Método de pago:</label>
+                                <div class="d-flex gap-3">
+                                    {% for radio in form.payment_method %}
+                                    <div class="form-check">
+                                        {{ radio }}
+                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 2. DATOS DE ENVÍO -->
-                        <div class="section-shipping mb-4">
-                            <h5 class="border-bottom pb-2">Datos de Envío</h5>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label class="form-label">Región *</label>
-                                    {{ form.region }}
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Ciudad *</label>
-                                    {{ form.ciudad }}
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Comuna *</label>
-                                    {{ form.comuna }}
-                                </div>
+                        <!-- Observaciones -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="id_observaciones" class="form-label">Observaciones:</label>
+                                {{ form.observaciones }}
                             </div>
                         </div>
 
-                        <!-- 3. MÉTODO DE ENVÍO -->
-                        <div class="section-delivery-method mb-4">
-                            <h5 class="border-bottom pb-2">Método de Envío</h5>
-                            <div class="shipping-options">
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="radio" name="shipping" id="pickup" value="pickup" checked>
-                                    <label class="form-check-label" for="pickup">
-                                        <strong>Retiro en Tienda</strong>
-                                        <small class="d-block text-muted">Sin costo adicional</small>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="shipping" id="starken" value="starken">
-                                    <label class="form-check-label" for="starken">
-                                        <strong>Envío Starken por Pagar</strong>
-                                        <small class="d-block text-muted">Costo según destino</small>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <!-- Dirección de envío (visible solo si es Starken) -->
-                            <div id="direccionContainer" class="mt-3" style="display: none;">
-                                <label class="form-label">Dirección de Envío *</label>
-                                <input type="text" 
-                                       name="{{ form.direccion.name }}"
-                                       class="form-control"
-                                       placeholder="Ingrese dirección completa para envío"
-                                >
-                            </div>
-                        </div>
-
-                        <!-- 4. MÉTODO DE PAGO -->
-                        <div class="section-payment mb-4">
-                            <h5 class="border-bottom pb-2">Método de Pago</h5>
-                            <div class="payment-options">
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="flow" value="flow" checked>
-                                    <label class="form-check-label" for="flow">
-                                        <strong>Pago con Flow (WebPay)</strong>
-                                        <small class="d-block text-muted">Pago inmediato con tarjetas de crédito/débito</small>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="transfer" value="transfer">
-                                    <label class="form-check-label" for="transfer">
-                                        <strong>Transferencia Bancaria</strong>
-                                        <small class="d-block text-muted">Se procesará una vez confirmado el pago</small>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 5. OBSERVACIONES -->
-                        <div class="section-notes mb-4">
-                            <h5 class="border-bottom pb-2">Observaciones</h5>
-                            <textarea name="{{ form.observaciones.name }}" 
-                                      class="form-control" 
-                                      rows="3" 
-                                      placeholder="Observaciones opcionales sobre tu pedido"></textarea>
-                        </div>
-
-                        <!-- 6. BOTÓN DE PROCESAR -->
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                Procesar Pedido
-                            </button>
-                        </div>
+                        <button type="submit" class="btn btn-primary">Procesar Pedido</button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Resumen de Compra -->
+        <!-- Resumen de compra -->
         <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-header bg-secondary text-white">
-                    <h5 class="mb-0">Resumen de Compra</h5>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Resumen de Compra</h4>
                 </div>
                 <div class="card-body">
-                    {% if product %}
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <h6 class="mb-0">{{ product.nombre }}</h6>
-                            <small class="text-muted">Cantidad: 1</small>
-                        </div>
-                        <span class="h6 mb-0">${{ product.precio_final|floatformat:0 }}</span>
+                    <h5>{{ product.name }}</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Precio Base:</span>
+                        <span>${{ base_price|format_price }}</span>
                     </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <strong>Total a Pagar</strong>
-                        <strong class="text-primary">${{ product.precio_final|floatformat:0 }}</strong>
+                    
+                    {% if product.discount_percentage > 0 %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Descuento ({{ product.discount_percentage }}%):</span>
+                        <span class="text-danger">-${{ discount_amount|format_price }}</span>
                     </div>
                     {% endif %}
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>${{ price_without_iva|format_price }}</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>IVA (19%):</span>
+                        <span>${{ iva|format_price }}</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <strong>Total a Pagar:</strong>
+                        <strong class="text-primary">${{ final_price|format_price }}</strong>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Estilos adicionales -->
+<style>
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    margin-bottom: 0.5rem;
+}
+
+.form-check {
+    margin-bottom: 0.5rem;
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+</style>
+
+<!-- Agregar al final del archivo -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Datos del producto:', {
+        name: '{{ product.name }}',
+        basePrice: '{{ base_price }}',
+        finalPrice: '{{ final_price }}',
+        discount: '{{ product.discount_percentage }}',
+        iva: '{{ iva }}'
+    });
+});
+</script>
 {% endblock %}
 
 {% block extra_js %}
