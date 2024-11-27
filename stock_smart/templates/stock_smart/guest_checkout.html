@@ -13,7 +13,7 @@
                     <h4>Datos de Envío</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" id="checkoutForm">
                         {% csrf_token %}
                         
                         <!-- Datos personales -->
@@ -67,21 +67,35 @@
                             <div class="col-md-6">
                                 <label class="form-label">Método de envío:</label>
                                 <div class="d-flex gap-3">
-                                    {% for radio in form.shipping %}
                                     <div class="form-check">
-                                        {{ radio }}
+                                        <input type="radio" name="shipping" value="pickup" id="pickup" class="form-check-input" checked required>
+                                        <label for="pickup" class="form-check-label">
+                                            Retiro en tienda
+                                        </label>
                                     </div>
-                                    {% endfor %}
+                                    <div class="form-check">
+                                        <input type="radio" name="shipping" value="starken" id="starken" class="form-check-input">
+                                        <label for="starken" class="form-check-label">
+                                            Envío por Starken
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Método de pago:</label>
                                 <div class="d-flex gap-3">
-                                    {% for radio in form.payment_method %}
                                     <div class="form-check">
-                                        {{ radio }}
+                                        <input type="radio" name="payment_method" value="flow" id="flow" class="form-check-input" checked required>
+                                        <label for="flow" class="form-check-label">
+                                            Pago con Flow
+                                        </label>
                                     </div>
-                                    {% endfor %}
+                                    <div class="form-check">
+                                        <input type="radio" name="payment_method" value="transfer" id="transfer" class="form-check-input">
+                                        <label for="transfer" class="form-check-label">
+                                            Transferencia Bancaria
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +108,9 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Procesar Pedido</button>
+                        <button type="submit" class="btn btn-primary" id="processPaymentBtn">
+                            Procesar Pedido
+                        </button>
                     </form>
                 </div>
             </div>
@@ -176,6 +192,23 @@ document.addEventListener('DOMContentLoaded', function() {
         finalPrice: '{{ final_price }}',
         discount: '{{ product.discount_percentage }}',
         iva: '{{ iva }}'
+    });
+});
+</script>
+
+<!-- Agregar JavaScript para manejar el envío del formulario -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('checkoutForm');
+    const processPaymentBtn = document.getElementById('processPaymentBtn');
+
+    form.addEventListener('submit', function(e) {
+        // Prevenir múltiples envíos
+        if (form.submitting) return;
+
+        processPaymentBtn.disabled = true;
+        processPaymentBtn.innerHTML = 'Procesando...';
+        form.submitting = true;
     });
 });
 </script>

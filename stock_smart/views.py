@@ -402,37 +402,83 @@ def checkout_options(request, product_id=None):
 
 def process_payment(request):
     try:
-        logger.info("Iniciando process_payment")
+        logger.info("="*50)
+        logger.info("INICIANDO PROCESO DE PAGO FLOW SANDBOX")
         
         order_id = request.session.get('order_id')
-        logger.info(f"ID de orden en sesión: {order_id}")
+        logger.info(f"Order ID en sesión: {order_id}")
         
         if not order_id:
+            logger.error("No se encontró order_id en sesión")
             messages.error(request, 'No se encontró la orden')
             return redirect('stock_smart:productos_lista')
-        
-        try:
-            order = Order.objects.get(id=order_id)
-            logger.info(f"Orden encontrada: {order.order_number}")
-        except Order.DoesNotExist:
-            logger.error(f"No se encontró la orden con ID: {order_id}")
-            messages.error(request, 'Orden no encontrada')
-            return redirect('stock_smart:productos_lista')
-        
-        # Crear pago en Flow
-        flow_service = FlowPaymentService()
-        payment_url = flow_service.create_payment(order)
-        
-        if payment_url:
-            logger.info(f"URL de pago generada: {payment_url}")
-            return redirect(payment_url)
-        else:
-            logger.error("No se pudo generar la URL de pago")
-            messages.error(request, 'Error al procesar el pago')
-            return redirect('stock_smart:productos_lista')
             
+        order = get_object_or_404(Order, id=order_id)
+        logger.info(f"Orden encontrada: {order.order_number}")
+
+        # Datos mínimos requeridos según documentación
+        payment_data = {
+            "apiKey": settings.FLOW_API_KEY,
+            "commerceOrder": order.order_number,
+            "subject": f"Pago Orden {order.order_number}",
+            "amount": int(order.total_amount),
+            "email": order.customer_email,
+            "urlConfirmation": request.build_absolute_uri(reverse('stock_smart:payment_confirm')),
+            "urlReturn": request.build_absolute_uri(reverse('stock_smart:payment_success'))
+        }
+        
+        # Ordenar parámetros alfabéticamente
+        params = sorted(payment_data.items())
+        
+        # Concatenar key=value
+        to_sign = ''.join(f"{key}{value}" for key, value in params)
+        
+        logger.info("String para firma:")
+        logger.info(to_sign)
+        
+        # Generar firma
+        secret_key = settings.FLOW_SECRET_KEY.encode('utf-8')
+        signature = hmac.new(
+            secret_key,
+            to_sign.encode('utf-8'),
+            hashlib.sha256
+        ).hexdigest()
+        
+        # Agregar firma
+        payment_data['s'] = signature
+        
+        logger.info("Datos de pago:")
+        logger.info(json.dumps(payment_data, indent=2))
+        
+        # Enviar a Flow
+        response = requests.post(
+            'https://sandbox.flow.cl/api/payment/create',
+            data=payment_data
+        )
+        
+        logger.info(f"Status Code: {response.status_code}")
+        logger.info(f"Respuesta Flow: {response.text}")
+        
+        if response.status_code == 200:
+            response_data = response.json()
+            if 'url' in response_data and 'token' in response_data:
+                # Guardar token
+                order.flow_token = response_data['token']
+                order.save()
+                
+                # Construir URL de pago
+                payment_url = f"{response_data['url']}?token={response_data['token']}"
+                logger.info(f"URL de pago: {payment_url}")
+                
+                return redirect(payment_url)
+        
+        logger.error(f"Error en respuesta Flow: {response.text}")
+        messages.error(request, 'Error al procesar el pago')
+        return redirect('stock_smart:productos_lista')
+        
     except Exception as e:
         logger.error(f"Error en process_payment: {str(e)}")
+        logger.error(traceback.format_exc())
         messages.error(request, 'Error al procesar el pago')
         return redirect('stock_smart:productos_lista')
 
@@ -460,87 +506,109 @@ def checkout(request):
 
 def guest_checkout(request):
     try:
-        # Obtener producto de la sesión
+        logger.info("="*50)
+        logger.info("INICIO GUEST CHECKOUT")
+        
         product_id = request.session.get('product_id')
-        logger.info(f"Recuperando producto ID de la sesión: {product_id}")
+        logger.info(f"Product ID en sesión: {product_id}")
         
         if not product_id:
+            logger.error("No se encontró product_id en sesión")
             messages.error(request, 'No se encontró el producto en la sesión')
             return redirect('stock_smart:productos_lista')
         
-        # Obtener el producto
         product = get_object_or_404(Product, id=product_id)
         logger.info(f"Producto encontrado: {product.name}")
+        logger.info(f"Precio base: ${product.published_price}")
+        logger.info(f"Descuento: {product.discount_percentage}%")
         
         # Calcular precios
         base_price = product.published_price
-        
-        # Calcular descuento si existe
         if product.discount_percentage > 0:
             discount_amount = (base_price * Decimal(str(product.discount_percentage))) / Decimal('100')
             final_price = base_price - discount_amount
+            logger.info(f"Monto descuento: ${discount_amount}")
         else:
             final_price = base_price
             discount_amount = Decimal('0')
-        
-        # Calcular IVA (19%)
-        price_without_iva = final_price / Decimal('1.19')
-        iva_amount = final_price - price_without_iva
-        
-        # Debug de precios
-        logger.info(f"""
-            Precios calculados para {product.name}:
-            Base: ${base_price}
-            Descuento: {product.discount_percentage}%
-            Monto descuento: ${discount_amount}
-            Final: ${final_price}
-            Sin IVA: ${price_without_iva}
-            IVA: ${iva_amount}
-        """)
+            
+        logger.info(f"Precio final: ${final_price}")
         
         if request.method == 'POST':
+            logger.info("Procesando POST request")
             form = GuestCheckoutForm(request.POST)
+            logger.info(f"Datos del formulario: {request.POST}")
+            
             if form.is_valid():
-                # Crear la orden
-                order = Order(
-                    customer_name=f"{form.cleaned_data['nombre']} {form.cleaned_data['apellido']}",
-                    customer_email=form.cleaned_data['email'],
-                    customer_phone=form.cleaned_data['telefono'],
-                    region=form.cleaned_data['region'],
-                    ciudad=form.cleaned_data['ciudad'],
-                    comuna=form.cleaned_data['comuna'],
-                    shipping_method=form.cleaned_data['shipping'],
-                    payment_method=form.cleaned_data['payment_method'],
-                    total_amount=final_price
-                )
-                
-                if form.cleaned_data['shipping'] == 'starken':
-                    order.shipping_address = form.cleaned_data['direccion']
-                
-                if form.cleaned_data.get('observaciones'):
-                    order.observaciones = form.cleaned_data['observaciones']
-                
-                order.save()
-                
-                # Guardar ID de orden en sesión
-                request.session['order_id'] = order.id
-                logger.info(f"Orden creada y guardada en sesión: {order.id}")
-                
-                # Redireccionar según método de pago
-                if form.cleaned_data['payment_method'] == 'flow':
-                    return redirect('stock_smart:process_payment')
-                else:
-                    return redirect('stock_smart:transfer_instructions')
+                logger.info("Formulario válido - Creando orden")
+                try:
+                    # Generar número de orden
+                    order_number = f'ORD-{timezone.now().strftime("%Y%m%d")}-{uuid.uuid4().hex[:8]}'
+                    logger.info(f"Número de orden generado: {order_number}")
+                    
+                    # Crear orden
+                    order = Order.objects.create(
+                        order_number=order_number,
+                        customer_name=f"{form.cleaned_data['nombre']} {form.cleaned_data['apellido']}",
+                        customer_email=form.cleaned_data['email'],
+                        customer_phone=form.cleaned_data['telefono'],
+                        region=form.cleaned_data['region'],
+                        ciudad=form.cleaned_data['ciudad'],
+                        comuna=form.cleaned_data['comuna'],
+                        shipping_address=form.cleaned_data['direccion'],
+                        shipping_method=form.cleaned_data['shipping'],
+                        payment_method=form.cleaned_data['payment_method'],
+                        total_amount=final_price,
+                        status='pending'
+                    )
+                    logger.info(f"Orden creada con ID: {order.id}")
+                    
+                    # Crear item de orden
+                    OrderItem.objects.create(
+                        order=order,
+                        product=product,
+                        quantity=1,
+                        price=final_price
+                    )
+                    logger.info("Item de orden creado")
+                    
+                    # Guardar en sesión
+                    request.session['order_id'] = order.id
+                    logger.info(f"Order ID guardado en sesión: {order.id}")
+                    
+                    # Redireccionar según método de pago
+                    payment_method = form.cleaned_data['payment_method']
+                    logger.info(f"Método de pago seleccionado: {payment_method}")
+                    
+                    if payment_method == 'flow':
+                        logger.info("Redirigiendo a proceso de pago Flow")
+                        return redirect('stock_smart:process_payment')
+                    else:
+                        logger.info("Redirigiendo a instrucciones de transferencia")
+                        return redirect('stock_smart:transfer_instructions')
+                        
+                except Exception as e:
+                    logger.error("="*50)
+                    logger.error("ERROR AL CREAR ORDEN")
+                    logger.error(f"Error: {str(e)}")
+                    logger.error(f"Traceback: {traceback.format_exc()}")
+                    logger.error("="*50)
+                    messages.error(request, 'Error al crear la orden')
+                    return redirect('stock_smart:productos_lista')
+            else:
+                logger.error("Formulario inválido")
+                logger.error(f"Errores del formulario: {form.errors}")
         else:
             form = GuestCheckoutForm()
+            logger.info("Mostrando formulario vacío")
         
         context = {
             'form': form,
             'product': product,
             'base_price': base_price,
             'final_price': final_price,
-            'price_without_iva': price_without_iva,
-            'iva': iva_amount,
+            'price_without_iva': final_price / Decimal('1.19'),
+            'iva': final_price - (final_price / Decimal('1.19')),
             'discount_amount': discount_amount,
             'cart_count': get_cart_count(request)
         }
@@ -548,7 +616,11 @@ def guest_checkout(request):
         return render(request, 'stock_smart/guest_checkout.html', context)
         
     except Exception as e:
-        logger.error(f"Error en guest_checkout: {str(e)}\n{traceback.format_exc()}")
+        logger.error("="*50)
+        logger.error("ERROR EN GUEST CHECKOUT")
+        logger.error(f"Error: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        logger.error("="*50)
         messages.error(request, 'Error al procesar el checkout')
         return redirect('stock_smart:productos_lista')
 
@@ -1523,31 +1595,37 @@ def process_guest_order(request):
 
 def transfer_instructions(request):
     try:
+        logger.info("="*50)
+        logger.info("MOSTRANDO INSTRUCCIONES DE TRANSFERENCIA")
+        
         order_id = request.session.get('order_id')
+        logger.info(f"Order ID en sesión: {order_id}")
+        
         if not order_id:
-            messages.error(request, 'No se encontró la orden')
+            logger.error("No se encontró order_id en sesión")
             return redirect('stock_smart:productos_lista')
             
         order = get_object_or_404(Order, id=order_id)
+        logger.info(f"Orden encontrada: {order.order_number}")
         
-        bank_info = {
-            'banco': 'Banco Estado',
-            'tipo_cuenta': 'Cuenta Corriente',
-            'numero_cuenta': '123456789',
-            'rut': '76.543.210-K',
-            'nombre': 'Tu Empresa SPA',
-            'email': 'pagos@tuempresa.cl'
+        context = {
+            'order': order,
+            'bank_info': {
+                'bank_name': 'Banco Estado',
+                'account_type': 'Cuenta Corriente',
+                'account_number': '123456789',
+                'rut': '12.345.678-9',
+                'email': 'pagos@tusitio.com'
+            }
         }
         
-        return render(request, 'stock_smart/transfer_instructions.html', {
-            'order': order,
-            'bank_info': bank_info
-        })
+        return render(request, 'stock_smart/transfer_instructions.html', context)
         
     except Exception as e:
         logger.error(f"Error en transfer_instructions: {str(e)}")
-        messages.error(request, 'Error al mostrar instrucciones de pago')
-        return redirect('stock_smart:productos_lista')
+        logger.error(traceback.format_exc())
+        messages.error(request, 'Error al mostrar instrucciones de transferencia')
+        return redirect('stock_smart:checkout_error')
 
 @csrf_exempt
 def flow_confirmation(request):
@@ -1773,27 +1851,21 @@ def payment_notify(request):
 
 def payment_success(request):
     try:
+        logger.info("="*50)
+        logger.info("PAGO EXITOSO")
+        logger.info(f"GET params: {request.GET}")
+        
         token = request.GET.get('token')
-        if not token:
-            messages.error(request, 'Token no válido')
-            return redirect('stock_smart:productos_lista')
+        if token:
+            order = Order.objects.get(flow_token=token)
+            return render(request, 'stock_smart/payment_success.html', {'order': order})
             
-        order = get_object_or_404(Order, flow_token=token)
-        
-        # Actualizar estado de la orden
-        order.status = 'paid'
-        order.save()
-        
-        # Limpiar sesión
-        if 'order_id' in request.session:
-            del request.session['order_id']
-        
-        messages.success(request, '¡Pago exitoso!')
-        return render(request, 'stock_smart/payment_success.html', {'order': order})
+        messages.error(request, 'No se encontró la información del pago')
+        return redirect('stock_smart:productos_lista')
         
     except Exception as e:
-        print(f"Error en payment_success: {str(e)}")
-        messages.error(request, 'Error al procesar el pago')
+        logger.error(f"Error en payment_success: {str(e)}")
+        messages.error(request, 'Error al procesar la confirmación del pago')
         return redirect('stock_smart:productos_lista')
 
 def payment_cancel(request):
@@ -1902,7 +1974,7 @@ def update_cart(request):
                 request.session.modified = True
                 
                 # Calcular nuevos totales
-                item_total = int(float(cart[product_id]['price']) * new_quantity)
+                item_total = int(float(cart[product_id]['price'])) * new_quantity
                 cart_total = sum(int(float(item['price']) * item['quantity']) for item in cart.values())
                 cart_count = sum(item['quantity'] for item in cart.values())
                 
@@ -2355,19 +2427,22 @@ def validate_product(request, product_id):
 @csrf_exempt  # Necesario para recibir POST de Flow
 def payment_confirm(request):
     try:
-        logger.info("Iniciando payment_confirm")
+        logger.info("="*50)
+        logger.info("INICIANDO PAYMENT CONFIRM")
         logger.info(f"Método: {request.method}")
         logger.info(f"POST data: {request.POST}")
         
         if request.method != 'POST':
+            logger.error("Método no permitido")
             return HttpResponse('Método no permitido', status=405)
         
-        # Obtener token de Flow
+        # Obtener token
         token = request.POST.get('token')
+        logger.info(f"Token recibido: {token}")
+        
         if not token:
             logger.error("No se recibió token de Flow")
             return HttpResponse('Token no recibido', status=400)
-            
         try:
             # Buscar orden por token
             order = Order.objects.get(flow_token=token)
@@ -2429,4 +2504,65 @@ def iniciar_checkout(request, producto_id):
     except Exception as e:
         logger.error(f"Error al iniciar checkout: {str(e)}")
         messages.error(request, 'Error al iniciar el proceso de compra')
+        return redirect('stock_smart:productos_lista')
+
+def update_cart_quantity(request):
+    try:
+        logger.info("Actualizando cantidad en carrito")
+        product_id = request.POST.get('product_id')
+        new_quantity = int(request.POST.get('quantity', 1))
+        cart = request.session.get('cart', {})
+        
+        if product_id in cart:
+            # Corregimos el paréntesis faltante
+            item_total = int(float(cart[product_id]['price']) * new_quantity)
+            cart[product_id]['quantity'] = new_quantity
+            cart[product_id]['total'] = item_total
+            
+            request.session['cart'] = cart
+            request.session.modified = True
+            
+            # Calcular nuevo total del carrito
+            cart_total = sum(item['total'] for item in cart.values())
+            
+            logger.info(f"Carrito actualizado: Producto {product_id}, Nueva cantidad: {new_quantity}")
+            
+            return JsonResponse({
+                'success': True,
+                'new_quantity': new_quantity,
+                'item_total': item_total,
+                'cart_total': cart_total
+            })
+    except Exception as e:
+        logger.error(f"Error al actualizar carrito: {str(e)}")
+        return JsonResponse({'success': False, 'error': str(e)})
+
+def payment_error(request):
+    try:
+        logger.info("="*50)
+        logger.info("ERROR EN PAGO")
+        logger.info(f"GET params: {request.GET}")
+        
+        error_message = request.GET.get('message', 'Error en el proceso de pago')
+        order_id = request.session.get('order_id')
+        
+        context = {
+            'error_message': error_message,
+            'order_id': order_id
+        }
+        
+        if order_id:
+            try:
+                order = Order.objects.get(id=order_id)
+                context['order'] = order
+                logger.info(f"Orden encontrada: {order.order_number}")
+            except Order.DoesNotExist:
+                logger.error(f"No se encontró la orden con ID: {order_id}")
+        
+        return render(request, 'stock_smart/payment_error.html', context)
+        
+    except Exception as e:
+        logger.error(f"Error en payment_error view: {str(e)}")
+        logger.error(traceback.format_exc())
+        messages.error(request, 'Error al mostrar la página de error de pago')
         return redirect('stock_smart:productos_lista')

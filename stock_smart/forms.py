@@ -60,105 +60,28 @@ class RecoveryForm(PasswordResetForm):
         'placeholder': 'Correo electrónico'
     }))
 
-class GuestCheckoutForm(forms.Form):
-    # Datos personales
-    nombre = forms.CharField(
-        label='Nombre',
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    
-    apellido = forms.CharField(
-        label='Apellido',
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    
-    email = forms.EmailField(
-        label='Email',
-        widget=forms.EmailInput(attrs={'class': 'form-control'})
-    )
-    
-    telefono = forms.CharField(
-        label='Teléfono',
-        validators=[
-            RegexValidator(
-                regex=r'^\+569\d{8}$',
-                message='El número debe tener formato +569XXXXXXXX'
-            )
-        ],
-        initial='+569',
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': '+569XXXXXXXX'
-        })
-    )
-    
-    # Dirección
-    region = forms.ChoiceField(
-        label='Región',
-        choices=[
-            ('', 'Seleccione región'),
-            ('metropolitana', 'Región Metropolitana'),
-            ('valparaiso', 'Región de Valparaíso'),
-            # Agregar más regiones
-        ],
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
-    
-    ciudad = forms.CharField(
-        label='Ciudad',
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    
-    comuna = forms.CharField(
-        label='Comuna',
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    
-    direccion = forms.CharField(
-        label='Dirección de envío',
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    
-    # Métodos de envío y pago
-    shipping = forms.ChoiceField(
-        label='Método de envío',
-        choices=[
-            ('pickup', 'Retiro en tienda'),
-            ('starken', 'Envío Starken'),
-        ],
-        widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
-    )
-    
-    payment_method = forms.ChoiceField(
-        label='Método de pago',
-        choices=[
-            ('flow', 'Pago con Flow (WebPay)'),
-            ('transfer', 'Transferencia Bancaria'),
-        ],
-        widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
-    )
-    
-    # Campo opcional
-    observaciones = forms.CharField(
-        label='Observaciones',
-        required=False,
-        widget=forms.Textarea(attrs={
-            'class': 'form-control',
-            'rows': 3,
-            'placeholder': 'Observaciones opcionales sobre tu pedido'
-        })
-    )
+SHIPPING_CHOICES = [
+    ('pickup', 'Retiro en tienda'),
+    ('starken', 'Envío por Starken'),
+]
 
-    def clean_telefono(self):
-        telefono = self.cleaned_data['telefono']
-        if not telefono.startswith('+569'):
-            raise forms.ValidationError('El número debe comenzar con +569')
-        return telefono
+PAYMENT_CHOICES = [
+    ('flow', 'Pago con Flow'),
+    ('transfer', 'Transferencia Bancaria'),
+]
+
+class GuestCheckoutForm(forms.Form):
+    nombre = forms.CharField(max_length=100)
+    apellido = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    telefono = forms.CharField(max_length=12)
+    region = forms.CharField(max_length=100)
+    ciudad = forms.CharField(max_length=100)
+    comuna = forms.CharField(max_length=100)
+    direccion = forms.CharField(max_length=200)
+    shipping = forms.ChoiceField(choices=SHIPPING_CHOICES)
+    payment_method = forms.ChoiceField(choices=PAYMENT_CHOICES)
+    observaciones = forms.CharField(required=False, widget=forms.Textarea)
 
 class CheckoutForm(forms.Form):
     address = forms.CharField(widget=forms.TextInput(attrs={

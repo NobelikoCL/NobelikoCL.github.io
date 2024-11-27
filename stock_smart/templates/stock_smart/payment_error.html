@@ -1,0 +1,40 @@
+{% extends 'stock_smart/base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h4>Error en el Pago</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        {{ error_message }}
+                    </div>
+
+                    {% if order %}
+                    <div class="mt-3">
+                        <h5>Detalles del Pedido:</h5>
+                        <p><strong>Número de Orden:</strong> {{ order.order_number }}</p>
+                        <p><strong>Total:</strong> ${{ order.total_amount|format_price }}</p>
+                    </div>
+                    {% endif %}
+
+                    <div class="mt-4 text-center">
+                        <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-secondary me-2">
+                            Volver a la Tienda
+                        </a>
+                        {% if order %}
+                        <a href="{% url 'stock_smart:process_payment' %}" class="btn btn-primary">
+                            Intentar Pago Nuevamente
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

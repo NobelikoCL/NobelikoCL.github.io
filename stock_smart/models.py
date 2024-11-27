@@ -131,13 +131,27 @@ class Pedido(models.Model):
         return self.pedidoitem_set.all()
 
 def generate_order_number():
-    """Genera un número de orden único"""
-    return f"ORD-{uuid.uuid4().hex[:8].upper()}"
+    """Genera un número de orden con formato DDMMAAXXXX"""
+    today = timezone.now()
+    date_str = today.strftime("%d%m%y")
+    
+    # Obtener el último número de orden del día
+    last_order = Order.objects.filter(
+        order_number__startswith=f'ORD{date_str}'
+    ).order_by('-order_number').first()
+    
+    if last_order:
+        last_number = int(last_order.order_number[-4:])
+        new_number = str(last_number + 1).zfill(4)
+    else:
+        new_number = '0001'
+    
+    return f'ORD{date_str}{new_number}'
 
 class Order(models.Model):
     SHIPPING_CHOICES = [
         ('pickup', 'Retiro en tienda'),
-        ('starken', 'Envío Starken'),
+        ('starken', 'Envío por Starken'),
     ]
     
     PAYMENT_CHOICES = [
@@ -153,7 +167,7 @@ class Order(models.Model):
         ('cancelled', 'Cancelado'),
     ]
 
-    order_number = models.CharField(max_length=11, unique=True)
+    order_number = models.CharField(max_length=20, unique=True, default=generate_order_number)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
@@ -164,7 +178,7 @@ class Order(models.Model):
     payment_url = models.URLField(max_length=300, blank=True, null=True)
     
     # Campos de envío
-    shipping_method = models.CharField(max_length=10, choices=SHIPPING_CHOICES)
+    shipping_method = models.CharField(max_length=20, choices=SHIPPING_CHOICES)
     shipping_cost = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     shipping_address = models.TextField(null=True, blank=True)
     
@@ -193,7 +207,7 @@ class Order(models.Model):
     ciudad = models.CharField(max_length=100)
     comuna = models.CharField(max_length=100)
     shipping_address = models.TextField(blank=True, null=True)
-    payment_method = models.CharField(max_length=10, choices=PAYMENT_CHOICES)
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_CHOICES)
     observaciones = models.TextField(blank=True, null=True)
     
     def save(self, *args, **kwargs):

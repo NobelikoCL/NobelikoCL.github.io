@@ -80,4 +80,8 @@ urlpatterns = [
     path('payment/confirm/', views.payment_confirm, name='payment_confirm'),
     path('producto/<int:producto_id>/', views.detalle_producto, name='detalle_producto'),
     path('checkout/<int:producto_id>/', views.iniciar_checkout, name='iniciar_checkout'),
+    path('checkout/process-payment/', views.process_payment, name='process_payment'),
+    path('checkout/payment-success/', views.payment_success, name='payment_success'),
+    path('checkout/payment-confirm/', views.payment_confirm, name='payment_confirm'),
+    path('checkout/payment-error/', views.payment_error, name='payment_error'),
 ]

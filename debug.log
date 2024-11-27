@@ -922,3 +922,461 @@ Producto encontrado: xbox serie x
             Sin IVA: $294111.7647058823529411764706
             IVA: $55881.2352941176470588235294
         
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Precios calculados para xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Monto descuento: $149997.0000
+            Final: $349993.0000
+            Sin IVA: $294111.7647058823529411764706
+            IVA: $55881.2352941176470588235294
+        
+Producto ID guardado en sesión: 1
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+
+            Precios calculados para xbox serie x:
+            Base: $499990.00
+            Descuento: 30.00%
+            Monto descuento: $149997.0000
+            Final: $349993.0000
+            Sin IVA: $294111.7647058823529411764706
+            IVA: $55881.2352941176470588235294
+        
+Error en guest_checkout: 'Product' object has no attribute 'get_discount_amount'
+Producto ID guardado en sesión: 1
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+Producto ID guardado en sesión: 1
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+Producto ID guardado en sesión: 1
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+Recuperando producto ID de la sesión: 1
+Producto encontrado: xbox serie x
+Producto ID guardado en sesión: 1
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['8xc3D0iLaasCPT4XMHrGPFFggPtgQAqbVxhgwij1H5gvwhkQRmG74cASEYiI4kg8'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@gmail.com'], 'telefono': ['976586346'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'shipping': ['store'], 'payment_method': ['flow'], 'observaciones': ['asdasd']}>
+Formulario inválido
+Errores del formulario: <ul class="errorlist"><li>telefono<ul class="errorlist"><li>El número debe tener formato +569XXXXXXXX</li></ul></li><li>shipping<ul class="errorlist"><li>Select a valid choice. store is not one of the available choices.</li></ul></li></ul>
+Producto ID guardado en sesión: 1
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['I4qACYI0Z2au9dXEgEL6bdA1Xip6G7Ezv4vNvgJgwXYnQBdxlj0xqKvDlreyURuw'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@gmail.com'], 'telefono': ['+56951524037'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'shipping': ['store'], 'payment_method': ['flow'], 'observaciones': ['asdas']}>
+Formulario inválido
+Errores del formulario: <ul class="errorlist"><li>shipping<ul class="errorlist"><li>Select a valid choice. store is not one of the available choices.</li></ul></li></ul>
+Producto ID guardado en sesión: 1
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['5F7VFDK3MqSIL2y5TE9D0COD4OU8joj3SFc8yVLjjlGBsqOYYjo4f9JfsXJAx890'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@gmail.com'], 'telefono': ['976586346'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'shipping': ['pickup'], 'payment_method': ['flow'], 'observaciones': ['asdasd']}>
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241127-35acf5a6
+Orden creada con ID: 1
+Item de orden creado
+Order ID guardado en sesión: 1
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO
+Order ID en sesión: 1
+Orden encontrada: ORD-20241127-35acf5a6
+Procesando pago con Flow
+Datos de pago Flow: {'commerceOrder': 'ORD-20241127-35acf5a6', 'subject': 'Pago orden ORD-20241127-35acf5a6', 'amount': 349993, 'email': 'hernan.villanueva.gutierrez@gmail.com', 'urlConfirmation': 'http://127.0.0.1:8000/payment/confirm/', 'urlReturn': 'http://127.0.0.1:8000/payment/success/'}
+Error al generar URL de pago Flow
+Error en process_payment: Reverse for 'checkout_error' not found. 'checkout_error' is not a valid view function or pattern name.
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\proyecto nuevo\ecommerce.github.io\stock_smart\views.py", line 440, in process_payment
+    return redirect('stock_smart:checkout_error')
+  File "C:\Users\Hernan-PC\Documents\proyecto nuevo\ecommerce.github.io\venv\Lib\site-packages\django\shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\Documents\proyecto nuevo\ecommerce.github.io\venv\Lib\site-packages\django\shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\Hernan-PC\Documents\proyecto nuevo\ecommerce.github.io\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\Documents\proyecto nuevo\ecommerce.github.io\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'checkout_error' not found. 'checkout_error' is not a valid view function or pattern name.
+
+==================================================
+INICIANDO PROCESO DE PAGO FLOW
+Order ID en sesión: 1
+Orden encontrada: ORD-20241127-35acf5a6
+Datos de pago preparados:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "commerceOrder": "ORD-20241127-35acf5a6",
+  "subject": "Pago Orden ORD-20241127-35acf5a6",
+  "currency": "CLP",
+  "amount": 349993,
+  "email": "hernan.villanueva.gutierrez@gmail.com",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "s": "3c84506c642a82659d1ad24d08f3f0e0a02b536461fd9355052b80e97ef2291c"
+}
+Error en respuesta Flow: {"code":108,"message":"Invalid Signature"}
+Producto ID guardado en sesión: 1
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['l75b9uAR2JeXkV1hLPFgFHV7NHceKSca87ao2MB7zE2Q1jhaQuUHUeQJbQ1GYC27'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@gmail.com'], 'telefono': ['976586346'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'shipping': ['pickup'], 'payment_method': ['flow'], 'observaciones': ['asdasd']}>
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241127-ba6fc220
+Orden creada con ID: 2
+Item de orden creado
+Order ID guardado en sesión: 2
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO FLOW
+Order ID en sesión: 2
+Orden encontrada: ORD-20241127-ba6fc220
+Datos de pago preparados:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "commerceOrder": "ORD-20241127-ba6fc220",
+  "subject": "Pago Orden ORD-20241127-ba6fc220",
+  "currency": "CLP",
+  "amount": 349993,
+  "email": "hernan.villanueva.gutierrez@gmail.com",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "s": "0ae557b46b4bc0678320e3d05ff75f2710cc9fbda5866794738ab031e9f38d82"
+}
+Error en respuesta Flow: {"code":108,"message":"Invalid Signature"}
+Producto ID guardado en sesión: 1
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['GKLqZkJYr1PfWZ5Y47An47QI7oH98IQ5tKQDSCKeYWD8DnlR9MPOjELkvxwBmsG2'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@gmail.com'], 'telefono': ['976586346'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'shipping': ['pickup'], 'payment_method': ['flow'], 'observaciones': ['asasd']}>
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241127-7e92e57a
+Orden creada con ID: 3
+Item de orden creado
+Order ID guardado en sesión: 3
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO FLOW
+Order ID en sesión: 3
+Orden encontrada: ORD-20241127-7e92e57a
+String para firma: 3499934B00FE26-91DE-4BF0-83A7-577C6L8AA65AORD-20241127-7e92e57aCLPhernan.villanueva.gutierrez@gmail.comPago Orden ORD-20241127-7e92e57ahttp://127.0.0.1:8000/checkout/payment-confirm/http://127.0.0.1:8000/checkout/payment-success/
+Datos de pago preparados:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "commerceOrder": "ORD-20241127-7e92e57a",
+  "subject": "Pago Orden ORD-20241127-7e92e57a",
+  "currency": "CLP",
+  "amount": 349993,
+  "email": "hernan.villanueva.gutierrez@gmail.com",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "s": "d3be7671d03243df9de367292755e1a0b953f12b0ecac6d5b0a090dd512cb2fa"
+}
+Status Code: 400
+Respuesta Flow: {"code":108,"message":"Invalid Signature"}
+Error en respuesta Flow: {"code":108,"message":"Invalid Signature"}
+Producto ID guardado en sesión: 1
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['r3YuYpihay9KvR0gwz8n28koCAABpyZse33HRHjxHtXDcfg9BenOhFf00Jp3DiPp'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@gmail.com'], 'telefono': ['976586346'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'shipping': ['pickup'], 'payment_method': ['flow'], 'observaciones': ['234234']}>
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241127-51079162
+Orden creada con ID: 4
+Item de orden creado
+Order ID guardado en sesión: 4
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO FLOW SANDBOX
+Order ID en sesión: 4
+Orden encontrada: ORD-20241127-51079162
+String para firma (sin secret): 3499934B00FE26-91DE-4BF0-83A7-577C6L8AA65AORD-20241127-51079162CLPhernan.villanueva.gutierrez@gmail.comPago Orden ORD-20241127-51079162http://127.0.0.1:8000/checkout/payment-confirm/http://127.0.0.1:8000/checkout/payment-success/
+Datos de pago preparados para sandbox:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "commerceOrder": "ORD-20241127-51079162",
+  "subject": "Pago Orden ORD-20241127-51079162",
+  "currency": "CLP",
+  "amount": 349993,
+  "email": "hernan.villanueva.gutierrez@gmail.com",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "optional": "ORD-20241127-51079162",
+  "s": "d3135c1bfdfd01f6f6bc61ed7b162256fd07e1f5fd3c2cc9b70ce191522bb63b"
+}
+Status Code: 400
+Respuesta Flow Sandbox: {"code":108,"message":"Invalid Signature"}
+Error en respuesta Flow Sandbox: {"code":108,"message":"Invalid Signature"}
+Producto ID guardado en sesión: 1
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['AZjaV3QbIdLopuJNCM7EuqdWq6Eko2mUnZonOlRrf8zh6SZGHrm5JX8yOftMCMcR'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@gmail.com'], 'telefono': ['976586346'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'shipping': ['pickup'], 'payment_method': ['flow'], 'observaciones': ['asdas']}>
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241127-8aa32907
+Orden creada con ID: 5
+Item de orden creado
+Order ID guardado en sesión: 5
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO FLOW SANDBOX
+Order ID en sesión: 5
+Orden encontrada: ORD-20241127-8aa32907
+Datos ordenados:
+amount: 349993
+apiKey: 4B00FE26-91DE-4BF0-83A7-577C6L8AA65A
+commerceOrder: ORD-20241127-8aa32907
+currency: CLP
+email: hernan.villanueva.gutierrez@gmail.com
+subject: Pago Orden ORD-20241127-8aa32907
+urlConfirmation: http://127.0.0.1:8000/checkout/payment-confirm/
+urlReturn: http://127.0.0.1:8000/checkout/payment-success/
+String para firma: 3499934B00FE26-91DE-4BF0-83A7-577C6L8AA65AORD-20241127-8aa32907CLPhernan.villanueva.gutierrez@gmail.comPago Orden ORD-20241127-8aa32907http://127.0.0.1:8000/checkout/payment-confirm/http://127.0.0.1:8000/checkout/payment-success/
+Datos completos de pago:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "amount": 349993,
+  "commerceOrder": "ORD-20241127-8aa32907",
+  "currency": "CLP",
+  "email": "hernan.villanueva.gutierrez@gmail.com",
+  "subject": "Pago Orden ORD-20241127-8aa32907",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "s": "ed80cb9a310610d7a505b5fbf2809c66a9507d6cf8371c64d9f4354430c6caf9"
+}
+Status Code: 400
+Respuesta Flow Sandbox: {"code":101,"message":"There's some missing params"}
+Error en respuesta Flow Sandbox: {"code":101,"message":"There's some missing params"}
+Producto ID guardado en sesión: 1
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['FCxxwybQLutymafviMGE3KG3KyOiOAlEsCCKpQc6iphr3yvonrV5ihBF8HDK2kbB'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@gmail.com'], 'telefono': ['976586346'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'shipping': ['pickup'], 'payment_method': ['flow'], 'observaciones': ['asdas']}>
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241127-537389ca
+Orden creada con ID: 6
+Item de orden creado
+Order ID guardado en sesión: 6
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO FLOW SANDBOX
+Order ID en sesión: 6
+Orden encontrada: ORD-20241127-537389ca
+Datos ordenados:
+amount: 349993
+apiKey: 4B00FE26-91DE-4BF0-83A7-577C6L8AA65A
+commerceOrder: ORD-20241127-537389ca
+currency: CLP
+email: hernan.villanueva.gutierrez@gmail.com
+merchantId: 1
+payment_currency: CLP
+payment_method: 1
+subject: Pago Orden ORD-20241127-537389ca
+timeout: 60
+urlConfirmation: http://127.0.0.1:8000/checkout/payment-confirm/
+urlReturn: http://127.0.0.1:8000/checkout/payment-success/
+String para firma: 3499934B00FE26-91DE-4BF0-83A7-577C6L8AA65AORD-20241127-537389caCLPhernan.villanueva.gutierrez@gmail.com1CLP1Pago Orden ORD-20241127-537389ca60http://127.0.0.1:8000/checkout/payment-confirm/http://127.0.0.1:8000/checkout/payment-success/
+Datos completos de pago:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "amount": 349993,
+  "commerceOrder": "ORD-20241127-537389ca",
+  "currency": "CLP",
+  "email": "hernan.villanueva.gutierrez@gmail.com",
+  "subject": "Pago Orden ORD-20241127-537389ca",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "merchantId": "1",
+  "payment_method": "1",
+  "timeout": 60,
+  "payment_currency": "CLP",
+  "s": "481736957554d58ed8b0d804d755155e09390853534ff4e9386f9f1d924b538c"
+}
+Status Code: 400
+Respuesta Flow Sandbox: {"code":108,"message":"Invalid Signature"}
+Error en respuesta Flow Sandbox: {"code":108,"message":"Invalid Signature"}
+Producto ID guardado en sesión: 1
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['B42cKugQQiMiq6JSFGvIOsKFTvmQmjLRo47pDMh6ndAb7uZLKlK93ZFhhEbiA3BO'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@gmail.com'], 'telefono': ['976586346'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'shipping': ['pickup'], 'payment_method': ['flow'], 'observaciones': ['asdas']}>
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241127-b7598348
+Orden creada con ID: 7
+Item de orden creado
+Order ID guardado en sesión: 7
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO FLOW SANDBOX
+Order ID en sesión: 7
+Orden encontrada: ORD-20241127-b7598348
+String para firma:
+amount349993apiKey4B00FE26-91DE-4BF0-83A7-577C6L8AA65AcommerceOrderORD-20241127-b7598348emailhernan.villanueva.gutierrez@gmail.comsubjectPago Orden ORD-20241127-b7598348urlConfirmationhttp://127.0.0.1:8000/checkout/payment-confirm/urlReturnhttp://127.0.0.1:8000/checkout/payment-success/
+Datos de pago:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "commerceOrder": "ORD-20241127-b7598348",
+  "subject": "Pago Orden ORD-20241127-b7598348",
+  "amount": 349993,
+  "email": "hernan.villanueva.gutierrez@gmail.com",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "s": "bc8826907d97b057548b6caf2a8a5051625400ad1289d7c6b43a600918330937"
+}
+Status Code: 200
+Respuesta Flow: {"token":"9BAFB497AE42FCD250BD9E6AE4FD18A3753585CL","url":"https:\/\/sandbox.flow.cl\/app\/web\/pay.php","flowOrder":2340921}
+URL de pago: https://sandbox.flow.cl/app/web/pay.php?token=9BAFB497AE42FCD250BD9E6AE4FD18A3753585CL
