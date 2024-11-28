@@ -1,0 +1,31 @@
+{% extends 'stock_smart/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <i class="fas fa-times-circle text-danger fa-5x mb-3"></i>
+                    <h2 class="card-title">Pago No Completado</h2>
+                    <p class="card-text">
+                        Lo sentimos, tu pago no pudo ser procesado correctamente.
+                    </p>
+                    <p class="card-text">
+                        Por favor, intenta nuevamente o contacta con nuestro servicio al cliente.
+                    </p>
+                    <hr>
+                    <div class="mt-4">
+                        <a href="{% url 'stock_smart:cart' %}" class="btn btn-primary me-2">
+                            Volver al Carrito
+                        </a>
+                        <a href="{% url 'stock_smart:contacto' %}" class="btn btn-outline-primary">
+                            Contactar Soporte
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

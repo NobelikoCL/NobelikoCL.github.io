@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Formulario de Pago</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'stock_smart:payment_success' %}">
+                        {% csrf_token %}
+                        
+                        <!-- Resumen de la orden -->
+                        <div class="mb-4">
+                            <h5>Resumen de la Orden #{{ order.order_number }}</h5>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <td>Subtotal:</td>
+                                        <td class="text-end">${{ subtotal|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IVA (19%):</td>
+                                        <td class="text-end">${{ iva|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr class="fw-bold">
+                                        <td>Total:</td>
+                                        <td class="text-end">${{ total|floatformat:2 }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Datos de pago -->
+                        <div class="mb-3">
+                            <label for="card_number" class="form-label">Número de Tarjeta</label>
+                            <input type="text" class="form-control" id="card_number" name="card_number" required>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="expiry" class="form-label">Fecha de Expiración</label>
+                                <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/YY" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cvv" class="form-label">CVV</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="card_name" class="form-label">Nombre en la Tarjeta</label>
+                            <input type="text" class="form-control" id="card_name" name="card_name" required>
+                        </div>
+
+                        <!-- Botón de pago -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Pagar ${{ total|floatformat:2 }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Validación del formulario
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Aquí puedes agregar validaciones adicionales
+        
+        // Si todo está correcto, enviar el formulario
+        this.submit();
+    });
+</script>
+{% endblock %}

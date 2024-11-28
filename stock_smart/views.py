@@ -4,19 +4,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.crypto import get_random_string
 from django.db.models import Q
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, FileResponse
 from django.views.decorators.http import require_POST, require_http_methods
 from django.core.paginator import Paginator
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt, csrf_protect
 from .forms import RegisterForm, GuestCheckoutForm, UserProfileForm
-from .models import CustomUser, Product, Category, Cart, CartItem, Order, FlowCredentials, OrderTracking, OrderItem
+from .models import CustomUser, Product, Category, Cart, CartItem, Order, FlowCredentials, OrderTracking, OrderItem, GuestOrder, GuestOrderItem
 import json
 from decimal import Decimal
 from django.utils import timezone
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
-from .utils.pdf_generator import InvoiceGenerator
+from .utils.invoice_generator import InvoiceGenerator
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .services.flow_service import FlowPaymentService
@@ -33,6 +33,13 @@ from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from payments import get_payment_model, PaymentStatus, RedirectNeeded
 from django.conf import settings
+from django.views.generic import ListView
+from django.views import View
+from django.core.exceptions import ValidationError
+from django import forms
+import time
+from django.db import connection
+from django.utils.decorators import method_decorator
 
 logger = logging.getLogger(__name__)
 Payment = get_payment_model()
@@ -116,25 +123,6 @@ def verify_email(request, token):
     
     return redirect('stock_smart:login')
 
-def search(request):
-    """
-    Vista para la búsqueda de productos
-    """
-    query = request.GET.get('q', '')
-    products = []  # Lista vacía temporal
-    
-    # Cuando tengas el modelo Product implementado, descomenta esto:
-    # if query:
-    #     products = Product.objects.filter(
-    #         Q(name__icontains=query) |
-    #         Q(description__icontains=query)
-    #     )
-    
-    context = {
-        'query': query,
-        'products': products,
-    }
-    return render(request, 'stock_smart/search.html', context)
 
 def about_view(request):
     return render(request, 'stock_smart/about.html')
@@ -244,7 +232,7 @@ def add_to_cart(request):
 def products(request):
     products_list = Product.objects.all()
     
-    # Búsqueda
+    # B��squeda
     query = request.GET.get('q')
     if query:
         products_list = products_list.filter(
@@ -291,35 +279,6 @@ def buy_now_checkout(request, product_id):
     
     return render(request, 'stock_smart/checkout_options.html', context)
 
-@login_required
-def cart_checkout(request):
-    """Checkout para compra de carrito completo"""
-    try:
-        cart = Cart.objects.get(user=request.user, is_active=True)
-        
-        if not cart.cartitem_set.exists():
-            messages.warning(request, 'Tu carrito está vacío')
-            return redirect('stock_smart:cart')
-        
-        # Calcular totales
-        subtotal = sum(item.total for item in cart.cartitem_set.all())
-        iva = subtotal * Decimal('0.19')
-        total = subtotal + iva
-        
-        context = {
-            'is_buy_now': False,
-            'cart': cart,
-            'cart_items': cart.cartitem_set.all(),
-            'subtotal': subtotal,
-            'iva': iva,
-            'total': total,
-        }
-        
-        return render(request, 'stock_smart/checkout_options.html', context)
-        
-    except Cart.DoesNotExist:
-        messages.error(request, 'No se encontró un carrito activo')
-        return redirect('stock_smart:productos_lista')
 
 def checkout_options(request, product_id=None):
     if product_id:
@@ -489,20 +448,7 @@ def auth_page(request):
         print(f"Error en auth_page: {str(e)}")
         return redirect('stock_smart:productos_lista')
 
-def checkout(request):
-    """Checkout para usuarios registrados"""
-    if not request.user.is_authenticated:
-        return redirect('stock_smart:checkout_options')
-    
-    cart = get_or_create_cart(request)
-    if not cart.cartitem_set.exists():
-        messages.warning(request, 'Tu carrito está vacío')
-        return redirect('stock_smart:productos_lista')
-    
-    return render(request, 'stock_smart/checkout.html', {
-        'titulo': 'Checkout',
-        'cart': cart
-    })
+
 
 def guest_checkout(request):
     try:
@@ -624,22 +570,21 @@ def guest_checkout(request):
         messages.error(request, 'Error al procesar el checkout')
         return redirect('stock_smart:productos_lista')
 
-def categories(request):
-    categories = Category.objects.all()
-    context = {
-        'categories': categories,
-    }
-    return render(request, 'stock_smart/categories.html', context)
+
 
 def category_detail(request, category_id):
     category = get_object_or_404(Category, id=category_id)
     products = Product.objects.filter(category=category)
+    main_categories = Category.objects.filter(parent=None)
     
     context = {
         'category': category,
         'products': products,
+        'main_categories': main_categories,
     }
-    return render(request, 'stock_smart/categoria_detalle.html', context)
+    
+    # Importante: debe renderizar categories.html
+    return render(request, 'stock_smart/categories.html', context)
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -1280,7 +1225,7 @@ def create_flow_signature(data):
     """
     Crea la firma para Flow
     """
-    # Ordenar keys alfabéticamente
+    # Ordenar keys alfab��ticamente
     sorted_data = dict(sorted(data.items()))
     
     # Concatenar valores
@@ -1421,7 +1366,7 @@ def buy_now_confirm(request, product_id):
         
     except Exception as e:
         logger.error(f"Error en buy_now_confirm: {str(e)}")
-        messages.error(request, 'Error al procesar la compra rápida. Por favor, intente nuevamente.')
+        messages.error(request, 'Error al procesar la compra r��pida. Por favor, intente nuevamente.')
         return redirect('stock_smart:productos_lista')
 
 @require_http_methods(["POST"])
@@ -1480,18 +1425,19 @@ def update_cart_api(request):
             'success': False,
             'error': 'Producto no encontrado'
         }, status=404)
-    except ValueError as e:
+    except (ValueError, TypeError) as e:
+        logger.exception(f"Error de valor en la actualización del carrito: {str(e)}")
         return JsonResponse({
             'success': False,
-            'error': str(e)
+            'error': 'Cantidad inválida'
         }, status=400)
     except Exception as e:
+        logger.exception(f"Error inesperado en la actualización del carrito: {str(e)}")
         return JsonResponse({
             'success': False,
             'error': 'Error al actualizar el carrito'
         }, status=500)
 
-def generate_order_number():
     """Genera un número de orden único"""
     return f"ORD-{uuid.uuid4().hex[:8].upper()}"
 
@@ -1849,24 +1795,86 @@ def payment_notify(request):
         logger.error(f"Error en payment_notify: {str(e)}")
         return HttpResponse(status=500)
 
-def payment_success(request):
-    try:
+@method_decorator(csrf_exempt, name='dispatch')
+class PaymentSuccessView(View):
+    def post(self, request, *args, **kwargs):
         logger.info("="*50)
-        logger.info("PAGO EXITOSO")
-        logger.info(f"GET params: {request.GET}")
+        logger.info("RECIBIENDO POST DE FLOW")
+        logger.info(f"POST Data: {request.POST}")
         
-        token = request.GET.get('token')
-        if token:
+        token = request.POST.get('token')
+        payment_status = request.POST.get('status')
+        
+        logger.info(f"Token: {token}")
+        logger.info(f"Estado del pago: {payment_status}")
+
+        if not token:
+            logger.error("No se recibió token")
+            return redirect('stock_smart:productos_lista')
+
+        try:
             order = Order.objects.get(flow_token=token)
-            return render(request, 'stock_smart/payment_success.html', {'order': order})
             
-        messages.error(request, 'No se encontró la información del pago')
+            if payment_status == '2':  # Pago exitoso
+                order.status = 'PAID'
+                order.payment_date = timezone.now()
+                order.save()
+                logger.info(f"Orden {order.order_number} marcada como pagada")
+                
+                return render(request, 'stock_smart/payment_success.html', {
+                    'order': order,
+                    'order_number': order.order_number,
+                    'customer_email': order.customer_email
+                })
+            
+            # Si el pago fue rechazado
+            logger.warning(f"Pago rechazado o con error. Estado: {payment_status}")
+            order.status = 'REJECTED'
+            order.save()
+            
+            return render(request, 'stock_smart/payment_rejected.html', {
+                'order': order,
+                'order_number': order.order_number
+            })
+            
+        except Order.DoesNotExist:
+            logger.error(f"No se encontró orden para el token: {token}")
+            messages.error(request, 'Orden no encontrada')
+            return redirect('stock_smart:productos_lista')
+        except Exception as e:
+            logger.error(f"Error procesando pago: {str(e)}")
+            messages.error(request, 'Error procesando el pago')
+            return redirect('stock_smart:productos_lista')
+
+    def get(self, request, *args, **kwargs):
+        messages.warning(request, 'Acceso no válido')
         return redirect('stock_smart:productos_lista')
+
+def send_confirmation_email(order):
+    """Función auxiliar para enviar correo de confirmación"""
+    try:
+        subject = f'Confirmación de Pago - Orden #{order.order_number}'
+        message = f"""
+        ¡Gracias por tu compra!
         
+        Detalles de la orden:
+        Número de orden: {order.order_number}
+        Total: ${order.total_amount}
+        Estado: Pagado
+        
+        Pronto recibirás información sobre el envío.
+        """
+        
+        send_mail(
+            subject,
+            message,
+            'noreply@tusitio.com',
+            [order.customer_email],
+            fail_silently=False,
+        )
     except Exception as e:
-        logger.error(f"Error en payment_success: {str(e)}")
-        messages.error(request, 'Error al procesar la confirmación del pago')
-        return redirect('stock_smart:productos_lista')
+        logger.error(f"Error al enviar correo de confirmación: {str(e)}")
+        # No relanzo la excepción para no interrumpir el flujo principal
 
 def payment_cancel(request):
     try:
@@ -1956,7 +1964,6 @@ def update_cart(request):
         try:
             data = json.loads(request.body)
             product_id = str(data.get('product_id'))
-            new_quantity = int(data.get('quantity'))
             
             # Verificar stock disponible
             product = get_object_or_404(Product, id=product_id)
@@ -2421,7 +2428,6 @@ def validate_product(request, product_id):
                 'success': False,
                 'message': str(e)
             })
-    
     return JsonResponse({'success': False, 'message': 'Método no permitido'})
 
 @csrf_exempt  # Necesario para recibir POST de Flow
@@ -2515,7 +2521,7 @@ def update_cart_quantity(request):
         
         if product_id in cart:
             # Corregimos el paréntesis faltante
-            item_total = int(float(cart[product_id]['price']) * new_quantity)
+            item_total = int(float(cart[product_id]['price'])) * new_quantity
             cart[product_id]['quantity'] = new_quantity
             cart[product_id]['total'] = item_total
             
@@ -2566,3 +2572,719 @@ def payment_error(request):
         logger.error(traceback.format_exc())
         messages.error(request, 'Error al mostrar la página de error de pago')
         return redirect('stock_smart:productos_lista')
+
+class ProductosPorCategoria(ListView):
+    model = Product
+    template_name = 'stock_smart/productos_lista.html'
+    context_object_name = 'productos'
+    paginate_by = 12
+
+    def get_queryset(self):
+        queryset = Product.objects.filter(active=True)
+        query = self.request.GET.get('q')
+        
+        if query:
+            logger.info(f"Búsqueda realizada: {query}")
+            queryset = queryset.filter(
+                Q(name__icontains=query) |
+                Q(description__icontains=query) |
+                Q(category__name__icontains=query) |
+                Q(brand__name__icontains=query)
+            ).distinct()
+            
+            logger.info(f"Resultados encontrados: {queryset.count()}")
+        
+        return queryset.order_by('-created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('q', '')
+        return context
+
+class ProductosListaView(ListView):  # Cambiamos a PascalCase para la clase
+    model = Product
+    template_name = 'stock_smart/productos_lista.html'
+    context_object_name = 'productos'
+    paginate_by = 12
+
+    def get_queryset(self):
+        queryset = Product.objects.filter(active=True)
+        query = self.request.GET.get('q')
+        
+        if query:
+            logger.info(f"Búsqueda realizada: {query}")
+            queryset = queryset.filter(
+                Q(name__icontains=query) |
+                Q(description__icontains=query) |
+                Q(category__name__icontains=query) |
+                Q(brand__name__icontains=query)
+            ).distinct()
+            
+            logger.info(f"Resultados encontrados: {queryset.count()}")
+        
+        return queryset.order_by('-created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('q', '')
+        return context
+
+class CheckoutOptionsView(View):
+    template_name = 'stock_smart/checkout_options.html'
+
+    def get(self, request, product_id):
+        try:
+            # Obtener el producto
+            product = get_object_or_404(Product, id=product_id, active=True)
+            logger.info(f"Iniciando compra rápida para producto: {product.name}")
+
+            # Calcular precios
+            base_price = product.published_price
+            discount_percentage = product.discount_percentage
+            
+            if discount_percentage > 0:
+                final_price = product.final_price
+            else:
+                final_price = base_price
+
+            iva = final_price * Decimal('0.19')
+            total = final_price + iva
+
+            context = {
+                'product': product,
+                'base_price': base_price,
+                'discount_percentage': discount_percentage,
+                'final_price': final_price,
+                'iva': iva,
+                'total': total
+            }
+
+            # Guardar el producto en sesión para el proceso de checkout
+            request.session['checkout_product_id'] = product_id
+            logger.info(f"Producto {product_id} guardado en sesión para checkout")
+
+            return render(request, self.template_name, context)
+
+        except Product.DoesNotExist:
+            logger.error(f"Producto no encontrado: {product_id}")
+            messages.error(request, "El producto no está disponible.")
+            return redirect('stock_smart:productos_lista')
+        except Exception as e:
+            logger.error(f"Error en checkout options: {str(e)}")
+            messages.error(request, "Ha ocurrido un error. Por favor, intenta nuevamente.")
+            return redirect('stock_smart:productos_lista')
+
+class CartOptionsCheckoutView(View):
+    def get(self, request):
+        logger.info("="*50)
+        logger.info("INICIANDO CREACIÓN DE ORDEN")
+        
+        try:
+            cart = request.session.get('cart', {})
+            
+            if not cart:
+                messages.warning(request, "Tu carrito está vacío")
+                return redirect('stock_smart:cart')
+
+            # Calcular totales
+            products_data = []
+            subtotal = Decimal('0')
+            
+            for product_id, item_data in cart.items():
+                try:
+                    product = Product.objects.get(id=int(product_id))
+                    quantity = int(item_data.get('quantity', 0))
+                    
+                    # Calcular precio con descuento si existe
+                    if product.discount_percentage > 0:
+                        price = product.price * (1 - product.discount_percentage/100)
+                    else:
+                        price = product.price
+                        
+                    item_total = price * quantity
+                    subtotal += item_total
+                    
+                    products_data.append({
+                        'product': product,
+                        'quantity': quantity,
+                        'price': price,
+                        'total': item_total
+                    })
+                    
+                    logger.info(f"Producto agregado: {product.name}")
+                    logger.info(f"Cantidad: {quantity}")
+                    logger.info(f"Precio unitario: ${price}")
+                    logger.info(f"Total item: ${item_total}")
+                    
+                except Product.DoesNotExist:
+                    logger.error(f"Producto {product_id} no encontrado")
+                    continue
+                except Exception as e:
+                    logger.error(f"Error procesando producto {product_id}: {str(e)}")
+                    continue
+
+            # Calcular IVA y total
+            iva = subtotal * Decimal('0.19')
+            total = subtotal + iva
+            
+            logger.info("\nTotales de la orden:")
+            logger.info(f"Subtotal: ${subtotal}")
+            logger.info(f"IVA: ${iva}")
+            logger.info(f"Total: ${total}")
+
+            # Crear orden
+            order = Order.objects.create(
+                order_number=generate_order_number(),
+                subtotal=subtotal,
+                iva=iva,
+                total=total,
+                status='pending'
+            )
+            
+            # Crear items de la orden
+            for item in products_data:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item['product'],
+                    quantity=item['quantity'],
+                    price=item['price'],
+                    total=item['total']
+                )
+            
+            # Guardar ID de orden en sesión
+            request.session['order_id'] = order.id
+            
+            logger.info(f"Orden creada: #{order.order_number}")
+            return redirect('stock_smart:guest_cart_checkout')
+            
+        except Exception as e:
+            logger.error(f"Error creando orden: {str(e)}")
+            logger.error(traceback.format_exc())
+            messages.error(request, "Error al procesar el checkout")
+            return redirect('stock_smart:cart')
+
+class GuestCartCheckoutView(View):
+    template_name = 'stock_smart/guest_cart_checkout.html'
+    
+    def get(self, request):
+        logger.info("="*50)
+        logger.info("INICIANDO GUEST CART CHECKOUT")
+        
+        try:
+            # Obtener orden de la sesión
+            order_id = request.session.get('order_id')
+            logger.info(f"Buscando orden: {order_id}")
+            
+            if not order_id:
+                messages.warning(request, "No se encontró la orden")
+                return redirect('stock_smart:cart')
+            
+            # Obtener datos de la orden
+            order = Order.objects.get(id=order_id)
+            logger.info(f"Orden encontrada: {order.order_number}")
+            
+            context = {
+                'order': order,
+                'subtotal': order.subtotal or 0,
+                'iva': order.iva or 0,
+                'total': order.total or 0,
+            }
+            
+            logger.info("Totales de la orden:")
+            logger.info(f"Subtotal: ${context['subtotal']}")
+            logger.info(f"IVA: ${context['iva']}")
+            logger.info(f"Total: ${context['total']}")
+            
+            return render(request, self.template_name, context)
+            
+        except Order.DoesNotExist:
+            logger.error(f"Orden {order_id} no encontrada")
+            messages.error(request, "Orden no encontrada")
+            return redirect('stock_smart:cart')
+        except Exception as e:
+            logger.error(f"Error en guest checkout: {str(e)}")
+            logger.error(traceback.format_exc())
+            messages.error(request, "Error al procesar el checkout")
+            return redirect('stock_smart:cart')
+    
+    def post(self, request):
+        logger.info("="*50)
+        logger.info("PROCESANDO FORMULARIO CHECKOUT")
+        
+        try:
+            # Obtener orden
+            order_id = request.session.get('order_id')
+            order = Order.objects.get(id=order_id)
+            
+            # Actualizar datos de la orden
+            order.first_name = request.POST.get('first_name')
+            order.last_name = request.POST.get('last_name')
+            order.rut = request.POST.get('rut')
+            order.phone = request.POST.get('phone')
+            order.email = request.POST.get('email')
+            order.shipping_method = request.POST.get('shipping_method')
+            order.payment_method = request.POST.get('payment_method')
+            
+            # Si es envío Starken
+            if order.shipping_method == 'starken':
+                order.address = request.POST.get('address')
+                order.region = request.POST.get('region')
+                order.comuna = request.POST.get('comuna')
+                order.shipping_notes = request.POST.get('shipping_notes')
+                order.shipping_cost = Decimal('3990')
+                order.total += order.shipping_cost
+            
+            order.save()
+            logger.info(f"Orden {order.order_number} actualizada")
+            
+            # Redireccionar según método de pago
+            if order.payment_method == 'flow':
+                return redirect('stock_smart:flow_payment')
+            else:
+                return redirect('stock_smart:bank_transfer')
+                
+        except Exception as e:
+            logger.error(f"Error procesando formulario: {str(e)}")
+            logger.error(traceback.format_exc())
+            messages.error(request, "Error al procesar el formulario")
+            return self.get(request)
+
+class CartPaymentView(View):
+    template_name = 'stock_smart/cart_payment.html'
+
+    def get(self, request):
+        logger.info("Iniciando vista de pago del carrito")
+        try:
+            # Obtener la orden de la sesión
+            order_id = request.session.get('order_id')
+            if not order_id:
+                logger.warning("No se encontró orden en la sesión")
+                messages.error(request, "No se encontró la orden")
+                return redirect('stock_smart:cart')
+
+            order = get_object_or_404(Order, id=order_id)
+            
+            # Verificar que la orden esté pendiente
+            if order.status != 'pending':
+                logger.warning(f"Intento de pago para orden no pendiente: {order.order_number}")
+                messages.error(request, "Esta orden ya no está disponible para pago")
+                return redirect('stock_smart:cart')
+
+            # Preparar datos para Flow
+            flow_service = FlowPaymentService()
+            payment_data = {
+                'commerceOrder': order.order_number,
+                'subject': f"Orden {order.order_number}",
+                'currency': 'CLP',
+                'amount': int(order.total),
+                'email': order.email,
+                'urlConfirmation': request.build_absolute_uri(reverse('stock_smart:cart_payment_confirm')),
+                'urlReturn': request.build_absolute_uri(reverse('stock_smart:cart_payment_return'))
+            }
+
+            # Crear orden en Flow
+            flow_response = flow_service.create_payment(payment_data)
+            
+            if flow_response.get('url'):
+                logger.info(f"Pago Flow creado para orden {order.order_number}")
+                return redirect(flow_response['url'])
+            else:
+                logger.error(f"Error creando pago Flow: {flow_response.get('error', 'Unknown error')}")
+                messages.error(request, "Error al procesar el pago. Por favor, intente nuevamente.")
+                return redirect('stock_smart:cart')
+
+        except Order.DoesNotExist:
+            logger.error(f"Orden no encontrada: {order_id}")
+            messages.error(request, "Orden no encontrada")
+            return redirect('stock_smart:cart')
+        except Exception as e:
+            logger.error(f"Error en vista de pago: {str(e)}")
+            messages.error(request, "Ocurrió un error al procesar el pago")
+            return redirect('stock_smart:cart')
+        
+        
+class CartPaymentConfirmView(View):
+    @csrf_exempt
+    def post(self, request):
+        logger.info("Recibiendo confirmación de pago Flow")
+        try:
+            # Obtener datos de Flow
+            flow_service = FlowPaymentService()
+            payment_data = flow_service.get_payment_status(request.POST)
+            
+            if not payment_data:
+                logger.error("No se recibieron datos de pago de Flow")
+                return HttpResponse(status=400)
+
+            # Obtener la orden
+            order = Order.objects.get(order_number=payment_data['commerceOrder'])
+            
+            # Actualizar estado según respuesta de Flow
+            if payment_data['status'] == 2:  # Pago exitoso
+                order.status = 'paid'
+                order.payment_date = timezone.now()
+                order.payment_id = payment_data['flowOrder']
+                order.save()
+                
+                # Actualizar stock
+                for item in order.orderitem_set.all():
+                    product = item.product
+                    product.stock -= item.quantity
+                    product.save()
+                    
+                # Limpiar carrito de la sesión
+                if 'cart' in request.session:
+                    del request.session['cart']
+                if 'order_id' in request.session:
+                    del request.session['order_id']
+                request.session.modified = True
+                
+                logger.info(f"Pago confirmado para orden {order.order_number}")
+                
+                # Enviar email de confirmación
+                try:
+                    send_confirmation_email(order)
+                except Exception as e:
+                    logger.error(f"Error enviando email de confirmación: {str(e)}")
+                
+            else:
+                order.status = 'failed'
+                order.save()
+                logger.warning(f"Pago fallido para orden {order.order_number}")
+            
+            return HttpResponse(status=200)
+
+        except Exception as e:
+            logger.error(f"Error en confirmación de pago: {str(e)}")
+            return HttpResponse(status=500)
+
+class CartPaymentReturnView(View):
+    template_name = 'stock_smart/cart_payment_return.html'
+
+    def get(self, request):
+        logger.info("Usuario retornando de Flow")
+        try:
+            # Obtener datos de Flow
+            flow_service = FlowPaymentService()
+            payment_data = flow_service.get_payment_status(request.GET)
+            
+            if not payment_data:
+                logger.error("No se recibieron datos de retorno de Flow")
+                messages.error(request, "No se pudo verificar el estado del pago")
+                return redirect('stock_smart:cart')
+
+            # Obtener la orden
+            order = Order.objects.get(order_number=payment_data['commerceOrder'])
+            
+            context = {
+                'order': order,
+                'payment_status': payment_data['status'],
+                'flow_order': payment_data['flowOrder']
+            }
+            
+            if payment_data['status'] == 2:  # Pago exitoso
+                messages.success(request, "¡Pago realizado con éxito!")
+                logger.info(f"Usuario retornó con pago exitoso para orden {order.order_number}")
+            else:
+                messages.error(request, "El pago no pudo ser procesado")
+                logger.warning(f"Usuario retornó con pago fallido para orden {order.order_number}")
+            
+            return render(request, self.template_name, context)
+
+        except Exception as e:
+            logger.error(f"Error en retorno de pago: {str(e)}")
+            messages.error(request, "Ocurrió un error al procesar el pago")
+            return redirect('stock_smart:cart')
+        
+        
+class ProcessCartCheckoutView(View):
+    def get(self, request):
+        logger.info("Iniciando procesamiento de pago del carrito")
+        try:
+            # Obtener orden de la sesión
+            order_id = request.session.get('order_id')
+            if not order_id:
+                logger.warning("No se encontró orden en la sesión")
+                messages.error(request, "No se encontró la orden")
+                return redirect('stock_smart:cart')
+
+            order = get_object_or_404(Order, id=order_id)
+            
+            # Verificar que la orden esté pendiente
+            if order.status != 'pending':
+                logger.warning(f"Intento de pago para orden no pendiente: {order.order_number}")
+                messages.error(request, "Esta orden ya no está disponible para pago")
+                return redirect('stock_smart:cart')
+
+            # Preparar datos para Flow
+            flow_data = {
+                'commerceOrder': order.order_number,
+                'subject': f"Orden {order.order_number}",
+                'currency': 'CLP',
+                'amount': int(order.total),
+                'email': order.email,
+                'urlConfirmation': request.build_absolute_uri(reverse('stock_smart:cart_payment_confirm')),
+                'urlReturn': request.build_absolute_uri(reverse('stock_smart:cart_payment_return'))
+            }
+
+            # Crear orden en Flow
+            flow_service = FlowPaymentService()
+            flow_response = flow_service.create_payment(flow_data)
+            
+            if flow_response.get('url'):
+                logger.info(f"Redirigiendo a Flow para orden {order.order_number}")
+                
+                # Guardar token de Flow en la orden
+                order.flow_token = flow_response.get('token')
+                order.save()
+                
+                return redirect(flow_response['url'])
+            else:
+                logger.error(f"Error creando pago Flow: {flow_response.get('error', 'Unknown error')}")
+                messages.error(request, "Error al procesar el pago. Por favor, intente nuevamente.")
+                return redirect('stock_smart:cart')
+
+        except Order.DoesNotExist:
+            logger.error(f"Orden no encontrada: {order_id}")
+            messages.error(request, "Orden no encontrada")
+            return redirect('stock_smart:cart')
+        except Exception as e:
+            logger.error(f"Error en procesamiento de pago: {str(e)}")
+            logger.error(traceback.format_exc())
+            messages.error(request, "Ocurrió un error al procesar el pago")
+            return redirect('stock_smart:cart')
+        
+      
+
+
+
+class TerminosView(View):
+    def get(self, request):
+        logger.info("Accediendo a términos y condiciones")
+        return render(request, 'stock_smart/terminos.html')
+
+class TrackingView(View):
+    template_name = 'stock_smart/seguimiento.html'
+    
+    def get(self, request):
+        logger.info("="*50)
+        logger.info("INICIANDO BÚSQUEDA DE ORDEN")
+        
+        try:
+            order_number = request.GET.get('order_number')
+            logger.info(f"Buscando orden número: {order_number}")
+            
+            if not order_number:
+                logger.info("No se proporcionó número de orden")
+                return render(request, self.template_name)
+
+            # Consulta SQL directa para obtener la orden
+            with connection.cursor() as cursor:
+                # Primero, obtener los datos de la orden
+                cursor.execute("""
+                    SELECT 
+                        id, order_number, status, payment_status, 
+                        shipping_method, first_name, last_name, 
+                        email, phone, address, comuna, region,
+                        shipping_cost, subtotal, iva, total,
+                        created_at, shipping_notes
+                    FROM stock_smart_order 
+                    WHERE order_number = %s
+                """, [order_number])
+                
+                order_row = cursor.fetchone()
+                
+                if order_row:
+                    # Convertir los resultados en un diccionario
+                    columns = [col[0] for col in cursor.description]
+                    order = dict(zip(columns, order_row))
+                    
+                    # Obtener los items de la orden
+                    cursor.execute("""
+                        SELECT 
+                            p.name,
+                            oi.quantity,
+                            oi.price,
+                            (oi.quantity * oi.price) as total
+                        FROM stock_smart_orderitem oi
+                        JOIN stock_smart_product p ON oi.product_id = p.id
+                        WHERE oi.order_id = %s
+                    """, [order['id']])
+                    
+                    items = []
+                    for item_row in cursor.fetchall():
+                        items.append({
+                            'name': item_row[0],
+                            'quantity': item_row[1],
+                            'price': item_row[2],
+                            'total': item_row[3]
+                        })
+                    
+                    # Formatear estados para display
+                    order['status'] = self.get_status_display(order['status'])
+                    order['payment_status'] = self.get_payment_status_display(order['payment_status'])
+                    order['shipping_method'] = self.get_shipping_method_display(order['shipping_method'])
+                    
+                    context = {
+                        'order': order,
+                        'items': items
+                    }
+                    
+                    logger.info(f"Orden encontrada: {order['order_number']}")
+                    return render(request, self.template_name, context)
+                else:
+                    logger.warning(f"No se encontró la orden: {order_number}")
+                    messages.error(request, "No se encontró la orden especificada")
+                    return render(request, self.template_name)
+                    
+        except Exception as e:
+            logger.error(f"Error al buscar orden: {str(e)}")
+            logger.error(traceback.format_exc())
+            messages.error(request, "Error al buscar la orden")
+            return render(request, self.template_name)
+
+    def get_status_display(self, status):
+        status_choices = {
+            'pending': 'Pendiente',
+            'processing': 'Procesando',
+            'shipped': 'Enviado',
+            'delivered': 'Entregado',
+            'cancelled': 'Cancelado'
+        }
+        return status_choices.get(status, status)
+
+    def get_payment_status_display(self, status):
+        payment_status_choices = {
+            'pending': 'Pendiente',
+            'completed': 'Completado',
+            'failed': 'Fallido',
+            'refunded': 'Reembolsado'
+        }
+        return payment_status_choices.get(status, status)
+
+    def get_shipping_method_display(self, method):
+        shipping_method_choices = {
+            'pickup': 'Retiro en tienda',
+            'starken': 'Envío Starken'
+        }
+        return shipping_method_choices.get(method, method)
+
+@csrf_protect
+def payment_form(request):
+    """Vista para mostrar el formulario de pago"""
+    try:
+        logger.info("="*50)
+        logger.info("INICIANDO FORMULARIO DE PAGO")
+        
+        # Obtener datos de la orden desde la sesión
+        order_id = request.session.get('order_id')
+        logger.info(f"Order ID en sesión: {order_id}")
+        
+        if not order_id:
+            logger.error("No se encontró order_id en sesión")
+            messages.error(request, 'No se encontró la orden')
+            return redirect('stock_smart:productos_lista')
+            
+        order = get_object_or_404(Order, id=order_id)
+        logger.info(f"Orden encontrada: {order.order_number}")
+        
+        context = {
+            'order': order,
+            'total': order.total_amount,
+            'iva': order.total_amount * Decimal('0.19'),
+            'subtotal': order.total_amount / Decimal('1.19')
+        }
+        
+        return render(request, 'stock_smart/payment_form.html', context)
+        
+    except Exception as e:
+        logger.error(f"Error en payment_form: {str(e)}")
+        logger.error(traceback.format_exc())
+        messages.error(request, 'Error al cargar el formulario de pago')
+        return redirect('stock_smart:checkout_error')
+
+@csrf_protect
+def payment_success(request):
+    """Vista para procesar el pago exitoso"""
+    try:
+        logger.info("="*50)
+        logger.info("PROCESANDO PAGO EXITOSO")
+        logger.info(f"Método: {request.method}")
+        
+        if request.method == 'POST':
+            # Obtener datos del formulario
+            order_id = request.session.get('order_id')
+            logger.info(f"Order ID en sesión: {order_id}")
+            
+            if not order_id:
+                raise ValueError("No se encontró order_id en sesión")
+                
+            order = get_object_or_404(Order, id=order_id)
+            logger.info(f"Orden encontrada: {order.order_number}")
+            
+            # Actualizar estado de la orden
+            order.status = 'PAID'
+            order.save()
+            logger.info("Estado de orden actualizado a PAID")
+            
+            # Actualizar stock de productos
+            for item in order.orderitem_set.all():
+                product = item.product
+                product.stock -= item.quantity
+                product.save()
+                logger.info(f"Stock actualizado para producto {product.id}: {product.stock}")
+            
+            # Limpiar datos de sesión
+            if 'order_id' in request.session:
+                del request.session['order_id']
+            if 'cart_id' in request.session:
+                del request.session['cart_id']
+            
+            logger.info("Sesión limpiada")
+            
+            # Enviar correo de confirmación
+            try:
+                send_confirmation_email(order)
+                logger.info("Correo de confirmación enviado")
+            except Exception as e:
+                logger.error(f"Error al enviar correo: {str(e)}")
+            
+            messages.success(request, '¡Pago realizado con éxito!')
+            return render(request, 'stock_smart/payment_success.html', {'order': order})
+            
+        else:
+            logger.warning("Intento de acceso GET a payment_success")
+            return redirect('stock_smart:productos_lista')
+            
+    except Exception as e:
+        logger.error(f"Error en payment_success: {str(e)}")
+        logger.error(traceback.format_exc())
+        messages.error(request, 'Error al procesar el pago')
+        return redirect('stock_smart:checkout_error')
+
+def send_confirmation_email(order):
+    """Función auxiliar para enviar correo de confirmación"""
+    try:
+        subject = f'Confirmación de Pago - Orden #{order.order_number}'
+        message = f"""
+        ¡Gracias por tu compra!
+        
+        Detalles de la orden:
+        Número de orden: {order.order_number}
+        Total: ${order.total_amount}
+        Estado: Pagado
+        
+        Pronto recibirás información sobre el envío.
+        """
+        
+        send_mail(
+            subject,
+            message,
+            'noreply@tusitio.com',
+            [order.customer_email],
+            fail_silently=False,
+        )
+    except Exception as e:
+        logger.error(f"Error al enviar correo de confirmación: {str(e)}")
+        # No relanzo la excepción para no interrumpir el flujo principal
+

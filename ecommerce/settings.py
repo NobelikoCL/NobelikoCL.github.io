@@ -53,7 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'stock_smart.middleware.VisitorMiddleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -72,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'stock_smart.context_processors.cart_count',
+                'stock_smart.context_processors.categories_processor',
             ],
         },
     },
@@ -249,8 +249,8 @@ FLOW_CONFIRM_URL = f"{SITE_URL}/payment/confirm/"
 CSRF_TRUSTED_ORIGINS = [
     'https://sandbox.flow.cl',
     'https://www.flow.cl',
-    'http://localhost:8000',
     'http://127.0.0.1:8000',
+    'http://localhost:8000'
 ]
 
 # Configuración de CORS
@@ -265,3 +265,14 @@ CORS_ALLOW_CREDENTIALS = True
 
 # Configuración de hosts permitidos
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+
+# Configuración de cookies
+CSRF_COOKIE_SECURE = True  # Solo en producción
+CSRF_COOKIE_HTTPONLY = True
+CSRF_USE_SESSIONS = True
+
+# Configuración adicional para Flow
+FLOW_SANDBOX = True  # Cambiar a False en producción
+FLOW_API_KEY = '4B00FE26-91DE-4BF0-83A7-577C6L8AA65A'
+FLOW_SECRET_KEY = 'deef495f20d1307e2ebed5b1f9c5f33da3aeaee9'
+

@@ -1,11 +1,25 @@
 from .models import Category, Cart, CartItem
 from django.db import models
+import logging
+
+logger = logging.getLogger(__name__)
 
 def categories_processor(request):
-    main_categories = Category.objects.filter(parent=None, is_active=True)
-    return {
-        'main_categories': main_categories
-    }
+    try:
+        # Obtener solo categorías padre (parent=None) que estén activas
+        categories = Category.objects.filter(
+            parent__isnull=True,
+            is_active=True
+        ).prefetch_related(
+            'children'
+        ).order_by('order', 'name')
+        
+        logger.info(f"Categorías principales cargadas: {categories.count()}")
+        return {'categories': categories}
+    
+    except Exception as e:
+        logger.error(f"Error al cargar categorías: {str(e)}")
+        return {'categories': []}
 
 def cart_count(request):
     count = 0

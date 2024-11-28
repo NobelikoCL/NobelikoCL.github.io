@@ -1,158 +1,150 @@
 {% extends 'stock_smart/base.html' %}
 {% load static %}
-{% load humanize %}
 {% load custom_filters %}
 
 {% block content %}
-{% csrf_token %}
-<div class="container mt-4">
+<div class="container mt-5">
     <h2>Carrito de Compras</h2>
     
     {% if cart_items %}
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Precio Unitario</th>
-                        <th>Cantidad</th>
-                        <th>Subtotal</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in cart_items %}
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
+        <div class="row">
+            <!-- Lista de productos -->
+            <div class="col-md-8">
+                {% for item in cart_items %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
                                 {% if item.product.image %}
-                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" 
-                                         style="width: 50px; height: 50px; object-fit: cover;" class="me-2">
+                                    <img src="{{ item.product.image.url }}" class="img-fluid" alt="{{ item.product.name }}">
                                 {% endif %}
-                                <div>
-                                    <h6 class="mb-0">{{ item.product.name }}</h6>
-                                    {% if item.product.discount_percentage > 0 %}
-                                        <small class="text-muted">
-                                            Descuento: {{ item.product.discount_percentage }}%
-                                        </small>
-                                    {% endif %}
-                                </div>
                             </div>
-                        </td>
-                        <td>
-                            {% if item.product.discount_percentage > 0 %}
-                                <div>
-                                    <del class="text-muted">${{ item.product.published_price|format_price }}</del>
-                                    <div class="text-success">
-                                        ${{ item.price|format_price }}
+                            <div class="col-md-9">
+                                <h5 class="card-title">{{ item.product.name }}</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="card-text mb-1">
+                                            {% if item.product.discount_percentage > 0 %}
+                                                <small class="text-decoration-line-through text-muted">
+                                                    ${{ item.product.published_price|format_price }}
+                                                </small>
+                                                <span class="text-danger ms-2">
+                                                    -{{ item.product.discount_percentage }}%
+                                                </span>
+                                                <br>
+                                                <strong class="text-success">
+                                                    ${{ item.price|format_price }}
+                                                </strong>
+                                            {% else %}
+                                                <strong>${{ item.price|format_price }}</strong>
+                                            {% endif %}
+                                        </p>
+                                        <div class="input-group" style="width: 150px;">
+                                            <button class="btn btn-outline-secondary" type="button" 
+                                                    onclick="updateQuantity('{{ item.product.id }}', -1)">-</button>
+                                            <input type="text" class="form-control text-center" 
+                                                   value="{{ item.quantity }}" readonly>
+                                            <button class="btn btn-outline-secondary" type="button" 
+                                                    onclick="updateQuantity('{{ item.product.id }}', 1)">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <p class="mb-0"><strong>${{ item.total|format_price }}</strong></p>
+                                        <button class="btn btn-danger btn-sm mt-2" type="button" 
+                                                onclick="removeFromCart('{{ item.product.id }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </div>
                                 </div>
-                            {% else %}
-                                ${{ item.price|format_price }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            <div class="input-group" style="width: 120px;">
-                                <button class="btn btn-outline-secondary" type="button" 
-                                        onclick="updateQuantity({{ item.product.id }}, -1)">-</button>
-                                <input type="text" class="form-control text-center" 
-                                       value="{{ item.quantity }}" 
-                                       data-product-id="{{ item.product.id }}" readonly>
-                                <button class="btn btn-outline-secondary" type="button" 
-                                        onclick="updateQuantity({{ item.product.id }}, 1)">+</button>
                             </div>
-                        </td>
-                        <td class="text-end">${{ item.total|format_price }}</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm" onclick="removeFromCart({{ item.product.id }})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="text-end"><strong>Total:</strong></td>
-                        <td class="text-end"><strong>${{ total|format_price }}</strong></td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        
-        <div class="d-flex justify-content-between mt-4">
-            <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-secondary">
-                Seguir Comprando
-            </a>
-            <a href="{% url 'stock_smart:cart_checkout_options' %}" class="btn btn-primary">
-                Proceder al Pago
-            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Resumen y checkout -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Resumen del Carrito</h5>
+                        <ul class="list-unstyled mb-4">
+                            <li class="d-flex justify-content-between mb-2">
+                                <span>Subtotal</span>
+                                <strong>${{ subtotal|format_price }}</strong>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">
+                                <span>IVA (19%)</span>
+                                <strong>${{ iva|format_price }}</strong>
+                            </li>
+                            <li class="d-flex justify-content-between border-top pt-2">
+                                <span class="text-success">
+                                    <strong>Total (CLP)</strong>
+                                </span>
+                                <strong class="text-success">
+                                    ${{ total|format_price }}
+                                </strong>
+                            </li>
+                        </ul>
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'stock_smart:cart_options_checkout' %}" 
+                               class="btn btn-success btn-lg">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                Proceder al Checkout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     {% else %}
-        <div class="alert alert-info">
-            Tu carrito está vacío. 
-            <a href="{% url 'stock_smart:productos_lista' %}">Ver productos disponibles</a>
+        <div class="text-center">
+            <p>Tu carrito está vacío</p>
+            <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-primary">
+                Continuar comprando
+            </a>
         </div>
     {% endif %}
 </div>
 
 <script>
-    function updateQuantity(productId, change) {
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        const quantityInput = document.querySelector(`input[data-product-id="${productId}"]`);
-        let newQuantity = parseInt(quantityInput.value) + change;
-        
-        if (newQuantity < 1) return;
-        
-        fetch("{% url 'stock_smart:update_cart' %}", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken
-            },
-            body: JSON.stringify({
-                'product_id': productId,
-                'quantity': newQuantity
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                location.reload(); // Recargar para asegurar consistencia
-            } else {
-                alert(data.error || 'Error al actualizar cantidad');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al actualizar cantidad');
-        });
-    }
-
-    function removeFromCart(productId) {
-        if (!confirm('¿Estás seguro de que deseas eliminar este producto del carrito?')) {
-            return;
+function updateQuantity(productId, change) {
+    fetch(`/cart/update/${productId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({ change: change })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert(data.message || 'Error al actualizar cantidad');
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al actualizar cantidad');
+    });
+}
 
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        
-        fetch("{% url 'stock_smart:remove_from_cart' %}", {
+function removeFromCart(productId) {
+    if (confirm('¿Estás seguro de eliminar este producto?')) {
+        fetch(`/cart/remove/${productId}/`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken
-            },
-            body: JSON.stringify({
-                'product_id': productId
-            })
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 location.reload();
             } else {
-                alert(data.error || 'Error al eliminar producto');
+                alert(data.message || 'Error al eliminar producto');
             }
         })
         .catch(error => {
@@ -160,5 +152,6 @@
             alert('Error al eliminar producto');
         });
     }
+}
 </script>
 {% endblock %}

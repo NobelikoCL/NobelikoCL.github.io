@@ -22,7 +22,7 @@
     {% csrf_token %}
     <!-- Header -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <!-- Logo y nombre -->
                 <a class="navbar-brand d-flex align-items-center" href="{% url 'stock_smart:productos_lista' %}">
@@ -34,7 +34,12 @@
                 <div class="d-flex align-items-center flex-grow-1 justify-content-end">
                     <!-- Buscador -->
                     <form class="d-flex mx-4 flex-grow-1" method="GET" action="{% url 'stock_smart:productos_lista' %}">
-                        <input class="form-control me-2" type="search" placeholder="Buscar productos..." name="q" value="{{ request.GET.q }}">
+                        <input class="form-control me-2" 
+                               type="search" 
+                               placeholder="Buscar productos..." 
+                               name="q" 
+                               value="{{ search_query|default:'' }}"
+                               aria-label="Buscar">
                         <button class="btn btn-outline-primary" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
@@ -54,77 +59,46 @@
             </div>
         </nav>
 
-        <!-- Barra de categorías -->
-        <div class="categories-bar">
+        <!-- Agregar aquí el nuevo menú de categorías -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light border-top">
-                    <div class="container-fluid p-0">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#megaMenu">
-                            <i class="fas fa-bars"></i> Categorías
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="megaMenu">
-                            <ul class="navbar-nav w-100">
-                                {% for category in main_categories %}
-                                <li class="nav-item dropdown position-static">
-                                    <a class="nav-link dropdown-toggle" 
-                                       href="/categoria/{{ category.id }}/"
-                                       id="navbarDropdown{{ category.id }}"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#categoriesMenu" aria-controls="categoriesMenu" aria-expanded="false" aria-label="Toggle categories">
+                    <i class="fas fa-tags me-2"></i>Categorías
+                </button>
+                
+                <div class="collapse navbar-collapse" id="categoriesMenu">
+                    <ul class="navbar-nav">
+                        {% for category in categories %}
+                            {% if category.is_active %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{% url 'stock_smart:productos_por_categoria' category.slug %}" 
+                                       id="categoria{{ category.id }}" 
                                        role="button" 
                                        data-bs-toggle="dropdown" 
                                        aria-expanded="false">
                                         {{ category.name }}
                                     </a>
-                                    {% if category.children.all %}
-                                    <div class="dropdown-menu mega-menu w-100" 
-                                         aria-labelledby="navbarDropdown{{ category.id }}">
-                                        <div class="container">
-                                            <div class="row">
-                                                {% for subcategory in category.children.all %}
-                                                <div class="col-md-4 mb-3">
-                                                    <a href="/categoria/{{ subcategory.id }}/" 
-                                                       class="dropdown-header text-decoration-none">
-                                                        {{ subcategory.name }}
-                                                    </a>
-                                                    {% if subcategory.children.all %}
-                                                    <ul class="list-unstyled">
-                                                        {% for sub_sub in subcategory.children.all %}
-                                                        <li>
-                                                            <a class="dropdown-item" 
-                                                               href="/categoria/{{ sub_sub.id }}/">
-                                                                {{ sub_sub.name }}
-                                                            </a>
-                                                        </li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                    {% endif %}
-                                                </div>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% if category.children.exists %}
+                                        <ul class="dropdown-menu" aria-labelledby="categoria{{ category.id }}">
+                                            {% for child in category.children.all %}
+                                                {% if child.is_active %}
+                                                    <li>
+                                                        <a class="dropdown-item" href="{% url 'stock_smart:productos_por_categoria' child.slug %}">
+                                                            {{ child.name }}
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
                                     {% endif %}
                                 </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mensajes -->
-    {% if messages %}
-        <div class="container mt-3">
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
                 </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+            </div>
+        </nav>
+    </header>
 
     <!-- Contenido principal -->
     <main>
@@ -143,14 +117,16 @@
                     <h5>Enlaces Útiles</h5>
                     <ul class="list-unstyled">
                         <li><a href="{% url 'stock_smart:about' %}">Quiénes Somos</a></li>
-                        <li><a href="{% url 'stock_smart:contacto' %}">Contacto</a></li>
+                        
                         <li><a href="{% url 'stock_smart:terminos' %}">Términos y Condiciones</a></li>
+                        
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h5>Ayuda</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{% url 'stock_smart:tracking' %}">Seguimiento de Pedido</a></li>
+                       
+                        <li><a href="{% url 'stock_smart:contacto' %}">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
@@ -174,6 +150,24 @@
 
     <!-- Script inline para funciones del carrito -->
     <script>
+        // Agregamos logging para el menú de categorías
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Inicializando menú de categorías');
+            
+            const dropdowns = document.querySelectorAll('.nav-item.dropdown');
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('show.bs.dropdown', function(e) {
+                    const categoryId = this.querySelector('.nav-link').id.replace('navbarDropdown', '');
+                    console.log(`Abriendo menú de categoría ID: ${categoryId}`);
+                });
+                
+                dropdown.addEventListener('shown.bs.dropdown', function() {
+                    console.log('Menú desplegado completamente');
+                });
+            });
+        });
+
+        // Mejoramos la función addToCart con logging
         function addToCart(productId) {
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             
@@ -204,6 +198,43 @@
                 alert('Error al agregar al carrito');
             });
         }
+    </script>
+
+    <!-- Script para el menú de categorías Lightning -->
+    <script>
+        console.log('Inicializando componente Lightning de categorías');
+
+        // Agregar clases SLDS para debugging
+        document.querySelectorAll('.categories-bar .nav-link').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                link.classList.add('slds-debug-hover');
+                console.log('Hover en categoría Lightning:', link.textContent.trim());
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                link.classList.remove('slds-debug-hover');
+            });
+        });
+
+        // Observar cambios en el menú
+        const menuObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('slds-is-open')) {
+                        console.log('Menú Lightning abierto:', target.querySelector('.nav-link').textContent.trim());
+                    }
+                }
+            });
+        });
+
+        // Observar los dropdowns
+        document.querySelectorAll('.nav-item.dropdown').forEach(dropdown => {
+            menuObserver.observe(dropdown, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+        });
     </script>
 </body>
 </html>

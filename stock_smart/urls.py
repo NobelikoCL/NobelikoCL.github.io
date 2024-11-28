@@ -1,6 +1,7 @@
 from django.urls import path, include
 from . import views
 from django.views.decorators.csrf import csrf_exempt
+from .views import PaymentSuccessView
 
 app_name = 'stock_smart'
 
@@ -10,7 +11,7 @@ urlpatterns = [
     path('products/', views.productos_lista, name='products'),
     path('about/', views.about, name='about'),
     path('contacto/', views.contacto, name='contacto'),
-    path('terminos/', views.terminos, name='terminos'),
+    path('terminos/', views.TerminosView.as_view(), name='terminos'),
     path('seguimiento/', views.tracking, name='tracking'),
     
     # Autenticación
@@ -25,7 +26,7 @@ urlpatterns = [
     path('cart/add/', views.add_to_cart, name='add_to_cart'),
     path('cart/remove/', views.remove_from_cart, name='remove_from_cart'),
     path('cart/update/', views.update_cart, name='update_cart'),
-    path('cart/checkout/', views.cart_checkout, name='cart_checkout'),
+    path('cart/checkout/', views.CheckoutOptionsView.as_view(), name='checkout_options'),
     path('cart/payment/', views.cart_payment, name='cart_payment'),
     path('cart/confirm/', views.cart_confirm, name='cart_confirm'),
     
@@ -81,7 +82,21 @@ urlpatterns = [
     path('producto/<int:producto_id>/', views.detalle_producto, name='detalle_producto'),
     path('checkout/<int:producto_id>/', views.iniciar_checkout, name='iniciar_checkout'),
     path('checkout/process-payment/', views.process_payment, name='process_payment'),
-    path('checkout/payment-success/', views.payment_success, name='payment_success'),
+    path('checkout/payment-success/', csrf_exempt(PaymentSuccessView.as_view()), name='payment_success'),
     path('checkout/payment-confirm/', views.payment_confirm, name='payment_confirm'),
     path('checkout/payment-error/', views.payment_error, name='payment_error'),
+    path('categoria/<int:category_id>/', views.category_detail, name='category_detail'),
+    path('categoria/<slug:slug>/', 
+         views.ProductosPorCategoria.as_view(), 
+         name='productos_por_categoria'),
+    path('productos/', views.ProductosListaView.as_view(), name='productos_lista'),
+    # Compra rápida (existente)
+    path('checkout/options/<int:product_id>/', views.CheckoutOptionsView.as_view(), name='checkout_options'),
+    # Checkout del carrito (nueva)
+    path('cart/checkout/options/', views.CartOptionsCheckoutView.as_view(), name='cart_options_checkout'),
+    path('cart/checkout/guest/', views.GuestCartCheckoutView.as_view(), name='guest_cart_checkout'),
+    path('cart/checkout/process/', views.ProcessCartCheckoutView.as_view(), name='process_cart_checkout'),
+    path('cart/checkout/payment/', views.CartPaymentView.as_view(), name='cart_payment'),
+    path('cart/checkout/confirm/', views.CartPaymentConfirmView.as_view(), name='cart_payment_confirm'),
+    path('checkout/payment/', views.payment_form, name='payment_form'),
 ]

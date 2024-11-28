@@ -1,0 +1,46 @@
+{% extends 'stock_smart/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if payment_status == 2 %}
+                        <div class="text-success mb-4">
+                            <i class="fas fa-check-circle fa-4x"></i>
+                        </div>
+                        <h3 class="mb-4">¡Pago Exitoso!</h3>
+                        <p>Tu orden {{ order.order_number }} ha sido procesada correctamente.</p>
+                        <p>Número de transacción Flow: {{ flow_order }}</p>
+                        <hr>
+                        <p>Hemos enviado un correo con los detalles de tu compra.</p>
+                    {% else %}
+                        <div class="text-danger mb-4">
+                            <i class="fas fa-times-circle fa-4x"></i>
+                        </div>
+                        <h3 class="mb-4">Pago No Completado</h3>
+                        <p>Lo sentimos, no pudimos procesar tu pago.</p>
+                        <p>Por favor, intenta nuevamente o contacta con soporte.</p>
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-primary">
+                            <i class="fas fa-home me-2"></i>Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Página de retorno de pago cargada');
+        console.log('Estado del pago: {{ payment_status }}');
+    });
+</script>
+{% endblock %}

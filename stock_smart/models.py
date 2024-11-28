@@ -10,6 +10,7 @@ from decimal import Decimal
 import datetime
 import uuid
 from payments.models import BasePayment
+from django.urls import reverse
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
@@ -149,28 +150,38 @@ def generate_order_number():
     return f'ORD{date_str}{new_number}'
 
 class Order(models.Model):
-    SHIPPING_CHOICES = [
-        ('pickup', 'Retiro en tienda'),
-        ('starken', 'Envío por Starken'),
-    ]
-    
-    PAYMENT_CHOICES = [
-        ('flow', 'Pago con Flow'),
-        ('transfer', 'Transferencia Bancaria'),
-    ]
-    
-    STATUS_CHOICES = [
+    STATUS_CHOICES = (
         ('pending', 'Pendiente'),
-        ('paid', 'Pagado'),
+        ('processing', 'Procesando'),
         ('shipped', 'Enviado'),
         ('delivered', 'Entregado'),
         ('cancelled', 'Cancelado'),
-    ]
+    )
+    
+    PAYMENT_STATUS_CHOICES = (
+        ('pending', 'Pendiente'),
+        ('completed', 'Completado'),
+        ('failed', 'Fallido'),
+        ('refunded', 'Reembolsado'),
+    )
+    
+    SHIPPING_METHOD_CHOICES = (
+        ('pickup', 'Retiro en tienda'),
+        ('starken', 'Envío Starken'),
+    )
 
-    order_number = models.CharField(max_length=20, unique=True, default=generate_order_number)
+    PAYMENT_CHOICES = (
+        ('flow', 'Flow'),
+        ('transfer', 'Transferencia Bancaria'),
+    )
+    
+    order_number = models.CharField(max_length=50, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='pending')
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_CHOICES)
+    shipping_method = models.CharField(max_length=20, choices=SHIPPING_METHOD_CHOICES, default='pickup')
     
     # Campos de Flow
     flow_token = models.CharField(max_length=100, blank=True, null=True)
@@ -178,7 +189,6 @@ class Order(models.Model):
     payment_url = models.URLField(max_length=300, blank=True, null=True)
     
     # Campos de envío
-    shipping_method = models.CharField(max_length=20, choices=SHIPPING_CHOICES)
     shipping_cost = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     shipping_address = models.TextField(null=True, blank=True)
     
@@ -230,7 +240,7 @@ class Order(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Orden {self.order_number} - {self.customer_name}"
+        return f"Orden #{self.order_number}"
 
     class Meta:
         ordering = ['-created_at']
@@ -246,6 +256,32 @@ class Order(models.Model):
     # Agregar método para calcular total
     def calculate_total(self):
         return sum(item.total for item in self.orderitem_set.all())
+
+    def get_subtotal(self):
+        """Calcula el subtotal de la orden (sin IVA)"""
+        try:
+            subtotal = sum(item.get_total() for item in self.orderitem_set.all())
+            return round(subtotal / Decimal('1.19'), 0)  # Dividir por 1.19 para obtener el subtotal sin IVA
+        except Exception as e:
+            logger.error(f"Error calculando subtotal: {str(e)}")
+            return Decimal('0')
+
+    def get_iva(self):
+        """Calcula el IVA de la orden (19%)"""
+        try:
+            subtotal = self.get_subtotal()
+            return round(subtotal * Decimal('0.19'), 0)
+        except Exception as e:
+            logger.error(f"Error calculando IVA: {str(e)}")
+            return Decimal('0')
+
+    def get_total(self):
+        """Calcula el total de la orden (con IVA)"""
+        try:
+            return self.get_subtotal() + self.get_iva()
+        except Exception as e:
+            logger.error(f"Error calculando total: {str(e)}")
+            return Decimal('0')
 
 class OrderTracking(models.Model):
     """Modelo para registrar el historial de estados de una orden"""
@@ -584,6 +620,14 @@ class OrderItem(models.Model):
     def total(self):
         return self.quantity * self.price
 
+    def get_total(self):
+        """Calcula el total del item (precio * cantidad)"""
+        try:
+            return self.price * self.quantity
+        except Exception as e:
+            logger.error(f"Error calculando total del item: {str(e)}")
+            return Decimal('0')
+
 class Payment(BasePayment):
     def get_failure_url(self):
         return 'http://' + settings.PAYMENT_HOST + reverse('payment:failed')
@@ -593,3 +637,62 @@ class Payment(BasePayment):
 
     # Agregar relación con Order
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+class GuestOrder(models.Model):
+    ORDER_STATUS = (
+        ('pending', 'En Curso'),
+        ('paid', 'Pagado'),
+        ('cancelled', 'Cancelado')
+    )
+    
+    PAYMENT_METHODS = (
+        ('flow', 'Flow'),
+        ('transfer', 'Transferencia Bancaria')
+    )
+    
+    SHIPPING_METHODS = (
+        ('pickup', 'Retiro en Tienda'),
+        ('starken', 'Envío Starken')
+    )
+
+    # Datos de orden
+    order_number = models.CharField(max_length=9, unique=True)
+    status = models.CharField(max_length=20, choices=ORDER_STATUS, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    # Datos de contacto
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    rut = models.CharField(max_length=12)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
+    
+    # Datos de envío
+    shipping_method = models.CharField(max_length=20, choices=SHIPPING_METHODS, default='pickup')
+    address = models.CharField(max_length=200, null=True, blank=True)
+    region = models.CharField(max_length=100, null=True, blank=True)
+    comuna = models.CharField(max_length=100, null=True, blank=True)
+    shipping_notes = models.TextField(null=True, blank=True)
+    
+    # Datos de pago
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS, default='flow')
+    
+    # Totales
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
+    iva = models.DecimalField(max_digits=10, decimal_places=2)
+    shipping_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Orden #{self.order_number}"
+
+class GuestOrderItem(models.Model):
+    order = models.ForeignKey(GuestOrder, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.quantity}x {self.product.name}"

@@ -1,4 +1,5 @@
 {% extends 'stock_smart/base.html' %}
+{% load static %}
 
 {% block title %}Términos y Condiciones - Stock Smart{% endblock %}
 
@@ -31,11 +32,36 @@
 
             <h2>8. Modificaciones</h2>
             <p>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio.</p>
+
+            <h2>9. Métodos de Pago</h2>
+            <p>Aceptamos los siguientes métodos de pago:</p>
+            <ul>
+                <li>Flow</li>
+                <li>Transferencia bancaria</li>
+            </ul>
+
+            <h2>10. Proceso de Compra</h2>
+            <p>El proceso de compra incluye los siguientes pasos:</p>
+            <ol>
+                <li>Selección de productos</li>
+                <li>Revisión del carrito</li>
+                <li>Ingreso de datos de envío</li>
+                <li>Selección del método de pago</li>
+                <li>Confirmación y pago</li>
+            </ol>
         </div>
     </div>
 
     <div class="mt-4">
-        <a href="{% url 'index' %}" class="btn btn-primary">Volver al inicio</a>
+        <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-primary">
+            <i class="fas fa-arrow-left me-2"></i>Volver al inicio
+        </a>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Página de términos y condiciones cargada');
+});
+</script>
 {% endblock %}

@@ -1,87 +1,196 @@
 {% extends 'stock_smart/base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container mt-5">
     <div class="row">
+        <!-- Formulario de pedido -->
+        <div class="col-md-8 order-md-1">
+            <form method="POST" id="checkout-form">
+                {% csrf_token %}
+                
+                <!-- Datos de contacto -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Datos de Contacto</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="first_name">Nombre</label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="last_name">Apellido</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="rut">RUT</label>
+                                <input type="text" class="form-control" id="rut" name="rut" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="phone">Teléfono</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Método de envío -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Método de Envío</h5>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="shipping_method" 
+                                       id="pickup" value="pickup" checked>
+                                <label class="form-check-label" for="pickup">
+                                    Retiro en tienda (Gratis)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="shipping_method" 
+                                       id="starken" value="starken">
+                                <label class="form-check-label" for="starken">
+                                    Envío Starken ($3.990)
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Datos de envío (oculto por defecto) -->
+                        <div id="shipping_info" style="display: none;">
+                            <div class="mb-3">
+                                <label for="address">Dirección</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="region">Región</label>
+                                    <select class="form-control" id="region" name="region">
+                                        <option value="">Seleccione...</option>
+                                        <!-- Agregar regiones -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="comuna">Comuna</label>
+                                    <select class="form-control" id="comuna" name="comuna">
+                                        <option value="">Seleccione...</option>
+                                        <!-- Se llenará según la región -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="shipping_notes">Observaciones de envío</label>
+                                <textarea class="form-control" id="shipping_notes" name="shipping_notes" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forma de pago -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Forma de Pago</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" 
+                                   id="flow" value="flow" checked>
+                            <label class="form-check-label" for="flow">
+                                Flow
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" 
+                                   id="transfer" value="transfer">
+                            <label class="form-check-label" for="transfer">
+                                Transferencia Bancaria
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block w-100" type="submit">
+                    Continuar al pago
+                </button>
+            </form>
+        </div>
+
         <!-- Resumen del carrito -->
         <div class="col-md-4 order-md-2 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-3">Resumen de Compra</h4>
-                    <ul class="list-group mb-3">
-                        {% for item in cart_items %}
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">{{ item.product.name }}</h6>
-                                <small class="text-muted">Cantidad: {{ item.quantity }}</small>
-                            </div>
-                            <span class="text-muted">${{ item.total|stringformat:".0f"|rjust:"1"|slice:"1:"|default:"0"|stringformat:"s"|slice:"-15:"|groupby:3|join:"." }}</span>
-                        </li>
-                        {% endfor %}
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (CLP)</span>
-                            <strong>${{ total|stringformat:".0f"|rjust:"1"|slice:"1:"|default:"0"|stringformat:"s"|slice:"-15:"|groupby:3|join:"." }}</strong>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Formulario de checkout para invitado -->
-        <div class="col-md-8 order-md-1">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="mb-3">Información de Contacto y Envío</h4>
-                    <form class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">Nombre</label>
-                                <input type="text" class="form-control" id="firstName" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName">Apellido</label>
-                                <input type="text" class="form-control" id="lastName" required>
-                            </div>
+                    <h5 class="card-title">Resumen del Carrito</h5>
+                    <p class="text-muted">Orden #{{ order.order_number }}</p>
+                    
+                    <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li class="d-flex justify-content-between mb-2">
+                                    <span>Subtotal</span>
+                                    <strong>${{ order.subtotal|format_price }}</strong>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">
+                                    <span>IVA (19%)</span>
+                                    <strong>${{ order.iva|format_price }}</strong>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">
+                                    <span>Envío</span>
+                                    <strong id="shipping_cost">$0</strong>
+                                </li>
+                                <li class="d-flex justify-content-between border-top pt-2">
+                                    <span class="text-success">
+                                        <strong>Total (CLP)</strong>
+                                    </span>
+                                    <strong class="text-success" id="total_amount">
+                                        ${{ order.total|format_price }}
+                                    </strong>
+                                </li>
+                            </ul>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" required>
-                            <small class="text-muted">Para recibir confirmación de tu compra</small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="phone">Teléfono</label>
-                            <input type="tel" class="form-control" id="phone" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="address">Dirección de Envío</label>
-                            <input type="text" class="form-control" id="address" required>
-                        </div>
-
-                        <!-- Método de pago -->
-                        <hr class="mb-4">
-                        <h4 class="mb-3">Método de Pago</h4>
-                        
-                        <div class="d-block my-3">
-                            <div class="custom-control custom-radio">
-                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                                <label class="custom-control-label" for="credit">Tarjeta de Crédito</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                <label class="custom-control-label" for="debit">Tarjeta de Débito</label>
-                            </div>
-                        </div>
-
-                        <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block w-100" type="submit">Confirmar Compra</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const shippingMethods = document.querySelectorAll('input[name="shipping_method"]');
+    const shippingInfo = document.getElementById('shipping_info');
+    const shippingCost = document.getElementById('shipping_cost');
+    const totalAmount = document.getElementById('total_amount');
+    const initialTotal = '{{ order.total }}';
+    
+    function updateTotals() {
+        const isStarken = document.getElementById('starken').checked;
+        const shippingValue = isStarken ? 3990 : 0;
+        const newTotal = parseInt(initialTotal) + shippingValue;
+        
+        shippingInfo.style.display = isStarken ? 'block' : 'none';
+        shippingCost.textContent = `$${formatPrice(shippingValue)}`;
+        totalAmount.textContent = `$${formatPrice(newTotal)}`;
+        
+        // Actualizar campos requeridos
+        const shippingFields = shippingInfo.querySelectorAll('input, select');
+        shippingFields.forEach(field => {
+            field.required = isStarken;
+        });
+    }
+    
+    shippingMethods.forEach(method => {
+        method.addEventListener('change', updateTotals);
+    });
+    
+    updateTotals();
+});
+
+function formatPrice(number) {
+    return new Intl.NumberFormat('es-CL').format(number);
+}
+</script>
 {% endblock %}
