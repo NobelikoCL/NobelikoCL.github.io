@@ -99,4 +99,7 @@ urlpatterns = [
     path('cart/checkout/payment/', views.CartPaymentView.as_view(), name='cart_payment'),
     path('cart/checkout/confirm/', views.CartPaymentConfirmView.as_view(), name='cart_payment_confirm'),
     path('checkout/payment/', views.payment_form, name='payment_form'),
+        path('checkout/transfer-instructions/<int:order_id>/', 
+         views.transfer_instructions, 
+         name='transfer_instructions'),
 ]

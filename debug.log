@@ -9008,3 +9008,660 @@ Resultado formateado: 499.990
 Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
 Número procesado: 349993.00
 Resultado formateado: 349.993
+Producto ID guardado en sesión: 1
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['0PHdaYMSuj0i3ZOjMHi56rGjGSYzfagFTBKFI7XKFJ6orQrvozRHFFPDnBzXyZOt'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['pickup'], 'region': [''], 'ciudad': [''], 'comuna': [''], 'direccion': [''], 'payment_method': ['transfer'], 'observaciones': ['1']}>
+Validando formulario con método de envío: pickup
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241128-b2df08e5
+Orden creada con ID: 31
+Item de orden creado
+Order ID guardado en sesión: 31
+Método de pago seleccionado: transfer
+Redirigiendo a instrucciones de transferencia
+==================================================
+ERROR AL CREAR ORDEN
+Error: Reverse for 'transfer_instructions' with no arguments not found. 1 pattern(s) tried: ['checkout/transfer\\-instructions/(?P<order_id>[0-9]+)/\\Z']
+Traceback: Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 534, in guest_checkout
+    return redirect('stock_smart:transfer_instructions')
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\venv\Lib\site-packages\django\shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\venv\Lib\site-packages\django\shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'transfer_instructions' with no arguments not found. 1 pattern(s) tried: ['checkout/transfer\\-instructions/(?P<order_id>[0-9]+)/\\Z']
+
+==================================================
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+==================================================
+ERROR EN GUEST CHECKOUT
+Error: cannot access local variable 'payment_method' where it is not associated with a value
+Traceback: Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 460, in guest_checkout
+    if payment_method == 'flow':
+       ^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'payment_method' where it is not associated with a value
+
+==================================================
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 1
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+==================================================
+ERROR EN GUEST CHECKOUT
+Error: cannot access local variable 'payment_method' where it is not associated with a value
+Traceback: Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 460, in guest_checkout
+    if payment_method == 'flow':
+       ^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'payment_method' where it is not associated with a value
+
+==================================================
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 3
+Categorías principales cargadas: 4
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 9340.33613445378151260504202 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 9340.33613445378151260504202
+Resultado formateado: 9.340
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+==================================================
+INICIO GUEST CHECKOUT
+==================================================
+ERROR EN GUEST CHECKOUT
+Error: name 'product_id' is not defined
+Traceback: Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 458, in guest_checkout
+    product = get_object_or_404(Product, id=product_id)
+                                            ^^^^^^^^^^
+NameError: name 'product_id' is not defined. Did you mean: 'products'?
+
+==================================================
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 1
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['qFWPURnVW9LeHOkpqTqOixqHFqbNrIcrjrZhs0yN7zRk5FXB2LZqRLz1m9MbKxKf'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['pickup'], 'region': [''], 'ciudad': [''], 'comuna': [''], 'direccion': [''], 'payment_method': ['transfer'], 'observaciones': ['|12']}>
+Método de pago seleccionado: transfer
+Validando formulario con método de envío: pickup
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241128-585778fa
+Orden creada con ID: 32
+Item de orden creado
+Order ID guardado en sesión: 32
+Redirigiendo a instrucciones de transferencia
+Error al crear la orden
+Reverse for 'transfer_instructions' with no arguments not found. 1 pattern(s) tried: ['checkout/transfer\\-instructions/(?P<order_id>[0-9]+)/\\Z']
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 1
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 1
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['MdBa60b69nahjyfm1dHT8FPZFL5Eu0GgFZECE9mYkNgnHpSyD5gvHTYjmuG2NPe4'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['pickup'], 'region': [''], 'ciudad': [''], 'comuna': [''], 'direccion': [''], 'payment_method': ['transfer'], 'observaciones': ['zszs']}>
+Método de pago seleccionado: transfer
+Validando formulario con método de envío: pickup
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241128-ff2a1fca
+Orden creada con ID: 33
+Item de orden creado
+Order ID guardado en sesión: 33
+Redirigiendo a instrucciones de transferencia
+Error al crear la orden
+Reverse for 'transfer_instructions' with no arguments not found. 2 pattern(s) tried: ['checkout/transfer\\-instructions/(?P<order_id>[0-9]+)/\\Z', 'checkout/transfer\\-instructions/(?P<order_id>[0-9]+)/\\Z']
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 1
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['59FDN62quI7teaz4h9mANEtyEru58uZJYVI5lfdiF8dzC1cgT1VcmSCSla5trjxx'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['pickup'], 'region': [''], 'ciudad': [''], 'comuna': [''], 'direccion': [''], 'payment_method': ['transfer'], 'observaciones': ['564']}>
+Método de pago seleccionado: transfer
+Validando formulario con método de envío: pickup
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241128-999da8a0
+Orden creada con ID: 34
+Error al crear la orden
+'decimal.Decimal' object is not callable
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 4
+Categorías principales cargadas: 4
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 15168.06722689075630252100840 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 15168.06722689075630252100840
+Resultado formateado: 15.168
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: Acer IPS SA242Y EBI
+Precio final: $95000.00
+Categorías principales cargadas: 4
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 15168.06722689075630252100840 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 15168.06722689075630252100840
+Resultado formateado: 15.168
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: Acer IPS SA242Y EBI
+Precio final: $95000.00
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['pFO0snja2OqKpeMkpaobTQ9XWHKLgN4UirRs0wu2dewQN5pw12XNs4ihDql9zCCI'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['pickup'], 'region': [''], 'ciudad': [''], 'comuna': [''], 'direccion': [''], 'payment_method': ['transfer'], 'observaciones': ['123']}>
+Método de pago seleccionado: transfer
+Validando formulario con método de envío: pickup
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241128-8b56307e
+Orden creada con ID: 35
+Item de orden creado
+Order ID guardado en sesión: 35
+Redirigiendo a instrucciones de transferencia para orden 35
+Categorías principales cargadas: 4
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000

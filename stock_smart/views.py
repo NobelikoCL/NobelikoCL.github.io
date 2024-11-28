@@ -455,18 +455,16 @@ def guest_checkout(request):
         logger.info("="*50)
         logger.info("INICIO GUEST CHECKOUT")
         
+        # Obtener product_id de la sesión
         product_id = request.session.get('product_id')
-        logger.info(f"Product ID en sesión: {product_id}")
         
         if not product_id:
-            logger.error("No se encontró product_id en sesión")
-            messages.error(request, 'No se encontró el producto en la sesión')
+            logger.error("No se encontró product_id en la sesión")
+            messages.error(request, 'No se encontró el producto')
             return redirect('stock_smart:productos_lista')
-        
+            
         product = get_object_or_404(Product, id=product_id)
         logger.info(f"Producto encontrado: {product.name}")
-        logger.info(f"Precio base: ${product.published_price}")
-        logger.info(f"Descuento: {product.discount_percentage}%")
         
         # Calcular precios
         base_price = product.published_price
@@ -481,9 +479,11 @@ def guest_checkout(request):
         logger.info(f"Precio final: ${final_price}")
         
         if request.method == 'POST':
-            logger.info("Procesando POST request")
             form = GuestCheckoutForm(request.POST)
             logger.info(f"Datos del formulario: {request.POST}")
+            
+            payment_method = request.POST.get('payment_method')
+            logger.info(f"Método de pago seleccionado: {payment_method}")
             
             if form.is_valid():
                 logger.info("Formulario válido - Creando orden")
@@ -498,23 +498,23 @@ def guest_checkout(request):
                         customer_name=f"{form.cleaned_data['nombre']} {form.cleaned_data['apellido']}",
                         customer_email=form.cleaned_data['email'],
                         customer_phone=form.cleaned_data['telefono'],
-                        region=form.cleaned_data['region'],
-                        ciudad=form.cleaned_data['ciudad'],
-                        comuna=form.cleaned_data['comuna'],
-                        shipping_address=form.cleaned_data['direccion'],
+                        region=form.cleaned_data.get('region', ''),
+                        ciudad=form.cleaned_data.get('ciudad', ''),
+                        comuna=form.cleaned_data.get('comuna', ''),
+                        shipping_address=form.cleaned_data.get('direccion', ''),
                         shipping_method=form.cleaned_data['shipping'],
-                        payment_method=form.cleaned_data['payment_method'],
-                        total_amount=final_price,
-                        status='pending'
+                        payment_method=payment_method,
+                        total_amount=final_price,  # Usamos el precio calculado
+                        status='pending_payment'
                     )
                     logger.info(f"Orden creada con ID: {order.id}")
-                    
+
                     # Crear item de orden
                     OrderItem.objects.create(
                         order=order,
                         product=product,
                         quantity=1,
-                        price=final_price
+                        price=final_price  # Usamos el precio calculado
                     )
                     logger.info("Item de orden creado")
                     
@@ -522,32 +522,31 @@ def guest_checkout(request):
                     request.session['order_id'] = order.id
                     logger.info(f"Order ID guardado en sesión: {order.id}")
                     
-                    # Redireccionar según método de pago
-                    payment_method = form.cleaned_data['payment_method']
-                    logger.info(f"Método de pago seleccionado: {payment_method}")
-                    
                     if payment_method == 'flow':
                         logger.info("Redirigiendo a proceso de pago Flow")
                         return redirect('stock_smart:process_payment')
-                    else:
-                        logger.info("Redirigiendo a instrucciones de transferencia")
-                        return redirect('stock_smart:transfer_instructions')
-                        
+                    elif payment_method == 'transfer':
+                        logger.info(f"Redirigiendo a instrucciones de transferencia para orden {order.id}")
+                        return render(request, 'stock_smart/transfer_instructions.html', {
+                            'order': order,
+                            'bank_info': {
+                                'banco': 'Banco Estado',
+                                'tipo_cuenta': 'Cuenta Corriente',
+                                'numero_cuenta': '123456789',
+                                'rut': '12.345.678-9',
+                                'nombre': 'Stock Smart SpA',
+                                'email': 'pagos@stocksmart.cl'
+                            }
+                        })
+                    
                 except Exception as e:
-                    logger.error("="*50)
-                    logger.error("ERROR AL CREAR ORDEN")
-                    logger.error(f"Error: {str(e)}")
-                    logger.error(f"Traceback: {traceback.format_exc()}")
-                    logger.error("="*50)
+                    logger.error(f"Error al crear la orden: {str(e)}")
+                    logger.error(traceback.format_exc())
                     messages.error(request, 'Error al crear la orden')
                     return redirect('stock_smart:productos_lista')
-            else:
-                logger.error("Formulario inválido")
-                logger.error(f"Errores del formulario: {form.errors}")
         else:
             form = GuestCheckoutForm()
-            logger.info("Mostrando formulario vacío")
-        
+            
         context = {
             'form': form,
             'product': product,
@@ -1539,39 +1538,29 @@ def process_guest_order(request):
 
     return redirect('stock_smart:productos_lista')
 
-def transfer_instructions(request):
+def transfer_instructions(request, order_id):
     try:
-        logger.info("="*50)
-        logger.info("MOSTRANDO INSTRUCCIONES DE TRANSFERENCIA")
-        
-        order_id = request.session.get('order_id')
-        logger.info(f"Order ID en sesión: {order_id}")
-        
-        if not order_id:
-            logger.error("No se encontró order_id en sesión")
-            return redirect('stock_smart:productos_lista')
-            
+        logger.info(f"Mostrando instrucciones de transferencia para orden {order_id}")
         order = get_object_or_404(Order, id=order_id)
-        logger.info(f"Orden encontrada: {order.order_number}")
         
         context = {
             'order': order,
             'bank_info': {
-                'bank_name': 'Banco Estado',
-                'account_type': 'Cuenta Corriente',
-                'account_number': '123456789',
+                'banco': 'Banco Estado',
+                'tipo_cuenta': 'Cuenta Corriente',
+                'numero_cuenta': '123456789',
                 'rut': '12.345.678-9',
-                'email': 'pagos@tusitio.com'
+                'nombre': 'Stock Smart SpA',
+                'email': 'pagos@stocksmart.cl'
             }
         }
         
         return render(request, 'stock_smart/transfer_instructions.html', context)
         
     except Exception as e:
-        logger.error(f"Error en transfer_instructions: {str(e)}")
-        logger.error(traceback.format_exc())
-        messages.error(request, 'Error al mostrar instrucciones de transferencia')
-        return redirect('stock_smart:checkout_error')
+        logger.error(f"Error al mostrar instrucciones de transferencia: {str(e)}")
+        messages.error(request, 'Error al mostrar las instrucciones de transferencia')
+        return redirect('stock_smart:productos_lista')
 
 @csrf_exempt
 def flow_confirmation(request):
@@ -2428,6 +2417,7 @@ def validate_product(request, product_id):
                 'success': False,
                 'message': str(e)
             })
+            
     return JsonResponse({'success': False, 'message': 'Método no permitido'})
 
 @csrf_exempt  # Necesario para recibir POST de Flow
