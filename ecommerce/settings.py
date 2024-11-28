@@ -145,7 +145,7 @@ AUTH_USER_MODEL = 'stock_smart.CustomUser'
 
 LOGIN_URL = 'stock_smart:login'
 LOGIN_REDIRECT_URL = 'stock_smart:account'
-LOGOUT_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = '/admin/login/'
 
 # Configuración de mensajes
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

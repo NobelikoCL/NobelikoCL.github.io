@@ -6,21 +6,18 @@
         <div class="col-md-8 text-center">
             <div class="card">
                 <div class="card-body">
-                    <i class="fas fa-times-circle text-danger fa-5x mb-3"></i>
-                    <h2 class="card-title">Pago No Completado</h2>
+                    <i class="fas fa-check-circle text-success fa-5x mb-3"></i>
+                    <h2 class="card-title">¡Pago Exitoso!</h2>
                     <p class="card-text">
-                        Lo sentimos, tu pago no pudo ser procesado correctamente.
+                        Tu orden #{{ order_number }} ha sido procesada correctamente.
                     </p>
                     <p class="card-text">
-                        Por favor, intenta nuevamente o contacta con nuestro servicio al cliente.
+                        Hemos enviado un correo de confirmación a {{ customer_email }}
                     </p>
                     <hr>
                     <div class="mt-4">
-                        <a href="{% url 'stock_smart:cart' %}" class="btn btn-primary me-2">
-                            Volver al Carrito
-                        </a>
-                        <a href="{% url 'stock_smart:contacto' %}" class="btn btn-outline-primary">
-                            Contactar Soporte
+                        <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-primary">
+                            Seguir Comprando
                         </a>
                     </div>
                 </div>

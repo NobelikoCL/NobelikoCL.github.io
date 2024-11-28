@@ -8644,3 +8644,130 @@ Categorías principales cargadas: 4
 Accediendo a términos y condiciones
 Categorías principales cargadas: 4
 Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 1
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['nnyknLdYq5OnsHT43pVMwcUU8kwzlPTzcd3lkM2kWXhPEtrY9lDwtmBf0L9dp86F'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['starken'], 'region': ['metropolitana'], 'ciudad': ['santiago'], 'comuna': ['puente alto'], 'direccion': ['Valle grande 2871 ex llohueo'], 'payment_method': ['flow'], 'observaciones': ['s']}>
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241128-a4cf6501
+Orden creada con ID: 28
+Item de orden creado
+Order ID guardado en sesión: 28
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO FLOW SANDBOX
+Order ID en sesión: 28
+Orden encontrada: ORD-20241128-a4cf6501
+String para firma:
+amount349993apiKey4B00FE26-91DE-4BF0-83A7-577C6L8AA65AcommerceOrderORD-20241128-a4cf6501emailhernan.villanueva.gutierrez@outlook.comsubjectPago Orden ORD-20241128-a4cf6501urlConfirmationhttp://127.0.0.1:8000/checkout/payment-confirm/urlReturnhttp://127.0.0.1:8000/checkout/payment-success/
+Datos de pago:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "commerceOrder": "ORD-20241128-a4cf6501",
+  "subject": "Pago Orden ORD-20241128-a4cf6501",
+  "amount": 349993,
+  "email": "hernan.villanueva.gutierrez@outlook.com",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "s": "aa6071c1d0bd39831e88b254fbb41389431d1971926e30b86f6c694fdc0efce1"
+}
+Status Code: 200
+Respuesta Flow: {"token":"7754669DD25198E14DF94DB72F3880494C7D83FR","url":"https:\/\/sandbox.flow.cl\/app\/web\/pay.php","flowOrder":2342886}
+URL de pago: https://sandbox.flow.cl/app/web/pay.php?token=7754669DD25198E14DF94DB72F3880494C7D83FR
+==================================================
+RECIBIENDO POST DE FLOW
+POST Data: <QueryDict: {'token': ['7754669DD25198E14DF94DB72F3880494C7D83FR']}>
+Token: 7754669DD25198E14DF94DB72F3880494C7D83FR
+Estado del pago: None
+Pago rechazado o con error. Estado: None
+Categorías principales cargadas: 4
