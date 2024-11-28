@@ -8771,3 +8771,240 @@ Token: 7754669DD25198E14DF94DB72F3880494C7D83FR
 Estado del pago: None
 Pago rechazado o con error. Estado: None
 Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 1
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['Cn02swIygNRBeIy4SuH7w49pz6lAKleiv93u0FTqrdXHCzbgumgJ5iiJgPWY3aM6'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['pickup'], 'region': [''], 'ciudad': [''], 'comuna': [''], 'direccion': [''], 'payment_method': ['flow'], 'observaciones': ['']}>
+Formulario inválido
+Errores del formulario: <ul class="errorlist"><li>region<ul class="errorlist"><li>This field is required.</li></ul></li><li>ciudad<ul class="errorlist"><li>This field is required.</li></ul></li><li>comuna<ul class="errorlist"><li>This field is required.</li></ul></li><li>direccion<ul class="errorlist"><li>This field is required.</li></ul></li></ul>
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['Cn02swIygNRBeIy4SuH7w49pz6lAKleiv93u0FTqrdXHCzbgumgJ5iiJgPWY3aM6'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['pickup'], 'region': [''], 'ciudad': [''], 'comuna': [''], 'direccion': [''], 'payment_method': ['flow'], 'observaciones': ['']}>
+Validando formulario con método de envío: pickup
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241128-2ce6e45b
+Orden creada con ID: 29
+Item de orden creado
+Order ID guardado en sesión: 29
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO FLOW SANDBOX
+Order ID en sesión: 29
+Orden encontrada: ORD-20241128-2ce6e45b
+String para firma:
+amount349993apiKey4B00FE26-91DE-4BF0-83A7-577C6L8AA65AcommerceOrderORD-20241128-2ce6e45bemailhernan.villanueva.gutierrez@outlook.comsubjectPago Orden ORD-20241128-2ce6e45burlConfirmationhttp://127.0.0.1:8000/checkout/payment-confirm/urlReturnhttp://127.0.0.1:8000/checkout/payment-success/
+Datos de pago:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "commerceOrder": "ORD-20241128-2ce6e45b",
+  "subject": "Pago Orden ORD-20241128-2ce6e45b",
+  "amount": 349993,
+  "email": "hernan.villanueva.gutierrez@outlook.com",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "s": "3fc51cfb4f2cb859182eccc6d61fbc7a0692c5ea0d9fc284d578dd2f2728bd4d"
+}
+Status Code: 200
+Respuesta Flow: {"token":"0F37DF43E86687DDC4A43758F27EAD3067474A8E","url":"https:\/\/sandbox.flow.cl\/app\/web\/pay.php","flowOrder":2342889}
+URL de pago: https://sandbox.flow.cl/app/web/pay.php?token=0F37DF43E86687DDC4A43758F27EAD3067474A8E
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Procesando POST request
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['A9wdxgv0fvgrSGuWf9S2OBIwOLuYD9bytVzF5pGSqVmxgx78R1rEnPRQvu5mWYJm'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['pickup'], 'region': [''], 'ciudad': [''], 'comuna': [''], 'direccion': [''], 'payment_method': ['flow'], 'observaciones': ['zxczxc']}>
+Validando formulario con método de envío: pickup
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241128-bb8c6728
+Orden creada con ID: 30
+Item de orden creado
+Order ID guardado en sesión: 30
+Método de pago seleccionado: flow
+Redirigiendo a proceso de pago Flow
+==================================================
+INICIANDO PROCESO DE PAGO FLOW SANDBOX
+Order ID en sesión: 30
+Orden encontrada: ORD-20241128-bb8c6728
+String para firma:
+amount349993apiKey4B00FE26-91DE-4BF0-83A7-577C6L8AA65AcommerceOrderORD-20241128-bb8c6728emailhernan.villanueva.gutierrez@outlook.comsubjectPago Orden ORD-20241128-bb8c6728urlConfirmationhttp://127.0.0.1:8000/checkout/payment-confirm/urlReturnhttp://127.0.0.1:8000/checkout/payment-success/
+Datos de pago:
+{
+  "apiKey": "4B00FE26-91DE-4BF0-83A7-577C6L8AA65A",
+  "commerceOrder": "ORD-20241128-bb8c6728",
+  "subject": "Pago Orden ORD-20241128-bb8c6728",
+  "amount": 349993,
+  "email": "hernan.villanueva.gutierrez@outlook.com",
+  "urlConfirmation": "http://127.0.0.1:8000/checkout/payment-confirm/",
+  "urlReturn": "http://127.0.0.1:8000/checkout/payment-success/",
+  "s": "71147dc0f1addf95f4c8f4ec6310687368e6f543d047078669d2b9821fceebd1"
+}
+Status Code: 200
+Respuesta Flow: {"token":"164AC349E7F5537FFDCE0F1EF6D5B46E88D84D6P","url":"https:\/\/sandbox.flow.cl\/app\/web\/pay.php","flowOrder":2342890}
+URL de pago: https://sandbox.flow.cl/app/web/pay.php?token=164AC349E7F5537FFDCE0F1EF6D5B46E88D84D6P
+==================================================
+INICIO GUEST CHECKOUT
+Product ID en sesión: 1
+Producto encontrado: xbox serie x
+Precio base: $499990.00
+Descuento: 30.00%
+Monto descuento: $149997.0000
+Precio final: $349993.0000
+Mostrando formulario vacío
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 55881.2352941176470588235294 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.2352941176470588235294
+Resultado formateado: 55.881
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993

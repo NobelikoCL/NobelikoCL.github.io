@@ -3,6 +3,9 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth.models import User
 from .models import CustomUser, Product
 from django.core.validators import RegexValidator
+import logging
+
+logger = logging.getLogger(__name__)
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -71,17 +74,71 @@ PAYMENT_CHOICES = [
 ]
 
 class GuestCheckoutForm(forms.Form):
-    nombre = forms.CharField(max_length=100)
-    apellido = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    telefono = forms.CharField(max_length=12)
-    region = forms.CharField(max_length=100)
-    ciudad = forms.CharField(max_length=100)
-    comuna = forms.CharField(max_length=100)
-    direccion = forms.CharField(max_length=200)
-    shipping = forms.ChoiceField(choices=SHIPPING_CHOICES)
-    payment_method = forms.ChoiceField(choices=PAYMENT_CHOICES)
-    observaciones = forms.CharField(required=False, widget=forms.Textarea)
+    # Campos siempre requeridos
+    nombre = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'})
+    )
+    apellido = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'})
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'})
+    )
+    telefono = forms.CharField(
+        max_length=12,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Teléfono'})
+    )
+    
+    # Campos opcionales según método de envío
+    region = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Región'})
+    )
+    ciudad = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ciudad'})
+    )
+    comuna = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Comuna'})
+    )
+    direccion = forms.CharField(
+        max_length=200,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Dirección'})
+    )
+    
+    shipping = forms.ChoiceField(
+        choices=SHIPPING_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    payment_method = forms.ChoiceField(
+        choices=PAYMENT_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    observaciones = forms.CharField(
+        required=False,
+        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Observaciones'})
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        shipping_method = cleaned_data.get('shipping')
+        logger.info(f"Validando formulario con método de envío: {shipping_method}")
+
+        if shipping_method == 'starken':
+            required_fields = ['region', 'ciudad', 'comuna', 'direccion']
+            for field in required_fields:
+                if not cleaned_data.get(field):
+                    logger.warning(f"Campo requerido faltante para envío Starken: {field}")
+                    self.add_error(field, 'Este campo es requerido para envío por Starken')
+
+        return cleaned_data
 
 class CheckoutForm(forms.Form):
     address = forms.CharField(widget=forms.TextInput(attrs={
