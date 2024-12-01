@@ -189,6 +189,9 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
+    ALLOWED_HOSTS = ['NobelikoCL.github.io']
+    STATIC_URL = '/NobelikoCL.github.io/static/'
+
 
 
 LOGGING = {
