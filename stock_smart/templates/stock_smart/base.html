@@ -54,6 +54,22 @@
                                 {{ cart_count|default:'0' }}
                             </span>
                         </a>
+                        
+                        <!-- Perfil -->
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                {% if user.is_authenticated %}
+                                    <li><span class="dropdown-item-text">Bienvenido, {{ user.first_name }} {{ user.last_name }}</span></li>
+                                    <li><a class="dropdown-item" href="{% url 'stock_smart:logout' %}">Cerrar sesión</a></li>
+                                {% else %}
+                                    <li><a class="dropdown-item" href="{% url 'stock_smart:login' %}">Iniciar sesión</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'stock_smart:register' %}">Registrarse</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -237,4 +253,4 @@
         });
     </script>
 </body>
-</html>
+</html> 

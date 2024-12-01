@@ -8,7 +8,7 @@ from django.http import JsonResponse, HttpResponse, FileResponse
 from django.views.decorators.http import require_POST, require_http_methods
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt, csrf_protect
-from .forms import RegisterForm, GuestCheckoutForm, UserProfileForm
+from .forms import RegisterForm, GuestCheckoutForm, UserProfileForm, CustomUserCreationForm
 from .models import CustomUser, Product, Category, Cart, CartItem, Order, FlowCredentials, OrderTracking, OrderItem, GuestOrder, GuestOrderItem
 import json
 from decimal import Decimal
@@ -63,66 +63,73 @@ def index(request):
     return render(request, 'stock_smart/home.html', context)
 
 def register_view(request):
-    if request.user.is_authenticated:
-        return redirect('stock_smart:account')
+    try:
+        logger.info("="*50)
+        logger.info("INICIO REGISTRO DE USUARIO")
+        logger.info("Verificando imports y formulario")
+        logger.info(f"CustomUserCreationForm está disponible: {CustomUserCreationForm}")
         
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.email  # Usamos el email como username
-            user.verification_token = get_random_string(64)
-            user.save()
+        if request.method == 'POST':
+            form = CustomUserCreationForm(request.POST)
+            logger.info(f"Datos del formulario: {request.POST}")
             
-            messages.success(request, 'Registro exitoso. Por favor verifica tu correo electrónico.')
-            return redirect('stock_smart:login')
-    else:
-        form = RegisterForm()
-    
-    return render(request, 'stock_smart/auth/register.html', {'form': form})
+            if form.is_valid():
+                logger.info("Formulario válido - Creando usuario")
+                user = form.save()
+                login(request, user)
+                logger.info(f"Usuario creado y logueado: {user.username}")
+                messages.success(request, '¡Registro exitoso!')
+                return redirect('/')
+            else:
+                logger.error(f"Errores en el formulario: {form.errors}")
+                messages.error(request, 'Error en el registro. Por favor, verifica los datos.')
+        else:
+            form = CustomUserCreationForm()
+            logger.info("Mostrando formulario de registro vacío")
+        
+        return render(request, 'stock_smart/register.html', {'form': form})
+        
+    except Exception as e:
+        logger.error("ERROR EN REGISTRO DE USUARIO")
+        logger.error(f"Error: {str(e)}")
+        logger.error(f"Traceback completo: {traceback.format_exc()}")
+        messages.error(request, 'Error al procesar el registro')
+        return redirect('/')
 
 def login_view(request):
-    if request.user.is_authenticated:
-        return redirect('stock_smart:account')
-        
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(request, username=email, password=password)
-        
-        if user is not None:
-            if user.email_verified:
-                login(request, user)
-                messages.success(request, '¡Bienvenido de vuelta!')
-                return redirect('stock_smart:account')
-            else:
-                messages.warning(request, 'Por favor verifica tu correo electrónico.')
-        else:
-            messages.error(request, 'Correo o contraseña incorrectos.')
-    
-    return render(request, 'stock_smart/auth/login.html')
-
-@login_required
-def account_view(request):
-    return render(request, 'stock_smart/auth/account.html')
-
-def logout_view(request):
-    logout(request)
-    messages.success(request, 'Has cerrado sesión exitosamente.')
-    return redirect('stock_smart:home')
-
-def verify_email(request, token):
     try:
-        user = CustomUser.objects.get(verification_token=token)
-        user.email_verified = True
-        user.verification_token = None
-        user.save()
-        messages.success(request, '¡Email verificado exitosamente!')
-    except CustomUser.DoesNotExist:
-        messages.error(request, 'El enlace de verificación es inválido.')
-    
-    return redirect('stock_smart:login')
-
+        logger.info("="*50)
+        logger.info("INICIO LOGIN")
+        
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            logger.info(f"Intento de login con email: {email}")
+            
+            try:
+                user = CustomUser.objects.get(email=email)
+                user = authenticate(request, username=user.username, password=password)
+                
+                if user is not None:
+                    login(request, user)
+                    logger.info(f"Login exitoso para usuario: {email}")
+                    messages.success(request, '¡Bienvenido!')
+                    return redirect('/')
+                else:
+                    logger.warning(f"Credenciales inválidas para: {email}")
+                    messages.error(request, 'Credenciales inválidas')
+            except CustomUser.DoesNotExist:
+                logger.warning(f"Usuario no encontrado: {email}")
+                messages.error(request, 'Usuario no encontrado')
+        
+        return render(request, 'stock_smart/login.html')
+        
+    except Exception as e:
+        logger.error("ERROR EN LOGIN")
+        logger.error(f"Error: {str(e)}")
+        logger.error(traceback.format_exc())
+        messages.error(request, 'Error al procesar el login')
+        return redirect('/')
 
 def about_view(request):
     return render(request, 'stock_smart/about.html')
@@ -133,8 +140,6 @@ def contact_view(request):
 def terms_view(request):
     return render(request, 'stock_smart/terminos.html')
 
-def tracking_view(request):
-    return render(request, 'stock_smart/seguimiento.html')
 
 def help_view(request):
     return render(request, 'stock_smart/ayuda.html')
@@ -527,6 +532,10 @@ def guest_checkout(request):
                         return redirect('stock_smart:process_payment')
                     elif payment_method == 'transfer':
                         logger.info(f"Redirigiendo a instrucciones de transferencia para orden {order.id}")
+                        # Actualizar estado de la orden
+                        order.status = 'pending_payment'
+                        order.save()
+                        logger.info(f"Estado de orden actualizado a: pending_payment")
                         return render(request, 'stock_smart/transfer_instructions.html', {
                             'order': order,
                             'bank_info': {
@@ -1224,7 +1233,7 @@ def create_flow_signature(data):
     """
     Crea la firma para Flow
     """
-    # Ordenar keys alfab��ticamente
+    # Ordenar keys alfabéticamente
     sorted_data = dict(sorted(data.items()))
     
     # Concatenar valores
@@ -1365,7 +1374,7 @@ def buy_now_confirm(request, product_id):
         
     except Exception as e:
         logger.error(f"Error en buy_now_confirm: {str(e)}")
-        messages.error(request, 'Error al procesar la compra r��pida. Por favor, intente nuevamente.')
+        messages.error(request, 'Error al procesar la compra rápida. Por favor, intente nuevamente.')
         return redirect('stock_smart:productos_lista')
 
 @require_http_methods(["POST"])
@@ -3277,4 +3286,35 @@ def send_confirmation_email(order):
     except Exception as e:
         logger.error(f"Error al enviar correo de confirmación: {str(e)}")
         # No relanzo la excepción para no interrumpir el flujo principal
+
+@require_http_methods(["GET", "POST"])
+def logout_view(request):
+    try:
+        logger.info("="*50)
+        logger.info("INICIO PROCESO LOGOUT")
+        logger.info(f"Usuario que cierra sesión: {request.user}")
+        
+        # Limpiar carrito de la sesión si existe
+        if 'cart' in request.session:
+            del request.session['cart']
+            logger.info("Carrito eliminado de la sesión")
+        
+        # Realizar logout
+        logout(request)
+        logger.info("Logout ejecutado correctamente")
+        
+        # Mensaje de éxito
+        messages.success(request, '¡Hasta pronto! Has cerrado sesión correctamente')
+        logger.info("Mensaje de éxito agregado")
+        
+        # Redirección a inicio
+        logger.info("Redirigiendo a página de inicio")
+        return redirect('/')
+        
+    except Exception as e:
+        logger.error("ERROR EN PROCESO LOGOUT")
+        logger.error(f"Error: {str(e)}")
+        logger.error(traceback.format_exc())
+        messages.error(request, 'Ocurrió un error al cerrar sesión')
+        return redirect('/')
 

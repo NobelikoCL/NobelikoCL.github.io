@@ -78,7 +78,7 @@ class GuestCheckoutForm(forms.Form):
     nombre = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'})
-    )
+    ) 
     apellido = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'})
@@ -201,3 +201,41 @@ class ProductForm(forms.ModelForm):
             'stock': forms.NumberInput(attrs={'class': 'form-control'}),
             'active': forms.CheckboxInput(attrs={'class': 'form-check-input'})
         }
+
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    phone = forms.CharField(required=False)
+    
+    class Meta:
+        model = CustomUser
+        fields = ("username", "first_name", "last_name", "email", "password1", "password2", "phone")
+    
+    def save(self, commit=True):
+        try:
+            logger.info("Iniciando creación de usuario")
+            user = super().save(commit=False)
+            user.email = self.cleaned_data["email"]
+            user.first_name = self.cleaned_data["first_name"]
+            user.last_name = self.cleaned_data["last_name"]
+            user.phone = self.cleaned_data.get("phone", "")
+            
+            if commit:
+                user.save()
+                logger.info(f"Usuario creado exitosamente: {user.username}")
+            return user
+            
+        except Exception as e:
+            logger.error(f"Error al crear usuario: {str(e)}")
+            raise 
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(
+        label='Correo electrónico',
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'correo@ejemplo.com'})
+    )
+    password = forms.CharField(
+        label='Contraseña',
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'})
+    )

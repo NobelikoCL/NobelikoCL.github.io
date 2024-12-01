@@ -9665,3 +9665,928 @@ Categorías principales cargadas: 4
 Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
 Número procesado: 95000.00
 Resultado formateado: 95.000
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 2
+Categorías principales cargadas: 4
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 23949.5798319327731092436975 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 23949.5798319327731092436975
+Resultado formateado: 23.950
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: Samsung Galaxy Buds3 Gray
+Precio final: $150000.00
+Categorías principales cargadas: 4
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 23949.5798319327731092436975 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 23949.5798319327731092436975
+Resultado formateado: 23.950
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+==================================================
+INICIO GUEST CHECKOUT
+Producto encontrado: Samsung Galaxy Buds3 Gray
+Precio final: $150000.00
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['KqVltCnu2evX86t4eJDNFwEJdELVzLWbDcYN1LymdEB3wX6gQBcpeKN3UnmjSAuZ'], 'nombre': ['Hernan'], 'apellido': ['Villanueva'], 'email': ['hernan.villanueva.gutierrez@outlook.com'], 'telefono': ['951524037'], 'shipping': ['pickup'], 'region': [''], 'ciudad': [''], 'comuna': [''], 'direccion': [''], 'payment_method': ['transfer'], 'observaciones': ['dfg']}>
+Método de pago seleccionado: transfer
+Validando formulario con método de envío: pickup
+Formulario válido - Creando orden
+Número de orden generado: ORD-20241201-89a21800
+Orden creada con ID: 36
+Item de orden creado
+Order ID guardado en sesión: 36
+Redirigiendo a instrucciones de transferencia para orden 36
+Categorías principales cargadas: 4
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+==================================================
+INICIO PROCESO LOGOUT
+Usuario que cierra sesión: admin@stocksmart.cl
+Logout ejecutado correctamente
+Mensaje de éxito agregado
+Redirigiendo a página de inicio
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO REGISTRO DE USUARIO
+ERROR EN REGISTRO DE USUARIO
+Error: name 'CustomUserCreationForm' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 124, in register_view
+    form = CustomUserCreationForm()
+           ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'CustomUserCreationForm' is not defined
+
+==================================================
+INICIO REGISTRO DE USUARIO
+ERROR EN REGISTRO DE USUARIO
+Error: name 'CustomUserCreationForm' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 124, in register_view
+    form = CustomUserCreationForm()
+           ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'CustomUserCreationForm' is not defined
+
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO REGISTRO DE USUARIO
+ERROR EN REGISTRO DE USUARIO
+Error: name 'CustomUserCreationForm' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 124, in register_view
+    form = CustomUserCreationForm()
+           ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'CustomUserCreationForm' is not defined
+
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO REGISTRO DE USUARIO
+ERROR EN REGISTRO DE USUARIO
+Error: name 'CustomUserCreationForm' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 124, in register_view
+    form = CustomUserCreationForm()
+           ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'CustomUserCreationForm' is not defined
+
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO REGISTRO DE USUARIO
+ERROR EN REGISTRO DE USUARIO
+Error: name 'CustomUserCreationForm' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 124, in register_view
+    form = CustomUserCreationForm()
+           ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'CustomUserCreationForm' is not defined
+
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+==================================================
+INICIO REGISTRO DE USUARIO
+ERROR EN REGISTRO DE USUARIO
+Error: name 'CustomUserCreationForm' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 124, in register_view
+    form = CustomUserCreationForm()
+           ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'CustomUserCreationForm' is not defined
+
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+==================================================
+INICIO REGISTRO DE USUARIO
+Verificando imports y formulario
+CustomUserCreationForm está disponible: <class 'stock_smart.forms.CustomUserCreationForm'>
+Mostrando formulario de registro vacío
+ERROR EN REGISTRO DE USUARIO
+Error: Invalid filter: 'add_class'
+Traceback completo: Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\ultimo intento\ecommerce.github.io\stock_smart\views.py", line 90, in register_view
+    return render(request, 'stock_smart/register.html', {'form': form})
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 605, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 701, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\Hernan-PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 611, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'add_class'
+
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO REGISTRO DE USUARIO
+Verificando imports y formulario
+CustomUserCreationForm está disponible: <class 'stock_smart.forms.CustomUserCreationForm'>
+Mostrando formulario de registro vacío
+Categorías principales cargadas: 4
+==================================================
+INICIO REGISTRO DE USUARIO
+Verificando imports y formulario
+CustomUserCreationForm está disponible: <class 'stock_smart.forms.CustomUserCreationForm'>
+Datos del formulario: <QueryDict: {'csrfmiddlewaretoken': ['cTiCxH4R7hKwAg1j5ebVAlg8xrKJmwWPhfubAbUjBFXiGimHQSbpB9UGcJ0iVECm'], 'username': ['nanito'], 'first_name': ['hernan'], 'last_name': ['villanueva'], 'email': ['asdasd@gmail.com'], 'password1': ['Nolase08/'], 'password2': ['Nolase08/'], 'phone': ['951524037']}>
+Formulario válido - Creando usuario
+Iniciando creación de usuario
+Usuario creado exitosamente: nanito
+Usuario creado y logueado: nanito
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO PROCESO LOGOUT
+Usuario que cierra sesión: asdasd@gmail.com
+Logout ejecutado correctamente
+Mensaje de éxito agregado
+Redirigiendo a página de inicio
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+==================================================
+INICIO LOGIN
+Categorías principales cargadas: 4
+==================================================
+INICIO LOGIN
+Intento de login con email: asdasd@gmail.com
+Login exitoso para usuario: asdasd@gmail.com
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO PROCESO LOGOUT
+Usuario que cierra sesión: asdasd@gmail.com
+Logout ejecutado correctamente
+Mensaje de éxito agregado
+Redirigiendo a página de inicio
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+==================================================
+INICIO LOGIN
+Categorías principales cargadas: 4
+==================================================
+INICIO REGISTRO DE USUARIO
+Verificando imports y formulario
+CustomUserCreationForm está disponible: <class 'stock_smart.forms.CustomUserCreationForm'>
+Mostrando formulario de registro vacío
+Categorías principales cargadas: 4
