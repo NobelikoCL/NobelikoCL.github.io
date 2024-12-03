@@ -13341,3 +13341,157 @@ Resultado formateado: 499.990
 Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
 Número procesado: 349993.00
 Resultado formateado: 349.993
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Carrito actual: {'3': {'quantity': 4, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 4, Total: 234000.0000
+Total amount final: 234000.0000, Items procesados: 1
+Categorías principales cargadas: 4
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 234000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 234000.0000
+Resultado formateado: 234.000
+Formateando precio: 234000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 234000.0000
+Resultado formateado: 234.000
+Formateando precio: 44460.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 44460.000000
+Resultado formateado: 44.460
+Formateando precio: 234000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 234000.0000
+Resultado formateado: 234.000
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
