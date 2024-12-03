@@ -67,25 +67,37 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Resumen del Carrito</h5>
+                        <h5 class="card-title">Resumen del Carrito ({{ cart_count }} productos)</h5>
                         <ul class="list-unstyled mb-4">
                             <li class="d-flex justify-content-between mb-2">
-                                <span>Subtotal</span>
-                                <strong>${{ subtotal|format_price }}</strong>
+                                <span>Subtotal (con IVA)</span>
+                                <strong>${{ total_amount|format_price }}</strong>
                             </li>
+                            
+                            {% if total_discount > 0 %}
                             <li class="d-flex justify-content-between mb-2">
-                                <span>IVA (19%)</span>
+                                <span>Descuentos aplicados</span>
+                                <strong class="text-danger">-${{ total_discount|format_price }}</strong>
+                            </li>
+                            {% endif %}
+                            
+                            <li class="d-flex justify-content-between mb-2">
+                                <span>IVA incluido (19%)</span>
                                 <strong>${{ iva|format_price }}</strong>
                             </li>
+                            
                             <li class="d-flex justify-content-between border-top pt-2">
                                 <span class="text-success">
-                                    <strong>Total (CLP)</strong>
+                                    <strong>Total a pagar (CLP)</strong>
                                 </span>
                                 <strong class="text-success">
-                                    ${{ total|format_price }}
+                                    ${{ total_amount|format_price }}
                                 </strong>
                             </li>
                         </ul>
+                        
+
+                        
                         <div class="d-grid gap-2">
                             <a href="{% url 'stock_smart:cart_options_checkout' %}" 
                                class="btn btn-success btn-lg">
@@ -109,20 +121,29 @@
 
 <script>
 function updateQuantity(productId, change) {
-    fetch(`/cart/update/${productId}/`, {
+    console.log('Actualizando cantidad:', productId, change); // Debug log
+    
+    fetch('/cart/update/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': '{{ csrf_token }}'
         },
-        body: JSON.stringify({ change: change })
+        body: JSON.stringify({
+            product_id: productId,
+            action: change > 0 ? 'add' : 'subtract'
+        })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Respuesta recibida:', response); // Debug log
+        return response.json();
+    })
     .then(data => {
+        console.log('Datos recibidos:', data); // Debug log
         if (data.success) {
             location.reload();
         } else {
-            alert(data.message || 'Error al actualizar cantidad');
+            alert(data.error || 'Error al actualizar cantidad');
         }
     })
     .catch(error => {
@@ -133,18 +154,29 @@ function updateQuantity(productId, change) {
 
 function removeFromCart(productId) {
     if (confirm('¿Estás seguro de eliminar este producto?')) {
-        fetch(`/cart/remove/${productId}/`, {
+        console.log('Eliminando producto:', productId); // Debug log
+        
+        fetch('/cart/update/', {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'X-CSRFToken': '{{ csrf_token }}'
-            }
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                action: 'remove'
+            })
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log('Respuesta recibida:', response); // Debug log
+            return response.json();
+        })
         .then(data => {
+            console.log('Datos recibidos:', data); // Debug log
             if (data.success) {
                 location.reload();
             } else {
-                alert(data.message || 'Error al eliminar producto');
+                alert(data.error || 'Error al eliminar producto');
             }
         })
         .catch(error => {

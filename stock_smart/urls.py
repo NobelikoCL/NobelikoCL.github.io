@@ -2,6 +2,9 @@ from django.urls import path, include
 from . import views
 from django.views.decorators.csrf import csrf_exempt
 from .views import PaymentSuccessView
+import logging
+
+logger = logging.getLogger(__name__)
 
 app_name = 'stock_smart'
 
@@ -25,10 +28,11 @@ urlpatterns = [
     path('cart/', views.cart_view, name='cart'),
     path('cart/add/', views.add_to_cart, name='add_to_cart'),
     path('cart/remove/', views.remove_from_cart, name='remove_from_cart'),
-    path('cart/update/', views.update_cart, name='update_cart'),
+    path('cart/update/', views.update_cart, name='cart_update'),
     path('cart/checkout/', views.CheckoutOptionsView.as_view(), name='checkout_options'),
     path('cart/payment/', views.cart_payment, name='cart_payment'),
     path('cart/confirm/', views.cart_confirm, name='cart_confirm'),
+    path('cart/update/<int:product_id>/', views.cart_update, name='cart_update'),
     
     # Compra directa (un solo producto)
     path('buy-now/<int:product_id>/', views.buy_now, name='buy_now'),
@@ -103,3 +107,5 @@ urlpatterns = [
          views.transfer_instructions, 
          name='transfer_instructions'),
 ]
+
+logger.info("URLs del carrito configuradas correctamente")

@@ -10590,3 +10590,2754 @@ Verificando imports y formulario
 CustomUserCreationForm está disponible: <class 'stock_smart.forms.CustomUserCreationForm'>
 Mostrando formulario de registro vacío
 Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Iniciando actualización de carrito para producto 6
+Actualizando cantidad: 1 para producto: 6
+Carrito actualizado exitosamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Iniciando add_to_cart
+Producto ID: None, Cantidad: 1
+Carrito actualizado: {'6': 1, 'None': 1}
+Iniciando add_to_cart
+Producto ID: None, Cantidad: 1
+Carrito actualizado: {'6': 1, 'None': 2}
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: None
+Producto no encontrado: None
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Producto ID guardado en sesión: 6
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 14369.74789915966386554621849 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 14369.74789915966386554621849
+Resultado formateado: 14.370
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: None
+Producto no encontrado: None
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 6
+Producto encontrado: Audifonos Razer KRAKEN PRO V2
+Carrito actual: {'6': 1, 'None': 2, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+ERROR en add_to_cart: 'int' object is not subscriptable
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 6
+Producto encontrado: Audifonos Razer KRAKEN PRO V2
+ERROR en add_to_cart: Field 'id' expected a number but got 'None'.
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 6
+Producto encontrado: Audifonos Razer KRAKEN PRO V2
+Producto 6 estandarizado correctamente
+Ignorando entrada inválida en carrito: None
+Producto 5 estandarizado correctamente
+Carrito estandarizado: {'6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Incrementada cantidad para producto 6
+Carrito actualizado: {'6': {'quantity': 2, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Total items en carrito: 3
+=== FIN DEBUG ===
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 180000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 180000.0000
+Resultado formateado: 180.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 2030000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2030000.0000
+Resultado formateado: 2.030.000
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+Iniciando actualización de carrito para producto 6
+Actualizando cantidad: 1 para producto: 6
+Carrito actualizado exitosamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 6
+Producto encontrado: Audifonos Razer KRAKEN PRO V2
+Producto 6 estandarizado correctamente
+Producto 5 estandarizado correctamente
+Carrito estandarizado: {'6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Incrementada cantidad para producto 6
+Carrito actualizado: {'6': {'quantity': 2, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Total items en carrito: 3
+=== FIN DEBUG ===
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 5
+Producto encontrado: Notebook Asus Rog 15
+Producto 6 estandarizado correctamente
+Producto 5 estandarizado correctamente
+Carrito estandarizado: {'6': {'quantity': 2, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Incrementada cantidad para producto 5
+Carrito actualizado: {'6': {'quantity': 2, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 2, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Total items en carrito: 4
+=== FIN DEBUG ===
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 180000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 180000.0000
+Resultado formateado: 180.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 3700000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 3700000.00
+Resultado formateado: 3.700.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 3880000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 3880000.0000
+Resultado formateado: 3.880.000
+Iniciando actualización de carrito para producto 6
+Actualizando cantidad: 1 para producto: 6
+Carrito actualizado exitosamente
+Iniciando actualización de carrito para producto 6
+Actualizando cantidad: 1 para producto: 6
+Carrito actualizado exitosamente
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 5
+Producto encontrado: Notebook Asus Rog 15
+Producto 6 estandarizado correctamente
+Producto 5 estandarizado correctamente
+Carrito estandarizado: {'6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 2, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Incrementada cantidad para producto 5
+Carrito actualizado: {'6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 3, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Total items en carrito: 4
+=== FIN DEBUG ===
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 5550000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 5550000.00
+Resultado formateado: 5.550.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 5640000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 5640000.0000
+Resultado formateado: 5.640.000
+Iniciando actualización de carrito para producto 5
+Actualizando cantidad: 1 para producto: 5
+Carrito actualizado exitosamente
+Iniciando actualización de carrito para producto 5
+Actualizando cantidad: 1 para producto: 5
+Carrito actualizado exitosamente
+Iniciando actualización de carrito para producto 5
+Actualizando cantidad: 1 para producto: 5
+Carrito actualizado exitosamente
+Iniciando actualización de carrito para producto 6
+Actualizando cantidad: 1 para producto: 6
+Carrito actualizado exitosamente
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 6
+Producto encontrado: Audifonos Razer KRAKEN PRO V2
+Producto 6 estandarizado correctamente
+Producto 5 estandarizado correctamente
+Carrito estandarizado: {'6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Incrementada cantidad para producto 6
+Carrito actualizado: {'6': {'quantity': 2, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Total items en carrito: 3
+=== FIN DEBUG ===
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 2
+Producto encontrado: Samsung Galaxy Buds3 Gray
+Producto 6 estandarizado correctamente
+Producto 5 estandarizado correctamente
+Carrito estandarizado: {'6': {'quantity': 2, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '150000.00', 'name': 'Samsung Galaxy Buds3 Gray'}
+Carrito actualizado: {'6': {'quantity': 2, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '2': {'quantity': 1, 'price': '150000.00', 'name': 'Samsung Galaxy Buds3 Gray'}}
+Total items en carrito: 4
+=== FIN DEBUG ===
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 180000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 180000.0000
+Resultado formateado: 180.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 2180000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2180000.0000
+Resultado formateado: 2.180.000
+Actualizando carrito - ID: 6, Acción: subtract
+Cantidad reducida para producto 6
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 2090000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2090000.0000
+Resultado formateado: 2.090.000
+Actualizando carrito - ID: 6, Acción: add
+Cantidad incrementada para producto 6
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 180000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 180000.0000
+Resultado formateado: 180.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 2180000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2180000.0000
+Resultado formateado: 2.180.000
+Actualizando carrito - ID: 6, Acción: add
+Cantidad incrementada para producto 6
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 270000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 270000.0000
+Resultado formateado: 270.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 2270000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2270000.0000
+Resultado formateado: 2.270.000
+Actualizando carrito - ID: 6, Acción: add
+Cantidad incrementada para producto 6
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 360000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 360000.0000
+Resultado formateado: 360.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 2360000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2360000.0000
+Resultado formateado: 2.360.000
+Actualizando carrito - ID: 6, Acción: add
+Cantidad incrementada para producto 6
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 450000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 450000.0000
+Resultado formateado: 450.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 2450000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2450000.0000
+Resultado formateado: 2.450.000
+Actualizando carrito - ID: 6, Acción: remove
+Producto 6 eliminado del carrito
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 2000000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2000000.00
+Resultado formateado: 2.000.000
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 3
+Producto encontrado: Mouse Logitech G604
+Producto 5 estandarizado correctamente
+Producto 2 estandarizado correctamente
+Carrito estandarizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '2': {'quantity': 1, 'price': '150000.00', 'name': 'Samsung Galaxy Buds3 Gray'}}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}
+Carrito actualizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '2': {'quantity': 1, 'price': '150000.00', 'name': 'Samsung Galaxy Buds3 Gray'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Total items en carrito: 3
+=== FIN DEBUG ===
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio:  (tipo: <class 'str'>)
+Valor vacío o None
+Formateando precio: 2058500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2058500.0000
+Resultado formateado: 2.058.500
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Formateando precio: 11115.0 (tipo: <class 'float'>)
+Número procesado: 11115.0
+Resultado formateado: 11.115
+Formateando precio: 69615.0 (tipo: <class 'float'>)
+Número procesado: 69615.0
+Resultado formateado: 69.615
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Formateando precio: 9340.336134453783 (tipo: <class 'float'>)
+Número procesado: 9340.336134453783
+Resultado formateado: 9.340
+Formateando precio: 0 (tipo: <class 'int'>)
+Número procesado: 0
+Resultado formateado: 0
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Actualizando carrito - ID: 5, Acción: remove
+Producto 5 eliminado del carrito
+Categorías principales cargadas: 4
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Formateando precio: 9340.336134453783 (tipo: <class 'float'>)
+Número procesado: 9340.336134453783
+Resultado formateado: 9.340
+Formateando precio: 0 (tipo: <class 'int'>)
+Número procesado: 0
+Resultado formateado: 0
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Actualizando carrito - ID: 2, Acción: remove
+Producto 2 eliminado del carrito
+Categorías principales cargadas: 4
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Formateando precio: 9340.336134453783 (tipo: <class 'float'>)
+Número procesado: 9340.336134453783
+Resultado formateado: 9.340
+Formateando precio: 0 (tipo: <class 'int'>)
+Número procesado: 0
+Resultado formateado: 0
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Actualizando carrito - ID: 3, Acción: remove
+Producto 3 eliminado del carrito
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 1
+Producto encontrado: xbox serie x
+Carrito estandarizado: {}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '349993.0000', 'name': 'xbox serie x'}
+Carrito actualizado: {'1': {'quantity': 1, 'price': '349993.0000', 'name': 'xbox serie x'}}
+Total items en carrito: 1
+=== FIN DEBUG ===
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 3
+Producto encontrado: Mouse Logitech G604
+Producto 1 estandarizado correctamente
+Carrito estandarizado: {'1': {'quantity': 1, 'price': '349993.0000', 'name': 'xbox serie x'}}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}
+Carrito actualizado: {'1': {'quantity': 1, 'price': '349993.0000', 'name': 'xbox serie x'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Total items en carrito: 2
+=== FIN DEBUG ===
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Formateando precio: 9340.336134453783 (tipo: <class 'float'>)
+Número procesado: 9340.336134453783
+Resultado formateado: 9.340
+Formateando precio: 0 (tipo: <class 'int'>)
+Número procesado: 0
+Resultado formateado: 0
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Actualizando carrito - ID: 3, Acción: remove
+Producto 3 eliminado del carrito
+Categorías principales cargadas: 4
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 349993 (tipo: <class 'int'>)
+Número procesado: 349993
+Resultado formateado: 349.993
+Formateando precio: 55881.23529411765 (tipo: <class 'float'>)
+Número procesado: 55881.23529411765
+Resultado formateado: 55.881
+Formateando precio: 0 (tipo: <class 'int'>)
+Número procesado: 0
+Resultado formateado: 0
+Formateando precio: 349993 (tipo: <class 'int'>)
+Número procesado: 349993
+Resultado formateado: 349.993
+Actualizando carrito - ID: 1, Acción: remove
+Producto 1 eliminado del carrito
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 5
+Producto encontrado: Notebook Asus Rog 15
+Carrito estandarizado: {}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}
+Carrito actualizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Total items en carrito: 1
+=== FIN DEBUG ===
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 3
+Producto encontrado: Mouse Logitech G604
+Producto 5 estandarizado correctamente
+Carrito estandarizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}
+Carrito actualizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Total items en carrito: 2
+=== FIN DEBUG ===
+URLs del carrito configuradas correctamente
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Formateando precio: 6500 (tipo: <class 'int'>)
+Número procesado: 6500
+Resultado formateado: 6.500
+Formateando precio: 9340.336134453781512605042016 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 9340.336134453781512605042016
+Resultado formateado: 9.340
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+URLs del carrito configuradas correctamente
+Error en cart_view: 'Product' object has no attribute 'price'
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 6
+Producto encontrado: Audifonos Razer KRAKEN PRO V2
+Producto 5 estandarizado correctamente
+Producto 3 estandarizado correctamente
+Carrito estandarizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}
+Carrito actualizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}}
+Total items en carrito: 3
+=== FIN DEBUG ===
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 1
+Producto encontrado: xbox serie x
+Producto 5 estandarizado correctamente
+Producto 3 estandarizado correctamente
+Producto 6 estandarizado correctamente
+Carrito estandarizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '349993.0000', 'name': 'xbox serie x'}
+Carrito actualizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '1': {'quantity': 1, 'price': '349993.0000', 'name': 'xbox serie x'}}
+Total items en carrito: 4
+=== FIN DEBUG ===
+Error en cart_view: 'Product' object has no attribute 'price'
+Categorías principales cargadas: 4
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+URLs del carrito configuradas correctamente
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '1': {'quantity': 1, 'price': '349993.0000', 'name': 'xbox serie x'}}
+Total amount: 2348493.0000, Total discount: 186497.0000
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 349993 (tipo: <class 'int'>)
+Número procesado: 349993
+Resultado formateado: 349.993
+Formateando precio: 55881.23529411764705882352941 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.23529411764705882352941
+Resultado formateado: 55.881
+Formateando precio: 349993 (tipo: <class 'int'>)
+Número procesado: 349993
+Resultado formateado: 349.993
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Actualizando carrito - ID: 5, Acción: remove
+Producto 5 eliminado del carrito
+Carrito actual: {'3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '1': {'quantity': 1, 'price': '349993.0000', 'name': 'xbox serie x'}}
+Total amount: 498493.0000, Total discount: 186497.0000
+Categorías principales cargadas: 4
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 349993 (tipo: <class 'int'>)
+Número procesado: 349993
+Resultado formateado: 349.993
+Formateando precio: 55881.23529411764705882352941 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.23529411764705882352941
+Resultado formateado: 55.881
+Formateando precio: 349993 (tipo: <class 'int'>)
+Número procesado: 349993
+Resultado formateado: 349.993
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Actualizando carrito - ID: 3, Acción: remove
+Producto 3 eliminado del carrito
+Carrito actual: {'6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}, '1': {'quantity': 1, 'price': '349993.0000', 'name': 'xbox serie x'}}
+Total amount: 439993.0000, Total discount: 179997.0000
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Formateando precio: 349993 (tipo: <class 'int'>)
+Número procesado: 349993
+Resultado formateado: 349.993
+Formateando precio: 55881.23529411764705882352941 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 55881.23529411764705882352941
+Resultado formateado: 55.881
+Formateando precio: 349993 (tipo: <class 'int'>)
+Número procesado: 349993
+Resultado formateado: 349.993
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 349993.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.0000
+Resultado formateado: 349.993
+Actualizando carrito - ID: 1, Acción: remove
+Producto 1 eliminado del carrito
+Carrito actual: {'6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}}
+Total amount: 90000.0000, Total discount: 30000.0000
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 14369.74789915966386554621849 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 14369.74789915966386554621849
+Resultado formateado: 14.370
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Actualizando carrito - ID: 6, Acción: remove
+Producto 6 eliminado del carrito
+Carrito actual: {}
+Total amount: 0, Total discount: 0
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 3
+Producto encontrado: Mouse Logitech G604
+Carrito estandarizado: {}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}
+Carrito actualizado: {'3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Total items en carrito: 1
+=== FIN DEBUG ===
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 6
+Producto encontrado: Audifonos Razer KRAKEN PRO V2
+Producto 3 estandarizado correctamente
+Carrito estandarizado: {'3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}
+Carrito actualizado: {'3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}}
+Total items en carrito: 2
+=== FIN DEBUG ===
+Carrito actual: {'3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}}
+Total amount: 148500.0000, Total discount: 36500.0000
+Categorías principales cargadas: 4
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 14369.74789915966386554621849 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 14369.74789915966386554621849
+Resultado formateado: 14.370
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Carrito actual: {'3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}}
+Total amount: 148500.0000, Total discount: 36500.0000
+Categorías principales cargadas: 4
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 14369.74789915966386554621849 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 14369.74789915966386554621849
+Resultado formateado: 14.370
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Carrito actual: {'3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}}
+Total amount: 148500.0000, Total discount: 36500.0000
+Categorías principales cargadas: 4
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 14369.74789915966386554621849 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 14369.74789915966386554621849
+Resultado formateado: 14.370
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Carrito actual: {'3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}, '6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}}
+Total amount: 148500.0000, Total discount: 36500.0000
+Categorías principales cargadas: 4
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 14369.74789915966386554621849 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 14369.74789915966386554621849
+Resultado formateado: 14.370
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Actualizando carrito - ID: 3, Acción: remove
+Producto 3 eliminado del carrito
+Carrito actual: {'6': {'quantity': 1, 'price': '90000.0000', 'name': 'Audifonos Razer KRAKEN PRO V2'}}
+Total amount: 90000.0000, Total discount: 30000.0000
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 14369.74789915966386554621849 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 14369.74789915966386554621849
+Resultado formateado: 14.370
+Formateando precio: 90000 (tipo: <class 'int'>)
+Número procesado: 90000
+Resultado formateado: 90.000
+Formateando precio: 90000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.0000
+Resultado formateado: 90.000
+Actualizando carrito - ID: 6, Acción: remove
+Producto 6 eliminado del carrito
+Carrito actual: {}
+Total amount: 0, Total discount: 0
+Categorías principales cargadas: 4
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 5
+Producto encontrado: Notebook Asus Rog 15
+Carrito estandarizado: {}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}
+Carrito actualizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Total items en carrito: 1
+=== FIN DEBUG ===
+=== DEBUG ADD TO CART ===
+Sesión ID: ceef2dupr10vzlo1kdxhpau6od0ditdr
+Product ID recibido: 3
+Producto encontrado: Mouse Logitech G604
+Producto 5 estandarizado correctamente
+Carrito estandarizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}}
+Nuevo producto agregado al carrito: {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}
+Carrito actualizado: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Total items en carrito: 2
+=== FIN DEBUG ===
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Total amount: 1908500.0000, Total discount: 6500.0000
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Formateando precio: 9340.336134453781512605042016 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 9340.336134453781512605042016
+Resultado formateado: 9.340
+Formateando precio: 58500 (tipo: <class 'int'>)
+Número procesado: 58500
+Resultado formateado: 58.500
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+URLs del carrito configuradas correctamente
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 1, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 1, Total: 58500.0000
+Total amount final: 1908500.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 1908500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1908500.0000
+Resultado formateado: 1.908.500
+Formateando precio: 362615.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 362615.000000
+Resultado formateado: 362.615
+Formateando precio: 1908500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1908500.0000
+Resultado formateado: 1.908.500
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Actualizando carrito - ID: 3, Acción: add
+Cantidad incrementada para producto 3
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 1967000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Formateando precio: 373730.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 373730.000000
+Resultado formateado: 373.730
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 1967000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Formateando precio: 373730.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 373730.000000
+Resultado formateado: 373.730
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+==================================================
+INICIANDO CREACIÓN DE ORDEN
+Error procesando producto 5: 'Product' object has no attribute 'price'
+Error procesando producto 3: 'Product' object has no attribute 'price'
+
+Totales de la orden:
+Subtotal: $0
+IVA: $0.00
+Total: $0.00
+Error creando orden: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\stock_smart\views.py", line 2727, in get
+    order = Order.objects.create(
+        order_number=generate_order_number(),
+    ...<3 lines>...
+        status='pending'
+    )
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\base.py", line 567, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 1967000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Formateando precio: 373730.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 373730.000000
+Resultado formateado: 373.730
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+==================================================
+INICIANDO CREACIÓN DE ORDEN
+Error procesando producto 5: 'Product' object has no attribute 'price'
+Error procesando producto 3: 'Product' object has no attribute 'price'
+
+Totales de la orden:
+Subtotal: $0
+IVA: $0.00
+Total: $0.00
+Error creando orden: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\stock_smart\views.py", line 2727, in get
+    order = Order.objects.create(
+        order_number=generate_order_number(),
+    ...<3 lines>...
+        status='pending'
+    )
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\base.py", line 567, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 1967000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Formateando precio: 373730.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 373730.000000
+Resultado formateado: 373.730
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+==================================================
+INICIANDO CREACIÓN DE ORDEN
+Error procesando producto 5: 'Product' object has no attribute 'price'
+Error procesando producto 3: 'Product' object has no attribute 'price'
+
+Totales de la orden:
+Subtotal: $0
+IVA: $0.00
+Total: $0.00
+Error creando orden: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\stock_smart\views.py", line 2727, in get
+    order = Order.objects.create(
+        order_number=generate_order_number(),
+    ...<3 lines>...
+        status='pending'
+    )
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\base.py", line 567, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 1967000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Formateando precio: 373730.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 373730.000000
+Resultado formateado: 373.730
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+==================================================
+INICIANDO CREACIÓN DE ORDEN
+Error procesando producto 5: 'Product' object has no attribute 'price'
+Error procesando producto 3: 'Product' object has no attribute 'price'
+
+Totales de la orden:
+Subtotal: $0
+IVA: $0.00
+Total: $0.00
+Error creando orden: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\stock_smart\views.py", line 2727, in get
+    order = Order.objects.create(
+        order_number=generate_order_number(),
+    ...<3 lines>...
+        status='pending'
+    )
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\base.py", line 567, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 1967000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Formateando precio: 373730.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 373730.000000
+Resultado formateado: 373.730
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+==================================================
+INICIANDO CREACIÓN DE ORDEN
+Error procesando producto 5: 'Product' object has no attribute 'price'
+Error procesando producto 3: 'Product' object has no attribute 'price'
+
+Totales de la orden:
+Subtotal: $0
+IVA: $0.00
+Total: $0.00
+Error creando orden: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+Traceback (most recent call last):
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\stock_smart\views.py", line 2727, in get
+    order = Order.objects.create(
+        order_number=generate_order_number(),
+    ...<3 lines>...
+        status='pending'
+    )
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\Hernan-PC\Documents\final finalicimo\NobelikoCL.github.io\venv\Lib\site-packages\django\db\models\base.py", line 567, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: Order() got unexpected keyword arguments: 'subtotal', 'iva', 'total'
+
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 1967000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Formateando precio: 373730.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 373730.000000
+Resultado formateado: 373.730
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Actualizando carrito - ID: 5, Acción: add
+Cantidad incrementada para producto 5
+Carrito actual: {'5': {'quantity': 2, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 2, Total: 3700000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 3817000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 3700000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 3700000.00
+Resultado formateado: 3.700.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 3817000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 3817000.0000
+Resultado formateado: 3.817.000
+Formateando precio: 725230.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 725230.000000
+Resultado formateado: 725.230
+Formateando precio: 3817000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 3817000.0000
+Resultado formateado: 3.817.000
+Actualizando carrito - ID: 5, Acción: add
+Cantidad incrementada para producto 5
+Carrito actual: {'5': {'quantity': 3, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 3, Total: 5550000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 5667000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 5550000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 5550000.00
+Resultado formateado: 5.550.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 5667000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 5667000.0000
+Resultado formateado: 5.667.000
+Formateando precio: 1076730.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1076730.000000
+Resultado formateado: 1.076.730
+Formateando precio: 5667000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 5667000.0000
+Resultado formateado: 5.667.000
+Actualizando carrito - ID: 5, Acción: subtract
+Cantidad reducida para producto 5
+Carrito actual: {'5': {'quantity': 2, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 2, Total: 3700000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 3817000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 3700000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 3700000.00
+Resultado formateado: 3.700.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 3817000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 3817000.0000
+Resultado formateado: 3.817.000
+Formateando precio: 725230.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 725230.000000
+Resultado formateado: 725.230
+Formateando precio: 3817000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 3817000.0000
+Resultado formateado: 3.817.000
+Actualizando carrito - ID: 5, Acción: subtract
+Cantidad reducida para producto 5
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 2, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 2, Total: 117000.0000
+Total amount final: 1967000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 117000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 117000.0000
+Resultado formateado: 117.000
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Formateando precio: 373730.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 373730.000000
+Resultado formateado: 373.730
+Formateando precio: 1967000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1967000.0000
+Resultado formateado: 1.967.000
+Actualizando carrito - ID: 3, Acción: add
+Cantidad incrementada para producto 3
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 3, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 3, Total: 175500.0000
+Total amount final: 2025500.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 175500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 175500.0000
+Resultado formateado: 175.500
+Formateando precio: 2025500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2025500.0000
+Resultado formateado: 2.025.500
+Formateando precio: 384845.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 384845.000000
+Resultado formateado: 384.845
+Formateando precio: 2025500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2025500.0000
+Resultado formateado: 2.025.500
+Actualizando carrito - ID: 3, Acción: add
+Cantidad incrementada para producto 3
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 4, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 4, Total: 234000.0000
+Total amount final: 2084000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 234000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 234000.0000
+Resultado formateado: 234.000
+Formateando precio: 2084000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2084000.0000
+Resultado formateado: 2.084.000
+Formateando precio: 395960.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 395960.000000
+Resultado formateado: 395.960
+Formateando precio: 2084000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2084000.0000
+Resultado formateado: 2.084.000
+Actualizando carrito - ID: 3, Acción: add
+Cantidad incrementada para producto 3
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 5, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 5, Total: 292500.0000
+Total amount final: 2142500.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 292500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 292500.0000
+Resultado formateado: 292.500
+Formateando precio: 2142500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2142500.0000
+Resultado formateado: 2.142.500
+Formateando precio: 407075.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 407075.000000
+Resultado formateado: 407.075
+Formateando precio: 2142500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2142500.0000
+Resultado formateado: 2.142.500
+Actualizando carrito - ID: 3, Acción: subtract
+Cantidad reducida para producto 3
+Carrito actual: {'5': {'quantity': 1, 'price': '1850000.00', 'name': 'Notebook Asus Rog 15'}, '3': {'quantity': 4, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Notebook Asus Rog 15, Precio: 1850000.00, Cantidad: 1, Total: 1850000.00
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 4, Total: 234000.0000
+Total amount final: 2084000.0000, Items procesados: 2
+Categorías principales cargadas: 4
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 234000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 234000.0000
+Resultado formateado: 234.000
+Formateando precio: 2084000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2084000.0000
+Resultado formateado: 2.084.000
+Formateando precio: 395960.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 395960.000000
+Resultado formateado: 395.960
+Formateando precio: 2084000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 2084000.0000
+Resultado formateado: 2.084.000
+Actualizando carrito - ID: 5, Acción: remove
+Producto 5 eliminado del carrito
+Carrito actual: {'3': {'quantity': 4, 'price': '58500.0000', 'name': 'Mouse Logitech G604'}}
+Producto procesado: Mouse Logitech G604, Precio: 58500.0000, Cantidad: 4, Total: 234000.0000
+Total amount final: 234000.0000, Items procesados: 1
+Categorías principales cargadas: 4
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.0000
+Resultado formateado: 58.500
+Formateando precio: 234000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 234000.0000
+Resultado formateado: 234.000
+Formateando precio: 234000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 234000.0000
+Resultado formateado: 234.000
+Formateando precio: 44460.000000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 44460.000000
+Resultado formateado: 44.460
+Formateando precio: 234000.0000 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 234000.0000
+Resultado formateado: 234.000
+Categorías principales cargadas: 4
+Formateando precio: 120000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 120000.00
+Resultado formateado: 120.000
+Formateando precio: 90000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 90000.00
+Resultado formateado: 90.000
+Formateando precio: 1850000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 1850000.00
+Resultado formateado: 1.850.000
+Formateando precio: 95000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 95000.00
+Resultado formateado: 95.000
+Formateando precio: 65000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 65000.00
+Resultado formateado: 65.000
+Formateando precio: 58500.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 58500.00
+Resultado formateado: 58.500
+Formateando precio: 150000.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 150000.00
+Resultado formateado: 150.000
+Formateando precio: 499990.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 499990.00
+Resultado formateado: 499.990
+Formateando precio: 349993.00 (tipo: <class 'decimal.Decimal'>)
+Número procesado: 349993.00
+Resultado formateado: 349.993

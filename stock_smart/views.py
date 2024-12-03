@@ -14,11 +14,7 @@ import json
 from decimal import Decimal
 from django.utils import timezone
 from django.core.mail import EmailMessage, send_mail
-from django.template.loader import render_to_string
 from django.conf import settings
-from .utils.invoice_generator import InvoiceGenerator
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from .services.flow_service import FlowPaymentService
 import uuid
 from django.contrib.humanize.templatetags.humanize import intcomma
@@ -166,73 +162,6 @@ def category_view(request, slug):
     }
     return render(request, 'stock_smart/category.html', context)
 
-@require_POST
-@ensure_csrf_cookie
-def add_to_cart(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            product_id = data.get('product_id')
-            
-            # Obtener el producto
-            product = get_object_or_404(Product, id=product_id)
-            
-            # Inicializar o obtener el carrito de la sesión
-            cart = request.session.get('cart', {})
-            
-            # Convertir el ID a string ya que las keys de session deben ser strings
-            product_id_str = str(product_id)
-            
-            # Si el producto ya está en el carrito, incrementar cantidad
-            if product_id_str in cart:
-                # Verificar stock disponible
-                if cart[product_id_str]['quantity'] < product.stock:
-                    cart[product_id_str]['quantity'] += 1
-                else:
-                    return JsonResponse({
-                        'success': False,
-                        'error': 'Stock no disponible'
-                    })
-            else:
-                # Agregar nuevo producto al carrito
-                if product.stock > 0:
-                    cart[product_id_str] = {
-                        'quantity': 1,
-                        'price': str(product.get_final_price),
-                        'name': product.name
-                    }
-                else:
-                    return JsonResponse({
-                        'success': False,
-                        'error': 'Producto sin stock'
-                    })
-            
-            # Guardar carrito actualizado en la sesión
-            request.session['cart'] = cart
-            request.session.modified = True
-            
-            # Calcular total de items en el carrito
-            cart_count = sum(item['quantity'] for item in cart.values())
-            
-            return JsonResponse({
-                'success': True,
-                'cart_count': cart_count,
-                'message': 'Producto agregado al carrito'
-            })
-            
-        except Product.DoesNotExist:
-            return JsonResponse({
-                'success': False,
-                'error': 'Producto no encontrado'
-            })
-        except Exception as e:
-            print(f"Error en add_to_cart: {str(e)}")
-            return JsonResponse({
-                'success': False,
-                'error': str(e)
-            })
-    
-    return JsonResponse({'success': False})
 
 def products(request):
     products_list = Product.objects.all()
@@ -1911,25 +1840,23 @@ def get_or_create_cart(request):
     return cart
 
 def cart_view(request):
+    cart_items = []
+    total_amount = Decimal('0')
+    total_discount = Decimal('0')
+    
     try:
         cart = request.session.get('cart', {})
-        cart_items = []
-        total = Decimal('0')
+        logger.info(f"Carrito actual: {cart}")
         
         # Procesar cada item en el carrito
-        for product_id, item_data in cart.items():
+        for product_id, item in cart.items():
             try:
                 product = Product.objects.get(id=product_id)
-                quantity = item_data['quantity']
-                
-                # Calcular precio con descuento si aplica
-                if product.discount_percentage:
-                    discount = (product.published_price * product.discount_percentage) / Decimal('100')
-                    price = product.published_price - discount
-                else:
-                    price = product.published_price
+                quantity = Decimal(str(item.get('quantity', 0)))
+                price = Decimal(str(item.get('price', '0')))
                 
                 item_total = price * quantity
+                total_amount += item_total
                 
                 cart_items.append({
                     'product': product,
@@ -1938,23 +1865,33 @@ def cart_view(request):
                     'total': item_total
                 })
                 
-                total += item_total
+                logger.info(f"Producto procesado: {product.name}, Precio: {price}, Cantidad: {quantity}, Total: {item_total}")
                 
             except Product.DoesNotExist:
+                logger.error(f"Producto no encontrado: {product_id}")
                 continue
+            except Exception as e:
+                logger.error(f"Error procesando producto {product_id}: {str(e)}")
+                continue
+        
+        logger.info(f"Total amount final: {total_amount}, Items procesados: {len(cart_items)}")
         
         context = {
             'cart_items': cart_items,
-            'total': total,
-            'cart_count': sum(item['quantity'] for item in cart.values())
+            'total_amount': total_amount,
+            'total_discount': total_discount,
+            'subtotal': total_amount,
+            'iva': total_amount * Decimal('0.19'),
+            'cart_count': len(cart_items)
         }
         
         return render(request, 'stock_smart/cart.html', context)
         
     except Exception as e:
-        print(f"Error en cart_view: {str(e)}")
+        logger.error(f"Error general en cart_view: {str(e)}")
         return render(request, 'stock_smart/cart.html', {
-            'error': 'Error al cargar el carrito'
+            'error': 'Error al cargar el carrito',
+            'cart_items': []
         })
 
 def update_cart(request):
@@ -1962,50 +1899,67 @@ def update_cart(request):
         try:
             data = json.loads(request.body)
             product_id = str(data.get('product_id'))
+            action = data.get('action')
             
-            # Verificar stock disponible
-            product = get_object_or_404(Product, id=product_id)
-            if new_quantity > product.stock:
+            logger.info(f"Actualizando carrito - ID: {product_id}, Acción: {action}")
+            
+            cart = request.session.get('cart', {})
+            
+            if not cart:
+                logger.error("Carrito vacío")
                 return JsonResponse({
                     'success': False,
-                    'error': 'Stock no disponible'
+                    'error': 'El carrito está vacío'
                 })
             
-            # Actualizar carrito
-            cart = request.session.get('cart', {})
-            if product_id in cart:
-                cart[product_id]['quantity'] = new_quantity
-                request.session['cart'] = cart
-                request.session.modified = True
-                
-                # Calcular nuevos totales
-                item_total = int(float(cart[product_id]['price'])) * new_quantity
-                cart_total = sum(int(float(item['price']) * item['quantity']) for item in cart.values())
-                cart_count = sum(item['quantity'] for item in cart.values())
-                
-                # Formatear números con separador de miles
-                from django.contrib.humanize.templatetags.humanize import intcomma
+            if product_id not in cart:
+                logger.error(f"Producto {product_id} no encontrado en el carrito")
                 return JsonResponse({
-                    'success': True,
-                    'new_quantity': new_quantity,
-                    'item_total': intcomma(item_total),
-                    'cart_total': intcomma(cart_total),
-                    'cart_count': cart_count
+                    'success': False,
+                    'error': 'Producto no encontrado en el carrito'
                 })
+            
+            if action == 'add':
+                cart[product_id]['quantity'] += 1
+                logger.info(f"Cantidad incrementada para producto {product_id}")
+            elif action == 'subtract':
+                if cart[product_id]['quantity'] > 1:
+                    cart[product_id]['quantity'] -= 1
+                    logger.info(f"Cantidad reducida para producto {product_id}")
+                else:
+                    logger.info(f"No se puede reducir más la cantidad del producto {product_id}")
+            elif action == 'remove':
+                del cart[product_id]
+                logger.info(f"Producto {product_id} eliminado del carrito")
+            
+            request.session['cart'] = cart
+            request.session.modified = True
+            
+            cart_count = sum(item['quantity'] for item in cart.values())
             
             return JsonResponse({
-                'success': False,
-                'error': 'Producto no encontrado en el carrito'
+                'success': True,
+                'cart_count': cart_count,
+                'message': f'Carrito actualizado correctamente. Acción: {action}'
             })
             
+        except json.JSONDecodeError:
+            logger.error("Error al decodificar JSON")
+            return JsonResponse({
+                'success': False,
+                'error': 'Error en el formato de la solicitud'
+            })
         except Exception as e:
-            print(f"Error en update_cart: {str(e)}")
+            logger.error(f"Error inesperado: {str(e)}")
             return JsonResponse({
                 'success': False,
                 'error': str(e)
             })
     
-    return JsonResponse({'success': False})
+    return JsonResponse({
+        'success': False,
+        'error': 'Método no permitido'
+    })
 
 def remove_from_cart(request):
     if request.method == 'POST':
@@ -2170,6 +2124,37 @@ def checkout_guest(request, product_id):
         'cart_count': get_cart_count(request),
     }
     return render(request, 'stock_smart/guest_checkout.html', context)
+def standardize_cart(cart):
+    """Estandariza el formato del carrito"""
+    standardized_cart = {}
+    for product_id, item in cart.items():
+        # Ignorar entradas con product_id None o inválido
+        if product_id == 'None' or not product_id:
+            logger.warning(f"Ignorando entrada inválida en carrito: {product_id}")
+            continue
+            
+        try:
+            if isinstance(item, (int, str)):
+                # Convertir formato antiguo a nuevo
+                product = Product.objects.get(id=product_id)
+                standardized_cart[str(product_id)] = {
+                    'quantity': int(item),
+                    'price': str(product.get_final_price),
+                    'name': product.name
+                }
+            elif isinstance(item, dict):
+                # Mantener formato nuevo
+                standardized_cart[str(product_id)] = item
+                
+            logger.info(f"Producto {product_id} estandarizado correctamente")
+        except Product.DoesNotExist:
+            logger.warning(f"Producto {product_id} no encontrado, ignorando")
+            continue
+        except Exception as e:
+            logger.error(f"Error al estandarizar producto {product_id}: {str(e)}")
+            continue
+            
+    return standardized_cart
 
 def add_to_cart(request):
     if request.method == 'POST':
@@ -2177,41 +2162,43 @@ def add_to_cart(request):
             data = json.loads(request.body)
             product_id = str(data.get('product_id'))
             
-            print("\n=== DEBUG ADD TO CART ===")
-            print(f"Sesión ID: {request.session.session_key}")
-            print(f"Product ID recibido: {product_id}")
+            logger.info("=== DEBUG ADD TO CART ===")
+            logger.info(f"Sesión ID: {request.session.session_key}")
+            logger.info(f"Product ID recibido: {product_id}")
             
             product = get_object_or_404(Product, id=product_id)
-            print(f"Producto encontrado: {product.name}")
+            logger.info(f"Producto encontrado: {product.name}")
             
             # Asegurarse de que existe un carrito en la sesión
             if 'cart' not in request.session:
                 request.session['cart'] = {}
-                print("Nuevo carrito creado en sesión")
+                logger.info("Nuevo carrito creado en sesión")
             
             cart = request.session.get('cart', {})
-            print(f"Carrito actual: {cart}")
+            # Estandarizar el carrito existente
+            cart = standardize_cart(cart)
+            logger.info(f"Carrito estandarizado: {cart}")
             
             # Agregar o actualizar producto
             if product_id in cart:
                 cart[product_id]['quantity'] += 1
-                print(f"Incrementada cantidad para producto {product_id}")
+                logger.info(f"Incrementada cantidad para producto {product_id}")
             else:
                 cart[product_id] = {
                     'quantity': 1,
                     'price': str(product.get_final_price),
                     'name': product.name
                 }
-                print(f"Nuevo producto agregado al carrito: {cart[product_id]}")
+                logger.info(f"Nuevo producto agregado al carrito: {cart[product_id]}")
             
             # Guardar carrito actualizado
             request.session['cart'] = cart
             request.session.modified = True
             
-            print(f"Carrito actualizado: {cart}")
+            logger.info(f"Carrito actualizado: {cart}")
             cart_count = sum(item['quantity'] for item in cart.values())
-            print(f"Total items en carrito: {cart_count}")
-            print("=== FIN DEBUG ===\n")
+            logger.info(f"Total items en carrito: {cart_count}")
+            logger.info("=== FIN DEBUG ===")
             
             return JsonResponse({
                 'success': True,
@@ -2219,11 +2206,16 @@ def add_to_cart(request):
             })
             
         except Exception as e:
-            print(f"ERROR en add_to_cart: {str(e)}")
+            logger.error(f"ERROR en add_to_cart: {str(e)}")
             return JsonResponse({
                 'success': False,
                 'error': str(e)
             })
+    
+    return JsonResponse({
+        'success': False,
+        'error': 'Método no permitido'
+    })
 
 @login_required
 def user_checkout(request):
@@ -3318,3 +3310,32 @@ def logout_view(request):
         messages.error(request, 'Ocurrió un error al cerrar sesión')
         return redirect('/')
 
+def cart_update(request, product_id):
+    try:
+        logger.info(f"Iniciando actualización de carrito para producto {product_id}")
+        
+        if request.method == 'POST':
+            cart = request.session.get('cart', {})
+            quantity = int(request.POST.get('quantity', 1))
+            
+            logger.info(f"Actualizando cantidad: {quantity} para producto: {product_id}")
+            
+            # Actualizar cantidad en el carrito
+            cart[str(product_id)] = quantity
+            request.session['cart'] = cart
+            request.session.modified = True
+            
+            logger.info("Carrito actualizado exitosamente")
+            return JsonResponse({'status': 'success'})
+        
+        logger.warning(f"Método no permitido: {request.method}")
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
+        
+    except Exception as e:
+        logger.error(f"Error en cart_update: {str(e)}")
+        return JsonResponse({'error': str(e)}, status=400)
+
+def clear_cart(request):
+    request.session['cart'] = {}
+    request.session.modified = True
+    return JsonResponse({'status': 'success', 'message': 'Carrito limpiado'})

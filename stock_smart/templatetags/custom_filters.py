@@ -1,6 +1,7 @@
 from django import template
 from decimal import Decimal
 import logging
+import decimal
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +63,17 @@ def format_price(value):
 
 @register.filter
 def multiply(value, arg):
-    return float(value) * float(arg)
+    try:
+        return Decimal(str(value)) * Decimal(str(arg))
+    except (ValueError, TypeError, decimal.InvalidOperation):
+        return Decimal('0')
+
+@register.filter
+def divide(value, arg):
+    try:
+        return Decimal(str(value)) / Decimal(str(arg))
+    except (ValueError, TypeError, decimal.InvalidOperation, ZeroDivisionError):
+        return Decimal('0')
 
 @register.filter(name='add_class')
 def add_class(value, arg):
@@ -107,3 +118,19 @@ def shipping_method_display(method):
         'starken': 'Envío Starken'
     }
     return methods.get(method, method)
+
+@register.filter
+def subtract(value, arg):
+    try:
+        return Decimal(str(value)) - Decimal(str(arg))
+    except (ValueError, TypeError, decimal.InvalidOperation):
+        return Decimal('0')
+
+@register.filter
+def percentage(value, arg):
+    try:
+        if float(arg) == 0:
+            return 0
+        return (float(value) / float(arg)) * 100
+    except (ValueError, TypeError, ZeroDivisionError):
+        return 0
