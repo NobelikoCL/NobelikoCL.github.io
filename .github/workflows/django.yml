@@ -27,13 +27,19 @@ jobs:
       run: |
         echo "DEBUG=True" >> .env
         echo "SECRET_KEY=your-secret-key-for-testing" >> .env
-        # Agrega otras variables de entorno necesarias
     
     - name: Run Migrations
       run: |
         python manage.py makemigrations
         python manage.py migrate
     
-    - name: Run server
+    - name: Collect Static Files
       run: |
-        python manage.py runserver
+        python manage.py collectstatic --noinput
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./staticfiles
+        enable_jekyll: true
