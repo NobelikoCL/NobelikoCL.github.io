@@ -267,7 +267,13 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 # Configuración de hosts permitidos
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = [
+    'nobelikoclgithubio-production.up.railway.app',
+    '.railway.app',
+    'localhost',
+    '*',
+    '127.0.0.1'
+]
 
 # Configuración de cookies
 CSRF_COOKIE_SECURE = True  # Solo en producción
@@ -278,4 +284,30 @@ CSRF_USE_SESSIONS = True
 FLOW_SANDBOX = True  # Cambiar a False en producción
 FLOW_API_KEY = '4B00FE26-91DE-4BF0-83A7-577C6L8AA65A'
 FLOW_SECRET_KEY = 'deef495f20d1307e2ebed5b1f9c5f33da3aeaee9'
+
+# Configuración de CSRF
+CSRF_TRUSTED_ORIGINS = [
+    'https://nobelikoclgithubio-production.up.railway.app',
+    'https://*.railway.app'
+]
+
+# Configuración de base de datos
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('PGDATABASE'),
+        'USER': os.getenv('PGUSER'),
+        'PASSWORD': os.getenv('PGPASSWORD'),
+        'HOST': os.getenv('PGHOST'),
+        'PORT': os.getenv('PGPORT'),
+    }
+}
+
+# Configuración de archivos estáticos
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Configuración de debug
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
