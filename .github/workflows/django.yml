@@ -12,7 +12,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.13.0]  # Versión específica que usas
+        python-version: [3.13.0]
 
     steps:
     - uses: actions/checkout@v4
@@ -23,14 +23,23 @@ jobs:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
     
-    - name: Install Dependencies
+    - name: Install System Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-dev python3-pip python3-setuptools python3-wheel
+        sudo apt-get install -y libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev
+        sudo apt-get install -y libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk
+        sudo apt-get install -y libharfbuzz-dev libfribidi-dev libxcb1-dev
+    
+    - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
+        python -m pip install wheel
         pip install Django==5.0
+        pip install --no-cache-dir Pillow==10.1.0
         pip install django-payments==2.0
         pip install django-rest-framework==0.1.0
         pip install djangorestframework==3.14.0
-        pip install Pillow==10.1.0
         pip install python-dotenv==1.0.0
         pip install unidecode==1.3.7
         pip install -r requirements.txt
