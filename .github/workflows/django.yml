@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -45,7 +48,8 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        github_token: ${{ secrets.GH_TOKEN }}
         publish_dir: ./staticfiles
         enable_jekyll: true
         commit_message: 'Deploy Django static files'
+        force_orphan: true
