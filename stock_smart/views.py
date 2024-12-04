@@ -39,6 +39,7 @@ from django.utils.decorators import method_decorator
 
 logger = logging.getLogger(__name__)
 Payment = get_payment_model()
+logger = logging.getLogger('django.security')
 
 def get_cart_count(request):
     if request.user.is_authenticated:
