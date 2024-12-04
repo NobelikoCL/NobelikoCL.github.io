@@ -3197,56 +3197,74 @@ def payment_form(request):
 
 @csrf_protect
 def payment_success(request):
-    """Vista para procesar el pago exitoso"""
+    logger.info('Accediendo a payment_success')
     try:
         logger.info("="*50)
         logger.info("PROCESANDO PAGO EXITOSO")
-        logger.info(f"Método: {request.method}")
         
-        if request.method == 'POST':
-            # Obtener datos del formulario
-            order_id = request.session.get('order_id')
-            logger.info(f"Order ID en sesión: {order_id}")
-            
-            if not order_id:
-                raise ValueError("No se encontró order_id en sesión")
-                
-            order = get_object_or_404(Order, id=order_id)
-            logger.info(f"Orden encontrada: {order.order_number}")
-            
-            # Actualizar estado de la orden
-            order.status = 'PAID'
-            order.save()
-            logger.info("Estado de orden actualizado a PAID")
-            
-            # Actualizar stock de productos
-            for item in order.orderitem_set.all():
-                product = item.product
-                product.stock -= item.quantity
-                product.save()
-                logger.info(f"Stock actualizado para producto {product.id}: {product.stock}")
-            
-            # Limpiar datos de sesión
-            if 'order_id' in request.session:
-                del request.session['order_id']
-            if 'cart_id' in request.session:
-                del request.session['cart_id']
-            
-            logger.info("Sesión limpiada")
-            
-            # Enviar correo de confirmación
-            try:
-                send_confirmation_email(order)
-                logger.info("Correo de confirmación enviado")
-            except Exception as e:
-                logger.error(f"Error al enviar correo: {str(e)}")
-            
-            messages.success(request, '¡Pago realizado con éxito!')
+        # Obtener order_id de la sesión
+        order_id = request.session.get('order_id')
+        logger.info(f"Order ID en sesión: {order_id}")
+        
+        if not order_id:
+            logger.warning("No se encontró order_id en sesión")
+            messages.warning(request, 'No se encontró información de la orden')
+            # En lugar de redireccionar, renderizamos el template con mensaje de éxito genérico
+            return render(request, 'stock_smart/payment_success.html', {})
+        
+        try:
+            order = Order.objects.select_related().get(id=order_id)
+        except Order.DoesNotExist:
+            logger.error(f"No se encontró la orden con ID: {order_id}")
+            messages.error(request, 'Orden no encontrada')
+            return render(request, 'stock_smart/payment_success.html', {})
+        
+        # Si la orden ya está pagada, solo mostrar la página de éxito
+        if order.status == 'PAID':
             return render(request, 'stock_smart/payment_success.html', {'order': order})
-            
-        else:
-            logger.warning("Intento de acceso GET a payment_success")
-            return redirect('stock_smart:productos_lista')
+        
+        try:
+            # Iniciar transacción para asegurar la integridad de los datos
+            with transaction.atomic():
+                # Actualizar estado de la orden
+                order.status = 'PAID'
+                order.payment_date = timezone.now()
+                
+                # Actualizar stock de productos
+                for item in order.orderitem_set.all():
+                    product = item.product
+                    if product.stock >= item.quantity:
+                        product.stock -= item.quantity
+                        product.save()
+                        logger.info(f"Stock actualizado para producto {product.id}: {product.stock}")
+                    else:
+                        raise ValueError(f"Stock insuficiente para {product.name}")
+                
+                order.save()
+                logger.info(f"Orden {order.order_number} actualizada correctamente")
+                
+                # Limpiar sesión
+                request.session.pop('order_id', None)
+                request.session.pop('cart_id', None)
+                request.session.modified = True
+                
+                # Intentar enviar email
+                try:
+                    send_confirmation_email(order)
+                    logger.info("Correo de confirmación enviado")
+                except Exception as e:
+                    logger.error(f"Error al enviar correo: {str(e)}")
+                
+                messages.success(request, '¡Pago realizado con éxito!')
+                
+                return render(request, 'stock_smart/payment_success.html', {
+                    'order': order,
+                })
+                
+        except ValueError as ve:
+            logger.error(f"Error de validación: {str(ve)}")
+            messages.error(request, str(ve))
+            return redirect('stock_smart:checkout_error')
             
     except Exception as e:
         logger.error(f"Error en payment_success: {str(e)}")

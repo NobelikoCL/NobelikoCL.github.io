@@ -1,4 +1,5 @@
 {% extends 'stock_smart/base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="container my-5">
@@ -8,12 +9,25 @@
                 <div class="card-body">
                     <i class="fas fa-check-circle text-success fa-5x mb-3"></i>
                     <h2 class="card-title">¡Pago Exitoso!</h2>
-                    <p class="card-text">
-                        Tu orden #{{ order_number }} ha sido procesada correctamente.
-                    </p>
-                    <p class="card-text">
-                        Hemos enviado un correo de confirmación a {{ customer_email }}
-                    </p>
+                    
+                    {% if order %}
+                        <p class="card-text">
+                            Tu orden #{{ order.order_number }} ha sido procesada correctamente.
+                        </p>
+                        <p class="card-text">
+                            Monto total: ${{ order.total_amount|floatformat:0 }}
+                        </p>
+                        {% if order.email %}
+                            <p class="card-text">
+                                Hemos enviado un correo de confirmación a {{ order.email }}
+                            </p>
+                        {% endif %}
+                    {% else %}
+                        <p class="card-text">
+                            Tu pago ha sido procesado correctamente.
+                        </p>
+                    {% endif %}
+                    
                     <hr>
                     <div class="mt-4">
                         <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-primary">
