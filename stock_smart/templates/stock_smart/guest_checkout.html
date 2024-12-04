@@ -95,11 +95,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="d-flex flex-column gap-2">
-                                    <div class="form-check card p-3">
-                                        <input type="radio" name="payment_method" value="flow" id="flow" 
-                                               class="form-check-input" checked required>
-                                        <label for="flow" class="form-check-label">
-                                            <i class="fas fa-credit-card"></i> Pago con Flow
+                                        <div class="form-check card p-3">
+                                        <input type="radio" name="payment_method" value="mercadopago" id="mercadopago" 
+                                               class="form-check-input" required>
+                                        <label for="mercadopago" class="form-check-label">
+                                            <i class="fas fa-credit-card"></i> Pago con MercadoPago
                                         </label>
                                     </div>
                                     <div class="form-check card p-3">
@@ -246,10 +246,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Manejo del envío del formulario
     form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevenir envío por defecto
+        
         if (form.submitting) return;
+        
+        const paymentMethod = document.querySelector('input[name="payment_method"]:checked');
+        if (!paymentMethod) {
+            alert('Por favor seleccione un método de pago');
+            return;
+        }
+
         processPaymentBtn.disabled = true;
         processPaymentBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
         form.submitting = true;
+
+        // Si es MercadoPago
+        if (paymentMethod.value === 'mercadopago') {
+            console.log("Procesando pago con MercadoPago");
+            fetch('/payment/mercadopago/create/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
+                body: JSON.stringify(Object.fromEntries(new FormData(form)))
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.init_point) {
+                    window.location.href = data.init_point;
+                } else {
+                    throw new Error('No se recibió el punto de inicio de MercadoPago');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al procesar el pago. Por favor intente nuevamente.');
+                processPaymentBtn.disabled = false;
+                processPaymentBtn.innerHTML = 'Procesar Pedido';
+                form.submitting = false;
+            });
+        } else {
+            // Para otros métodos de pago
+            form.submit();
+        }
     });
 
     // Manejo de dirección de envío

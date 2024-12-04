@@ -75,32 +75,42 @@
             </div>
         </nav>
 
-        <!-- Agregar aquí el nuevo menú de categorías -->
+        <!-- Menú de categorías -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#categoriesMenu" aria-controls="categoriesMenu" aria-expanded="false" aria-label="Toggle categories">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#categoriesMenu" 
+                        aria-controls="categoriesMenu" aria-expanded="false" aria-label="Toggle categories">
                     <i class="fas fa-tags me-2"></i>Categorías
                 </button>
                 
                 <div class="collapse navbar-collapse" id="categoriesMenu">
                     <ul class="navbar-nav">
                         {% for category in categories %}
-                            {% if category.is_active %}
+                            {% if category.is_active and not category.parent %}
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="{% url 'stock_smart:productos_por_categoria' category.slug %}" 
-                                       id="categoria{{ category.id }}" 
-                                       role="button" 
-                                       data-bs-toggle="dropdown" 
-                                       aria-expanded="false">
+                                    <a class="nav-link {% if category.children.exists %}dropdown-toggle{% endif %}" 
+                                       href="{% url 'stock_smart:productos_por_categoria' category.slug %}"
+                                       {% if category.children.exists %}
+                                       id="navbarDropdown{{ category.id }}"
+                                       role="button"
+                                       data-bs-toggle="dropdown"
+                                       aria-expanded="false"
+                                       {% endif %}>
                                         {{ category.name }}
                                     </a>
                                     {% if category.children.exists %}
-                                        <ul class="dropdown-menu" aria-labelledby="categoria{{ category.id }}">
-                                            {% for child in category.children.all %}
-                                                {% if child.is_active %}
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ category.id }}">
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'stock_smart:productos_por_categoria' category.slug %}">
+                                                    Ver todos en {{ category.name }}
+                                                </a>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            {% for subcategory in category.children.all %}
+                                                {% if subcategory.is_active %}
                                                     <li>
-                                                        <a class="dropdown-item" href="{% url 'stock_smart:productos_por_categoria' child.slug %}">
-                                                            {{ child.name }}
+                                                        <a class="dropdown-item" href="{% url 'stock_smart:productos_por_categoria' subcategory.slug %}">
+                                                            {{ subcategory.name }}
                                                         </a>
                                                     </li>
                                                 {% endif %}
@@ -251,6 +261,25 @@
                 attributeFilter: ['class']
             });
         });
+    </script>
+
+    <!-- Agregar este script al final del archivo, antes del cierre de body -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Activar los dropdowns de Bootstrap
+        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+        var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+            return new bootstrap.Dropdown(dropdownToggleEl)
+        });
+
+        // Logging para debugging
+        console.log('Menú de categorías inicializado');
+        document.querySelectorAll('.nav-item.dropdown').forEach(function(dropdown) {
+            dropdown.addEventListener('show.bs.dropdown', function () {
+                console.log('Abriendo dropdown de categoría:', this.querySelector('.nav-link').textContent.trim());
+            });
+        });
+    });
     </script>
 </body>
 </html> 

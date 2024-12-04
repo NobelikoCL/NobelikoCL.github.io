@@ -1,42 +1,21 @@
 {% extends 'stock_smart/base.html' %}
-{% load static %}
 
 {% block content %}
-<div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-            <div class="card">
-                <div class="card-body">
-                    <i class="fas fa-check-circle text-success fa-5x mb-3"></i>
-                    <h2 class="card-title">¡Pago Exitoso!</h2>
-                    
-                    {% if order %}
-                        <p class="card-text">
-                            Tu orden #{{ order.order_number }} ha sido procesada correctamente.
-                        </p>
-                        <p class="card-text">
-                            Monto total: ${{ order.total_amount|floatformat:0 }}
-                        </p>
-                        {% if order.email %}
-                            <p class="card-text">
-                                Hemos enviado un correo de confirmación a {{ order.email }}
-                            </p>
-                        {% endif %}
-                    {% else %}
-                        <p class="card-text">
-                            Tu pago ha sido procesado correctamente.
-                        </p>
-                    {% endif %}
-                    
-                    <hr>
-                    <div class="mt-4">
-                        <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-primary">
-                            Seguir Comprando
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container mt-5">
+    <div class="alert alert-success">
+        <h4 class="alert-heading">¡Pago Exitoso!</h4>
+        <p>Tu pago ha sido procesado correctamente.</p>
+        <hr>
+        <p>Detalles del pago:</p>
+        <ul>
+            <li>Orden ID: {{ payment_data.external_reference }}</li>
+            <li>Pago ID: {{ payment_data.payment_id }}</li>
+            <li>Estado: {{ payment_data.status }}</li>
+            <li>Tipo de pago: {{ payment_data.payment_type }}</li>
+        </ul>
+    </div>
+    <div class="mt-3">
+        <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-primary">Volver a la tienda</a>
     </div>
 </div>
 {% endblock %}

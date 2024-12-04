@@ -420,15 +420,12 @@ class Brand(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    slug = models.SlugField(unique=True, default='', blank=True)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
-    slug = models.SlugField(unique=True, blank=True, null=True)
-    order = models.IntegerField(default=0)
 
     class Meta:
-        verbose_name = "Categoría"
-        verbose_name_plural = "Categorías"
-        ordering = ['order', 'name']
+        verbose_name_plural = 'Categories'
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -437,6 +434,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def get_children(self):
+        return self.children.filter(is_active=True)
 
 class Product(models.Model):
     name = models.CharField(max_length=200)

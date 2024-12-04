@@ -36,6 +36,10 @@ from django import forms
 import time
 from django.db import connection
 from django.utils.decorators import method_decorator
+from .adapters.mercadopago_adapter import MercadoPagoAdapter
+from django.db import models
+
+
 
 logger = logging.getLogger(__name__)
 Payment = get_payment_model()
@@ -473,6 +477,24 @@ def guest_checkout(request):
                     if payment_method == 'flow':
                         logger.info("Redirigiendo a proceso de pago Flow")
                         return redirect('stock_smart:process_payment')
+                    elif payment_method == 'mercadopago':
+                        logger.info("Iniciando proceso de pago con MercadoPago")
+                        try:
+                            mp = MercadoPagoAdapter()
+                            preference = mp.create_preference(order)
+                            
+                            if preference:
+                                logger.info(f"Preferencia MercadoPago creada: {preference['id']}")
+                                return redirect(preference['init_point'])
+                            else:
+                                logger.error("Error al crear preferencia de MercadoPago")
+                                messages.error(request, 'Error al procesar el pago con MercadoPago')
+                                return redirect('stock_smart:checkout_error')
+                        except Exception as e:
+                            logger.error(f"Error en proceso MercadoPago: {str(e)}")
+                            logger.error(traceback.format_exc())
+                            messages.error(request, 'Error al procesar el pago')
+                            return redirect('stock_smart:checkout_error')
                     elif payment_method == 'transfer':
                         logger.info(f"Redirigiendo a instrucciones de transferencia para orden {order.id}")
                         # Actualizar estado de la orden
@@ -520,6 +542,8 @@ def guest_checkout(request):
         logger.error("="*50)
         messages.error(request, 'Error al procesar el checkout')
         return redirect('stock_smart:productos_lista')
+
+
 
 
 
@@ -621,16 +645,24 @@ def manage_users(request):
 
 def search_products(request):
     query = request.GET.get('q', '')
-    products = Product.objects.filter(
-        Q(name__icontains=query) |
-        Q(description__icontains=query)
-    ).filter(active=True)
+    productos = Product.objects.all()
     
-    return render(request, 'stock_smart/productos_lista.html', {
-        'productos': products,
-        'query': query,
-        'titulo': f'Resultados para: {query}'
-    })
+    # Obtener todas las categorías activas
+    categories = Category.objects.filter(is_active=True)
+    
+    logger.info(f"Categorías disponibles: {[cat.name for cat in categories]}")
+
+    if query:
+        productos = productos.filter(name__icontains=query) | productos.filter(description__icontains=query)
+        logger.info(f"Búsqueda realizada: {query}")
+        logger.info(f"Productos encontrados: {productos.count()}")
+
+    context = {
+        'productos': productos,
+        'categories': categories,
+        'search_query': query
+    }
+    return render(request, 'stock_smart/productos_lista.html', context)
 
 def filter_products(request):
     category_id = request.GET.get('category')
@@ -795,65 +827,6 @@ def terminos(request):
         'titulo': 'Términos y Condiciones'
     })
 
-def tracking(request):
-    """Vista para el seguimiento de pedidos"""
-    order_number = request.GET.get('order_number')
-    order = None
-    status_info = None
-    
-    if order_number:
-        try:
-            order = Order.objects.prefetch_related(
-                'tracking_history',
-                'cart__cartitem_set__product'
-            ).get(id=order_number)
-            
-            # Definir información del estado
-            status_info = {
-                'PENDING': {
-                    'progress': 25,
-                    'class': 'bg-warning',
-                    'text': 'Pendiente de pago',
-                    'icon': 'fa-clock'
-                },
-                'PAID': {
-                    'progress': 50,
-                    'class': 'bg-info',
-                    'text': 'Pago confirmado',
-                    'icon': 'fa-check-circle'
-                },
-                'SHIPPED': {
-                    'progress': 75,
-                    'class': 'bg-primary',
-                    'text': 'En camino',
-                    'icon': 'fa-truck'
-                },
-                'DELIVERED': {
-                    'progress': 100,
-                    'class': 'bg-success',
-                    'text': 'Entregado',
-                    'icon': 'fa-box-open'
-                },
-                'CANCELLED': {
-                    'progress': 0,
-                    'class': 'bg-danger',
-                    'text': 'Cancelado',
-                    'icon': 'fa-times-circle'
-                }
-            }[order.status]
-            
-            if not request.user.is_authenticated and order.user is not None:
-                messages.error(request, 'Debes iniciar sesión para ver este pedido.')
-                return redirect('stock_smart:auth_page')
-                
-        except Order.DoesNotExist:
-            messages.error(request, 'Pedido no encontrado.')
-    
-    return render(request, 'stock_smart/seguimiento.html', {
-        'titulo': 'Seguimiento de Pedido',
-        'order': order,
-        'status_info': status_info
-    })
 
 def update_cart_item(request, item_id):
     """
@@ -1750,7 +1723,7 @@ class PaymentSuccessView(View):
         logger.info(f"Estado del pago: {payment_status}")
 
         if not token:
-            logger.error("No se recibió token")
+            logger.error("No se recibi token")
             return redirect('stock_smart:productos_lista')
 
         try:
@@ -1969,7 +1942,6 @@ def update_cart(request):
                 'success': False,
                 'error': str(e)
             })
-    
     return JsonResponse({
         'success': False,
         'error': 'Método no permitido'
@@ -2048,22 +2020,84 @@ def view_cart(request):
     return render(request, 'stock_smart/cart.html', context)
 
 def productos_lista(request):
-    featured_products = Product.objects.filter(
-        is_featured=True,
-        active=True
-    )[:8]  # Limitar a 8 productos destacados
+    try:
+        search_query = request.GET.get('q', '')
+        productos = Product.objects.all()
+        
+        # Obtener todas las categorías activas, ordenadas por nombre
+        categories = Category.objects.filter(is_active=True).order_by('name')
+        
+        logger.info(f"Categorías cargadas: {[cat.name for cat in categories]}")
 
-    discounted_products = Product.objects.filter(
-        discount_percentage__gt=0,
-        active=True
-    )[:8]  # Limitar a 8 productos con descuento
+        if search_query:
+            productos = productos.filter(name__icontains=search_query) | productos.filter(description__icontains=search_query)
+            logger.info(f"Búsqueda realizada: {search_query}")
+            logger.info(f"Productos encontrados: {productos.count()}")
 
-    context = {
-        'featured_products': featured_products,
-        'discounted_products': discounted_products,
-        'cart_count': get_cart_count(request),
-    }
-    return render(request, 'stock_smart/products.html', context)
+        context = {
+            'productos': productos,
+            'categories': categories,
+            'search_query': search_query
+        }
+        return render(request, 'stock_smart/productos_lista.html', context)
+    except Exception as e:
+        logger.error(f"Error al cargar categorías: {str(e)}")
+        return render(request, 'stock_smart/productos_lista.html', {
+            'productos': Product.objects.all(),
+            'categories': [],
+            'search_query': search_query if 'search_query' in locals() else ''
+        })
+
+def productos_por_categoria(request, slug):
+    try:
+        logger.info(f"Buscando productos para categoría: {slug}")
+        
+        # Obtener la categoría actual
+        categoria = get_object_or_404(Category, slug=slug)
+        logger.info(f"Categoría encontrada: {categoria.name}, ID: {categoria.id}")
+        
+        # Obtener todas las categorías activas para el menú
+        categories = Category.objects.filter(is_active=True).order_by('name')
+        
+        # Verificar si es categoría padre
+        if categoria.parent is None:
+            logger.info(f"Es una categoría padre: {categoria.name}")
+            
+            # Obtener subcategorías
+            subcategorias = Category.objects.filter(parent=categoria, is_active=True)
+            logger.info(f"Subcategorías encontradas: {[sub.name for sub in subcategorias]}")
+            
+            # Obtener productos de la categoría principal y subcategorías
+            productos = Product.objects.filter(
+                models.Q(category=categoria) |
+                models.Q(category__in=subcategorias)
+            ).distinct()
+            
+        else:
+            logger.info(f"Es una subcategoría: {categoria.name}")
+            productos = Product.objects.filter(category=categoria)
+            subcategorias = None
+        
+        logger.info(f"Total productos encontrados: {productos.count()}")
+        
+        context = {
+            'category': categoria,  # Cambiado a 'category' para coincidir con el template
+            'categories': categories,
+            'products': productos,  # Cambiado a 'products' para coincidir con el template
+            'subcategories': subcategorias if 'subcategorias' in locals() else None,
+        }
+        
+        return render(request, 'stock_smart/category_products.html', context)
+        
+    except Exception as e:
+        logger.error(f"Error al cargar categoría: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
+        return render(request, 'stock_smart/productos_lista.html', {
+            'products': [],
+            'categories': categories,
+            'error_message': f"Error: {str(e)}"
+        })
 
 @login_required
 def checkout_direct(request, product_id):
@@ -2755,7 +2789,6 @@ class CartOptionsCheckoutView(View):
                     price=item['price'],
                     total=item['total']
                 )
-            
             # Guardar ID de orden en sesión
             request.session['order_id'] = order.id
             
@@ -3371,3 +3404,305 @@ def clear_cart(request):
     request.session['cart'] = {}
     request.session.modified = True
     return JsonResponse({'status': 'success', 'message': 'Carrito limpiado'})
+
+def mercadopago_success(request):
+    try:
+        logger.info("="*50)
+        logger.info("PAGO MERCADOPAGO EXITOSO")
+        logger.info(f"Parámetros recibidos: {request.GET}")
+        
+        payment_id = request.GET.get('payment_id')
+        order_id = request.GET.get('external_reference')
+        
+        if order_id:
+            order = Order.objects.get(id=order_id)
+            order.status = 'paid'
+            order.payment_id = payment_id
+            order.save()
+            
+            logger.info(f"Orden {order_id} actualizada a estado 'paid'")
+            messages.success(request, '¡Pago procesado exitosamente!')
+            return render(request, 'stock_smart/payment_success.html', {'order': order})
+            
+    except Exception as e:
+        logger.error(f"Error en mercadopago_success: {str(e)}")
+        logger.error(traceback.format_exc())
+        messages.error(request, 'Error al procesar la confirmación del pago')
+    
+    return redirect('stock_smart:productos_lista')
+
+
+def mercadopago_failure(request):
+    try:
+        logger.info("="*50)
+        logger.info("PAGO MERCADOPAGO FALLIDO")
+        logger.info(f"Parámetros recibidos: {request.GET}")
+        
+        order_id = request.GET.get('external_reference')
+        if order_id:
+            order = Order.objects.get(id=order_id)
+            order.status = 'failed'
+            order.save()
+            logger.info(f"Orden {order_id} actualizada a estado 'failed'")
+        
+        messages.error(request, 'El pago no pudo ser procesado')
+        return render(request, 'stock_smart/payment_failure.html')
+        
+    except Exception as e:
+        logger.error(f"Error en mercadopago_failure: {str(e)}")
+        logger.error(traceback.format_exc())
+        messages.error(request, 'Error al procesar el pago')
+        return redirect('stock_smart:productos_lista')
+def mercadopago_pending(request):
+    try:
+        logger.info("="*50)
+        logger.info("PAGO MERCADOPAGO PENDIENTE")
+        logger.info(f"Parámetros recibidos: {request.GET}")
+        
+        order_id = request.GET.get('external_reference')
+        if order_id:
+            order = Order.objects.get(id=order_id)
+            order.status = 'pending'
+            order.save()
+            logger.info(f"Orden {order_id} actualizada a estado 'pending'")
+        
+        messages.warning(request, 'Tu pago está pendiente de confirmación')
+        return render(request, 'stock_smart/payment_pending.html')
+        
+    except Exception as e:
+        logger.error(f"Error en mercadopago_pending: {str(e)}")
+        logger.error(traceback.format_exc())
+        messages.error(request, 'Error al procesar el estado pendiente del pago')
+        return redirect('stock_smart:home')
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def mercadopago_webhook(request):
+    logger.info("="*50)
+    logger.info("WEBHOOK MERCADOPAGO RECIBIDO")
+    logger.info(f"Datos recibidos: {request.POST}")
+    
+    mp = MercadoPagoAdapter()
+    if mp.process_webhook(request.POST):
+        logger.info("Webhook procesado exitosamente")
+        return HttpResponse(status=200)
+    
+    logger.error("Error al procesar webhook")
+    return HttpResponse(status=400)
+@require_http_methods(["POST"])
+def mercadopago_create_preference(request):
+    try:
+        logger.info("="*50)
+        logger.info("CREANDO PREFERENCIA MERCADOPAGO")
+        
+        # Imprimir el body completo de la solicitud
+        logger.info(f"Request body raw: {request.body}")
+        
+        try:
+            data = json.loads(request.body)
+            logger.info(f"Datos parseados: {data}")
+        except json.JSONDecodeError as e:
+            logger.error(f"Error al parsear JSON: {str(e)}")
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error en el formato de los datos'
+            }, status=400)
+
+        # Verificar que tenemos el product_id en la sesión
+        product_id = request.session.get('product_id')
+        logger.info(f"Product ID from session: {product_id}")
+        
+        if not product_id:
+            logger.error("No se encontró product_id en la sesión")
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Producto no encontrado en la sesión'
+            }, status=400)
+
+        try:
+            # Obtener el producto
+            product = Product.objects.get(id=product_id)
+            logger.info(f"Producto encontrado: {product.name}, Precio: {product.final_price}")
+
+            # Crear la orden
+            order_number = f'ORD-{timezone.now().strftime("%Y%m%d")}-{uuid.uuid4().hex[:8]}'
+            
+            order = Order.objects.create(
+                order_number=order_number,
+                customer_name=f"{data.get('nombre', '')} {data.get('apellido', '')}",
+                customer_email=data.get('email', ''),
+                customer_phone=data.get('telefono', ''),
+                region=data.get('region', ''),
+                ciudad=data.get('ciudad', ''),
+                comuna=data.get('comuna', ''),
+                shipping_address=data.get('direccion', ''),
+                shipping_method=data.get('shipping', ''),
+                payment_method='mercadopago',
+                total_amount=product.final_price,
+                status='pending_payment'
+            )
+            logger.info(f"Orden creada: {order.id}")
+
+            # Crear item de orden
+            order_item = OrderItem.objects.create(
+                order=order,
+                product=product,
+                quantity=1,
+                price=product.final_price
+            )
+            logger.info(f"Item de orden creado: {order_item.id}")
+
+            # Crear preferencia de MercadoPago
+            mp = MercadoPagoAdapter()
+            logger.info("MercadoPago adapter creado")
+            
+            # Crear datos de preferencia
+            preference_data = {
+                "items": [{
+                    "title": product.name,
+                    "quantity": 1,
+                    "currency_id": "CLP",
+                    "unit_price": float(product.final_price)
+                }],
+                "external_reference": str(order.id),
+                "back_urls": {
+                    "success": settings.MERCADOPAGO_SUCCESS_URL,
+                    "failure": settings.MERCADOPAGO_FAILURE_URL,
+                    "pending": settings.MERCADOPAGO_PENDING_URL
+                },
+                "notification_url": settings.MERCADOPAGO_WEBHOOK_URL
+            }
+            logger.info(f"Datos de preferencia: {preference_data}")
+            
+            preference = mp.create_preference(order)
+            logger.info(f"Respuesta de MercadoPago: {preference}")
+
+            if preference and 'init_point' in preference:
+                return JsonResponse({
+                    'status': 'success',
+                    'init_point': preference['init_point']
+                })
+            else:
+                logger.error("No se recibió init_point en la respuesta")
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Error al crear preferencia de pago'
+                }, status=500)
+
+        except Product.DoesNotExist:
+            logger.error(f"Producto no existe: {product_id}")
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Producto no encontrado'
+            }, status=404)
+        except Exception as e:
+            logger.error(f"Error al crear orden o preferencia: {str(e)}")
+            logger.error(traceback.format_exc())
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error al procesar el pago'
+            }, status=500)
+
+    except Exception as e:
+        logger.error(f"Error general: {str(e)}")
+        logger.error(traceback.format_exc())
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=500)
+
+def payment_success(request):
+    try:
+        logger.info("="*50)
+        logger.info("PAGO EXITOSO")
+        logger.info(f"GET params: {request.GET}")
+        
+        # Obtener parámetros de la respuesta
+        payment_data = {
+            'collection_id': request.GET.get('collection_id'),
+            'collection_status': request.GET.get('collection_status'),
+            'payment_id': request.GET.get('payment_id'),
+            'status': request.GET.get('status'),
+            'external_reference': request.GET.get('external_reference'),
+            'payment_type': request.GET.get('payment_type'),
+            'merchant_order_id': request.GET.get('merchant_order_id'),
+            'preference_id': request.GET.get('preference_id'),
+            'site_id': request.GET.get('site_id'),
+            'processing_mode': request.GET.get('processing_mode'),
+            'merchant_account_id': request.GET.get('merchant_account_id')
+        }
+        
+        logger.info(f"Datos de pago procesados: {payment_data}")
+        
+        # Actualizar la orden si existe
+        if payment_data['external_reference']:
+            try:
+                order = Order.objects.get(id=payment_data['external_reference'])
+                order.status = 'paid'  # Asegúrate de que este estado existe en tu modelo
+                order.payment_id = payment_data['payment_id']
+                order.payment_status = payment_data['status']
+                order.save()
+                logger.info(f"Orden {order.id} actualizada correctamente")
+            except Order.DoesNotExist:
+                logger.error(f"No se encontró la orden con ID {payment_data['external_reference']}")
+            except Exception as e:
+                logger.error(f"Error al actualizar la orden: {str(e)}")
+        
+        # Renderizar template de éxito
+        return render(request, 'stock_smart/payment_success.html', {
+            'payment_data': payment_data,
+            'order_id': payment_data['external_reference']
+        })
+        
+    except Exception as e:
+        logger.error(f"Error en payment_success: {str(e)}")
+        return render(request, 'stock_smart/payment_failure.html', {
+            'error_message': 'Hubo un error al procesar la respuesta del pago'
+        })
+
+def payment_failure(request):
+    try:
+        logger.info("="*50)
+        logger.info("PAGO FALLIDO")
+        logger.info(f"GET params: {request.GET}")
+        
+        error_message = request.GET.get('error_message', 'El pago no pudo ser procesado')
+        
+        return render(request, 'stock_smart/payment_failure.html', {
+            'error_message': error_message
+        })
+    except Exception as e:
+        logger.error(f"Error en payment_failure: {str(e)}")
+        return render(request, 'stock_smart/payment_failure.html', {
+            'error_message': 'Error al procesar la respuesta del pago'
+        })
+
+def payment_pending(request):
+    try:
+        logger.info("="*50)
+        logger.info("PAGO PENDIENTE")
+        logger.info(f"GET params: {request.GET}")
+        
+        return render(request, 'stock_smart/payment_pending.html', {
+            'payment_id': request.GET.get('payment_id'),
+            'external_reference': request.GET.get('external_reference')
+        })
+    except Exception as e:
+        logger.error(f"Error en payment_pending: {str(e)}")
+        return render(request, 'stock_smart/payment_failure.html', {
+            'error_message': 'Error al procesar el estado pendiente del pago'
+        })
+
+@csrf_exempt
+def mercadopago_webhook(request):
+    try:
+        logger.info("="*50)
+        logger.info("WEBHOOK MERCADOPAGO")
+        logger.info(f"Method: {request.method}")
+        logger.info(f"Headers: {request.headers}")
+        logger.info(f"Body: {request.body}")
+        
+        return HttpResponse(status=200)
+    except Exception as e:
+        logger.error(f"Error en webhook: {str(e)}")
+        return HttpResponse(status=500)

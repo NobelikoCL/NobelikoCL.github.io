@@ -53,11 +53,11 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'parent', 'order', 'is_active', 'slug']
-    list_filter = ['is_active', 'parent']
-    search_fields = ['name', 'slug']
+    list_display = ['name', 'slug', 'parent', 'is_active']
+    list_editable = ['is_active']
     prepopulated_fields = {'slug': ('name',)}
-    list_editable = ['order', 'is_active']
+    search_fields = ['name']
+    list_filter = ['is_active', 'parent']
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

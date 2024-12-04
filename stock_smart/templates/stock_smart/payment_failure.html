@@ -1,0 +1,13 @@
+{% extends 'stock_smart/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger">
+        <h4 class="alert-heading">Error en el Pago</h4>
+        <p>Lo sentimos, hubo un problema al procesar tu pago.</p>
+        <hr>
+        <p class="mb-0">Por favor, intenta nuevamente.</p>
+    </div>
+    <a href="{% url 'stock_smart:productos_lista' %}" class="btn btn-primary">Volver al inicio</a>
+</div>
+{% endblock %}

@@ -6,19 +6,9 @@ logger = logging.getLogger(__name__)
 
 def categories_processor(request):
     try:
-        # Obtener solo categorías padre (parent=None) que estén activas
-        categories = Category.objects.filter(
-            parent__isnull=True,
-            is_active=True
-        ).prefetch_related(
-            'children'
-        ).order_by('order', 'name')
-        
-        logger.info(f"Categorías principales cargadas: {categories.count()}")
+        categories = Category.objects.filter(is_active=True).order_by('name')
         return {'categories': categories}
-    
     except Exception as e:
-        logger.error(f"Error al cargar categorías: {str(e)}")
         return {'categories': []}
 
 def cart_count(request):

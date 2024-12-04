@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'stock_smart',
     'payments',
     'django_payments_flow',
+    
 ]
 
 MIDDLEWARE = [
@@ -199,20 +200,27 @@ if not DEBUG:
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': 'debug.log',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
-        'stock_smart': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
+        '': {  # Root logger
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'stock_smart': {  # Logger específico para tu app
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
         },
     },
 }
@@ -313,13 +321,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # Configuraciones de seguridad
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 SECURE_HSTS_SECONDS = 31536000
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
 
 # Agregar logging para debugging
 LOGGING = {
@@ -340,4 +348,16 @@ LOGGING = {
         },
     },
 }
+
+# Configuración de MercadoPago
+MERCADOPAGO_PUBLIC_KEY = 'TEST-6f3aec38-955f-45a2-824f-3470915ff6dc'  # Reemplaza con tu clave pública
+MERCADOPAGO_ACCESS_TOKEN = 'TEST-4531662437839938-120415-2944ba24c3df6c1c8fb3a0d1d716b4fd-225546413'  # Reemplaza con tu token de acceso
+
+# URLs para MercadoPago
+SITE_URL = 'http://127.0.0.1:8000'
+
+MERCADOPAGO_SUCCESS_URL = f"{SITE_URL}/payment/mercadopago/success/"
+MERCADOPAGO_FAILURE_URL = f"{SITE_URL}/payment/mercadopago/failure/"
+MERCADOPAGO_PENDING_URL = f"{SITE_URL}/payment/mercadopago/pending/"
+MERCADOPAGO_WEBHOOK_URL = f"{SITE_URL}/payment/mercadopago/webhook/"
 

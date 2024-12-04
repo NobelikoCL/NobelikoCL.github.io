@@ -19,7 +19,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('contacto/', views.contacto, name='contacto'),
     path('terminos/', views.TerminosView.as_view(), name='terminos'),
-    path('seguimiento/', views.tracking, name='tracking'),
+   
     
     # Autenticación
     path('login/', views.login_view, name='login'),
@@ -94,9 +94,7 @@ urlpatterns = [
     path('checkout/payment-confirm/', views.payment_confirm, name='payment_confirm'),
     path('checkout/payment-error/', views.payment_error, name='payment_error'),
     path('categoria/<int:category_id>/', views.category_detail, name='category_detail'),
-    path('categoria/<slug:slug>/', 
-         views.ProductosPorCategoria.as_view(), 
-         name='productos_por_categoria'),
+    path('categoria/<slug:slug>/', views.productos_por_categoria, name='productos_por_categoria'),
     path('productos/', views.ProductosListaView.as_view(), name='productos_lista'),
     # Compra rápida (existente)
     path('checkout/options/<int:product_id>/', views.CheckoutOptionsView.as_view(), name='checkout_options'),
@@ -113,6 +111,17 @@ urlpatterns = [
     path('payment/process/', views.process_payment, name='process_payment'),
     path('payment/confirm/', views.payment_confirm, name='payment_confirm'),
     path('payment/success/', views.payment_success, name='payment_success'),
+    path('payment/mercadopago/success/', views.mercadopago_success, name='mercadopago_success'),
+    path('payment/mercadopago/failure/', views.mercadopago_failure, name='mercadopago_failure'),
+    path('payment/mercadopago/pending/', views.mercadopago_pending, name='mercadopago_pending'),
+    path('payment/mercadopago/webhook/', views.mercadopago_webhook, name='mercadopago_webhook'),
+    path('payment/mercadopago/create/', views.mercadopago_create_preference, name='mercadopago_create_preference'),
+    # URLs para MercadoPago
+    path('payment/success/', views.payment_success, name='payment_success'),
+    path('payment/failure/', views.payment_failure, name='payment_failure'),
+    path('payment/pending/', views.payment_pending, name='payment_pending'),
+    path('payment/mercadopago/webhook/', views.mercadopago_webhook, name='mercadopago_webhook'),
+    path('categoria/<slug:slug>/', views.productos_por_categoria, name='productos_por_categoria'),
 ]
 
 logger.info("URLs del carrito configuradas correctamente")
