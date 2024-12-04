@@ -3,6 +3,10 @@ from . import views
 from django.views.decorators.csrf import csrf_exempt
 from .views import PaymentSuccessView
 import logging
+import hmac
+import hashlib
+import json
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -106,6 +110,9 @@ urlpatterns = [
         path('checkout/transfer-instructions/<int:order_id>/', 
          views.transfer_instructions, 
          name='transfer_instructions'),
+    path('payment/process/', views.process_payment, name='process_payment'),
+    path('payment/confirm/', views.payment_confirm, name='payment_confirm'),
+    path('payment/success/', views.payment_success, name='payment_success'),
 ]
 
 logger.info("URLs del carrito configuradas correctamente")

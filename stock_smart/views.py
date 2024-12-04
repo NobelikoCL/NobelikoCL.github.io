@@ -299,18 +299,39 @@ def process_payment(request):
         logger.info("="*50)
         logger.info("INICIANDO PROCESO DE PAGO FLOW SANDBOX")
         
-        order_id = request.session.get('order_id')
-        logger.info(f"Order ID en sesión: {order_id}")
+        # Obtener product_id de la sesión
+        product_id = request.session.get('product_id')
+        logger.info(f"Product ID en sesión: {product_id}")
         
-        if not order_id:
-            logger.error("No se encontró order_id en sesión")
-            messages.error(request, 'No se encontró la orden')
+        if not product_id:
+            logger.error("No se encontró product_id en sesión")
+            messages.error(request, 'No se encontró el producto')
             return redirect('stock_smart:productos_lista')
             
-        order = get_object_or_404(Order, id=order_id)
-        logger.info(f"Orden encontrada: {order.order_number}")
+        product = get_object_or_404(Product, id=product_id)
+        logger.info(f"Producto encontrado: {product.name}")
 
-        # Datos mínimos requeridos según documentación
+        # Crear orden directamente
+        order_number = f'ORD-{timezone.now().strftime("%Y%m%d")}-{uuid.uuid4().hex[:8]}'
+        order = Order.objects.create(
+            order_number=order_number,
+            total_amount=product.final_price,
+            status='pending',
+            customer_email=request.POST.get('email', ''),
+            customer_name=f"{request.POST.get('nombre', '')} {request.POST.get('apellido', '')}"
+        )
+        logger.info(f"Orden creada: {order.order_number}")
+
+        # Crear item de orden
+        OrderItem.objects.create(
+            order=order,
+            product=product,
+            quantity=1,
+            price=product.final_price
+        )
+        logger.info("Item de orden creado")
+
+        # Datos para Flow Sandbox
         payment_data = {
             "apiKey": settings.FLOW_API_KEY,
             "commerceOrder": order.order_number,
@@ -318,19 +339,17 @@ def process_payment(request):
             "amount": int(order.total_amount),
             "email": order.customer_email,
             "urlConfirmation": request.build_absolute_uri(reverse('stock_smart:payment_confirm')),
-            "urlReturn": request.build_absolute_uri(reverse('stock_smart:payment_success'))
+            "urlReturn": request.build_absolute_uri(reverse('stock_smart:payment_success')),
+            "optional": {"timeout": 30}  # Timeout de 30 minutos para sandbox
         }
         
-        # Ordenar parámetros alfabéticamente
-        params = sorted(payment_data.items())
+        logger.info("Datos de pago preparados")
+        logger.info(json.dumps(payment_data, indent=2))
         
-        # Concatenar key=value
+        # Crear firma
+        params = sorted(payment_data.items())
         to_sign = ''.join(f"{key}{value}" for key, value in params)
         
-        logger.info("String para firma:")
-        logger.info(to_sign)
-        
-        # Generar firma
         secret_key = settings.FLOW_SECRET_KEY.encode('utf-8')
         signature = hmac.new(
             secret_key,
@@ -338,43 +357,37 @@ def process_payment(request):
             hashlib.sha256
         ).hexdigest()
         
-        # Agregar firma
         payment_data['s'] = signature
+        logger.info("Firma generada")
         
-        logger.info("Datos de pago:")
-        logger.info(json.dumps(payment_data, indent=2))
-        
-        # Enviar a Flow
+        # Enviar a Flow Sandbox
         response = requests.post(
             'https://sandbox.flow.cl/api/payment/create',
             data=payment_data
         )
         
-        logger.info(f"Status Code: {response.status_code}")
-        logger.info(f"Respuesta Flow: {response.text}")
+        logger.info(f"Respuesta Flow Sandbox: {response.status_code}")
+        logger.info(response.text)
         
         if response.status_code == 200:
-            response_data = response.json()
-            if 'url' in response_data and 'token' in response_data:
-                # Guardar token
-                order.flow_token = response_data['token']
+            data = response.json()
+            if 'url' in data and 'token' in data:
+                order.flow_token = data['token']
                 order.save()
-                
-                # Construir URL de pago
-                payment_url = f"{response_data['url']}?token={response_data['token']}"
-                logger.info(f"URL de pago: {payment_url}")
-                
-                return redirect(payment_url)
+                logger.info(f"Token guardado: {data['token']}")
+                # Guardar order_id en sesión
+                request.session['order_id'] = order.id
+                return redirect(data['url'])
         
-        logger.error(f"Error en respuesta Flow: {response.text}")
+        logger.error("Error en respuesta de Flow Sandbox")
         messages.error(request, 'Error al procesar el pago')
-        return redirect('stock_smart:productos_lista')
+        return redirect('stock_smart:checkout_error')
         
     except Exception as e:
         logger.error(f"Error en process_payment: {str(e)}")
         logger.error(traceback.format_exc())
         messages.error(request, 'Error al procesar el pago')
-        return redirect('stock_smart:productos_lista')
+        return redirect('stock_smart:checkout_error')
 
 def auth_page(request):
     try:

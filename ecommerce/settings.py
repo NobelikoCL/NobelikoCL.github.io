@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-b-wqkp()jp4#5#h6p^)&i0q^+xzv651hejh++mar1m_@3pfnrc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -190,8 +190,9 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
-    ALLOWED_HOSTS = ['NobelikoCL.github.io']
+    ALLOWED_HOSTS = ['NobelikoCL.github.io', '*']
     STATIC_URL = '/NobelikoCL.github.io/static/'
+    
 
 
 
@@ -224,7 +225,7 @@ PAYMENT_VARIANTS = {
     })
 }
 
-PAYMENT_HOST = 'localhost:8000'
+PAYMENT_HOST = 'localhost:8000' , '*'
 PAYMENT_MODEL = 'stock_smart.Payment'
 PAYMENT_USES_SSL = False  # Cambiar a True en producción
 
@@ -242,7 +243,7 @@ FLOW_CONFIRM_URL = 'http://127.0.0.1:8000/payment/confirm/'
 FLOW_RETURN_URL = 'http://127.0.0.1:8000/payment/success/'
 FLOW_COMMERCE_ID = '1F90971E-8C84-4C67-834F-8B487AF2C550'
 FLOW_PAYMENT_URL = 'https://sandbox.flow.cl/app/web/pay.php'
-SITE_URL = 'http://127.0.0.1:8000'  # URL base de tu sitio
+SITE_URL = 'http://127.0.0.1:8000' , '*' # URL base de tu sitio
 
 # URLs completas para Flow
 FLOW_RETURN_URL = f"{SITE_URL}/payment/success/"
@@ -254,7 +255,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://sandbox.flow.cl',
     'https://www.flow.cl',
     'http://127.0.0.1:8000',
-    'http://localhost:8000'
+    'http://localhost:8000',
+    '*'
 ]
 
 # Configuración de CORS
@@ -263,6 +265,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://www.flow.cl',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
+    '*'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -290,6 +293,7 @@ FLOW_SECRET_KEY = 'deef495f20d1307e2ebed5b1f9c5f33da3aeaee9'
 CSRF_TRUSTED_ORIGINS = [
     'https://nobelikoclgithubio-production.up.railway.app',
     'https://*.railway.app'
+    '*'
 ]
 
 # Configuración de base de datos

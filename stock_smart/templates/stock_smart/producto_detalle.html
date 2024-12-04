@@ -1,5 +1,4 @@
 {% extends 'stock_smart/base.html' %}
-<<<<<<< HEAD
 % load static %}
 % load humanize %}
 {% block title %}{{ producto.name }} - Stock Smart{% endblock %}
@@ -86,19 +85,19 @@ div class="container my-4">
            </div>
            
            <!-- Botones de acción -->
-           <div class="d-grid gap-2">
+           #<div class="d-grid gap-2">
                {% if producto.stock > 0 %}
-                   <form method="POST" action="{% url 'stock_smart:agregar_carrito' producto.id %}" class="mb-2">
+               <!-- <form method="POST" action="{% url 'stock_smart:agregar_carrito' producto.id %}" class="mb-2">
                        {% csrf_token %}
                        <button type="submit" class="btn btn-outline-primary w-100">
                            <i class="bi bi-cart-plus"></i> Agregar al Carrito
-                       </button>
-                   </form>
+                       </button> -->
+                       <!-- </form> -->
                    
                    <form method="POST" action="{% url 'stock_smart:comprar_ahora' producto.id %}">
                        {% csrf_token %}
                        <button type="submit" class="btn btn-primary w-100">
-                           <i class="bi bi-lightning-charge"></i> Comprar Ahora
+                           <i class="bi bi-lightning-charge"></i> Comprar 
                        </button>
                    </form>
                {% else %}
@@ -144,123 +143,3 @@ div class="container my-4">
    {% endif %}
 /div>
 {% endblock %}
-=======
-
-{% block title %}{{ producto.nombre }} - Stock Smart{% endblock %}
-
-{% block content %}
-<div class="container my-5">
-    <div class="row">
-        <!-- Imagen del producto -->
-        <div class="col-md-6">
-            {% if producto.imagen %}
-                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="img-fluid rounded">
-            {% else %}
-                <img src="{% static 'img/no-image.png' %}" alt="Sin imagen" class="img-fluid rounded">
-            {% endif %}
-        </div>
-        
-        <!-- Detalles del producto -->
-        <div class="col-md-6">
-            <h1 class="mb-3">{{ producto.nombre }}</h1>
-            <p class="text-muted">Categoría: {{ producto.categoria.nombre }}</p>
-            
-            {% if producto.precio_oferta %}
-                <p class="h3 mb-3">
-                    <span class="text-danger">${{ producto.precio_oferta|floatformat:0 }}</span>
-                    <small class="text-muted text-decoration-line-through">${{ producto.precio|floatformat:0 }}</small>
-                </p>
-            {% else %}
-                <p class="h3 mb-3">${{ producto.precio|floatformat:0 }}</p>
-            {% endif %}
-            
-            <div class="mb-4">
-                {{ producto.descripcion|linebreaks }}
-            </div>
-            
-            <div class="d-grid gap-2">
-                <form method="post" action="{% url 'agregar_carrito' producto.id %}" class="d-flex gap-2 mb-3">
-                    {% csrf_token %}
-                    <div class="input-group" style="width: 150px;">
-                        <span class="input-group-text">Cantidad</span>
-                        <input type="number" name="cantidad" value="1" min="1" max="{{ producto.stock }}" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary flex-grow-1">
-                        <i class="bi bi-cart-plus"></i> Agregar al Carrito
-                    </button>
-                </form>
-                
-                <form method="post" action="{% url 'comprar_ahora' producto.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-success w-100">
-                        <i class="bi bi-lightning-charge"></i> Comprar Ahora
-                    </button>
-                </form>
-                
-                {% if user.is_authenticated %}
-                    <button class="btn btn-outline-primary" onclick="agregarAFavoritos({{ producto.id }})">
-                        <i class="bi bi-heart"></i> Agregar a Favoritos
-                    </button>
-                {% endif %}
-            </div>
-            
-            <!-- Información adicional -->
-            <div class="mt-4">
-                <p class="mb-2">
-                    <i class="bi bi-box-seam"></i> 
-                    Stock disponible: <strong>{{ producto.stock }}</strong>
-                </p>
-                {% if producto.stock > 0 %}
-                    <p class="text-success">
-                        <i class="bi bi-check-circle"></i> 
-                        Producto disponible para entrega inmediata
-                    </p>
-                {% else %}
-                    <p class="text-danger">
-                        <i class="bi bi-x-circle"></i> 
-                        Producto agotado temporalmente
-                    </p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    
-    <!-- Productos relacionados -->
-    {% if productos_relacionados %}
-    <div class="mt-5">
-        <h3 class="mb-4">Productos Relacionados</h3>
-        <div class="row">
-            {% for prod_rel in productos_relacionados %}
-            <div class="col-md-3 mb-4">
-                <div class="card h-100">
-                    {% if prod_rel.imagen %}
-                        <img src="{{ prod_rel.imagen.url }}" class="card-img-top" alt="{{ prod_rel.nombre }}">
-                    {% else %}
-                        <img src="{% static 'img/no-image.png' %}" class="card-img-top" alt="Sin imagen">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ prod_rel.nombre }}</h5>
-                        <p class="card-text">${{ prod_rel.precio|floatformat:0 }}</p>
-                        <a href="{% url 'producto_detalle' prod_rel.slug %}" class="btn btn-outline-primary">Ver Detalles</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-</div>
-
-{% block extra_js %}
-<script>
-function agregarAlCarrito(productoId) {
-    // Aquí irá la lógica para agregar al carrito
-}
-
-function agregarAFavoritos(productoId) {
-    // Aquí irá la lógica para agregar a favoritos
-}
-</script>
-{% endblock %}
-{% endblock %}
->>>>>>> 595a6b4df9c2aa87d70d9d46595bb6660fd1f04f
