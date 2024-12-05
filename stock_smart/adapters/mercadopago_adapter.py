@@ -1,6 +1,8 @@
 import mercadopago
 import logging
 from django.conf import settings
+from django.urls import reverse
+from urllib.parse import urljoin
 from ..models import OrderItem
 
 logger = logging.getLogger(__name__)
@@ -27,6 +29,17 @@ class MercadoPagoAdapter:
                 logger.error("No se encontraron items en la orden")
                 return None
 
+            # Obtener el dominio base desde settings
+            base_url = settings.SITE_URL  # Necesitamos agregar esto en settings.py
+            
+            # Construir URLs completas
+            success_url = urljoin(base_url, reverse('payment_success'))
+            failure_url = urljoin(base_url, reverse('payment_failure'))
+            pending_url = urljoin(base_url, reverse('payment_pending'))
+            
+            logger.info(f"URL base: {base_url}")
+            logger.info(f"URL success: {success_url}")
+
             # Crear preferencia básica según documentación de MercadoPago Chile
             preference_data = {
                 "items": [
@@ -38,9 +51,9 @@ class MercadoPagoAdapter:
                     }
                 ],
                 "back_urls": {
-                    "success": "/payment/success/",
-                    "failure": "/payment/failure/",
-                    "pending": "/payment/pending/"
+                    "success": success_url,
+                    "failure": failure_url,
+                    "pending": pending_url
                 },
                 "auto_return": "approved",
                 "external_reference": str(order.id)
