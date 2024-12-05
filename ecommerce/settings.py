@@ -361,3 +361,10 @@ MERCADOPAGO_FAILURE_URL = f"{SITE_URL}/payment/mercadopago/failure/"
 MERCADOPAGO_PENDING_URL = f"{SITE_URL}/payment/mercadopago/pending/"
 MERCADOPAGO_WEBHOOK_URL = f"{SITE_URL}/payment/mercadopago/webhook/"
 
+# Development
+if DEBUG:
+    SITE_URL = 'http://127.0.0.1:8000'
+else:
+    # Production
+    SITE_URL = 'https://nobelikoclgithubio-production.up.railway.app'  # Reemplaza con tu dominio de producción
+
