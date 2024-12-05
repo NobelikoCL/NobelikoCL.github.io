@@ -1,0 +1,82 @@
+.discount-badge {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    animation: pulse 2s infinite;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.final-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+section h3 {
+    color: #333;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 0.5rem;
+}
+
+/* Estilos para las imágenes */
+.card-img-top {
+    width: 100%;
+    height: 200px;  /* Altura fija para todas las imágenes */
+    object-fit: contain;  /* Mantiene la proporción sin recortar */
+    padding: 10px;  /* Espacio alrededor de la imagen */
+    background-color: #fff;
+}
+
+.no-image-placeholder {
+    width: 100%;
+    height: 200px;  /* Misma altura que las imágenes */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+/* Estilos para los precios */
+.price-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.final-price-container {
+    margin-top: 5px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Estilos para la card */
+.card {
+    transition: transform 0.2s;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
