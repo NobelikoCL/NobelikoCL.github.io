@@ -30,12 +30,12 @@ class MercadoPagoAdapter:
                 return None
 
             # Obtener el dominio base desde settings
-            base_url = settings.SITE_URL  # Necesitamos agregar esto en settings.py
+            base_url = settings.SITE_URL
             
-            # Construir URLs completas
-            success_url = urljoin(base_url, reverse('payment_success'))
-            failure_url = urljoin(base_url, reverse('payment_failure'))
-            pending_url = urljoin(base_url, reverse('payment_pending'))
+            # Construir URLs completas usando el namespace de la app
+            success_url = urljoin(base_url, reverse('stock_smart:payment_success'))
+            failure_url = urljoin(base_url, reverse('stock_smart:payment_failure'))
+            pending_url = urljoin(base_url, reverse('stock_smart:payment_pending'))
             
             logger.info(f"URL base: {base_url}")
             logger.info(f"URL success: {success_url}")
