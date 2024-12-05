@@ -38,9 +38,9 @@ class MercadoPagoAdapter:
                     }
                 ],
                 "back_urls": {
-                    "success": "http://127.0.0.1:8000/payment/success/",
-                    "failure": "http://127.0.0.1:8000/payment/failure/",
-                    "pending": "http://127.0.0.1:8000/payment/pending/"
+                    "success": "/payment/success/",
+                    "failure": "/payment/failure/",
+                    "pending": "/payment/pending/"
                 },
                 "auto_return": "approved",
                 "external_reference": str(order.id)
