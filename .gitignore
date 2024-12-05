@@ -12,8 +12,7 @@ env/
 # Django
 *.log
 local_settings.py
-media/
-static/
+
 
 # VS Code
 .vscode/
