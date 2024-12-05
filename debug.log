@@ -113,3 +113,4 @@ Categorías cargadas: ['Accesorios Celulares', 'Accesorios Computación', 'Accesor
 "GET /static/stock_smart/js/main.js HTTP/1.1" 304 0
 "GET /media/products/rtx4060.png HTTP/1.1" 200 324702
 "GET /static/stock_smart/js/theme.js HTTP/1.1" 304 0
+Watching for file changes with StatReloader
