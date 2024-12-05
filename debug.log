@@ -97,3 +97,19 @@ INICIO LOGIN
 Intento de login con email: asdasd@gmail.com
 Login exitoso para usuario: asdasd@gmail.com
 Categorías cargadas: ['Accesorios Celulares', 'Accesorios Computación', 'Accesorios Gaming', 'Apple iPhone', 'Audio', 'Audio Profesional', 'Audífonos', 'Computación', 'Consolas', 'Equipos de Sonido', 'Gaming', 'Impresoras', 'Micrófonos', 'Monitores', 'Notebooks', 'Notebooks Gamer', 'PC Escritorio', 'Parlantes', 'Samsung Galaxy', 'Sillas Gamer', 'Smartphones', 'Smartwatch', 'Videojuegos', 'Xiaomi']
+Categorías cargadas: ['Accesorios Celulares', 'Accesorios Computación', 'Accesorios Gaming', 'Apple iPhone', 'Audio', 'Audio Profesional', 'Audífonos', 'Computación', 'Consolas', 'Equipos de Sonido', 'Gaming', 'Impresoras', 'Micrófonos', 'Monitores', 'Notebooks', 'Notebooks Gamer', 'PC Escritorio', 'Parlantes', 'Samsung Galaxy', 'Sillas Gamer', 'Smartphones', 'Smartwatch', 'Videojuegos', 'Xiaomi']
+Categorías cargadas: ['Accesorios Celulares', 'Accesorios Computación', 'Accesorios Gaming', 'Apple iPhone', 'Audio', 'Audio Profesional', 'Audífonos', 'Computación', 'Consolas', 'Equipos de Sonido', 'Gaming', 'Impresoras', 'Micrófonos', 'Monitores', 'Notebooks', 'Notebooks Gamer', 'PC Escritorio', 'Parlantes', 'Samsung Galaxy', 'Sillas Gamer', 'Smartphones', 'Smartwatch', 'Videojuegos', 'Xiaomi', 'tarjetas Graficas']
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Categorías cargadas: ['Accesorios Celulares', 'Accesorios Computación', 'Accesorios Gaming', 'Apple iPhone', 'Audio', 'Audio Profesional', 'Audífonos', 'Computación', 'Consolas', 'Equipos de Sonido', 'Gaming', 'Impresoras', 'Micrófonos', 'Monitores', 'Notebooks', 'Notebooks Gamer', 'PC Escritorio', 'Parlantes', 'Samsung Galaxy', 'Sillas Gamer', 'Smartphones', 'Smartwatch', 'Videojuegos', 'Xiaomi', 'tarjetas Graficas']
+"GET / HTTP/1.1" 200 46571
+"GET /media/products/audifono-razer-kraken-multiplataforma-wired-green-pnrz04-02830200-r3u1.jpg HTTP/1.1" 304 0
+"GET /static/stock_smart/css/styles.css HTTP/1.1" 304 0
+"GET /media/products/descarga_3.jpeg HTTP/1.1" 304 0
+"GET /media/products/descarga_2.jpeg HTTP/1.1" 304 0
+"GET /media/products/descarga_1.jpeg HTTP/1.1" 304 0
+"GET /media/products/xbox_sx.png HTTP/1.1" 304 0
+"GET /media/products/descarga.jpeg HTTP/1.1" 304 0
+"GET /static/stock_smart/js/main.js HTTP/1.1" 304 0
+"GET /media/products/rtx4060.png HTTP/1.1" 200 324702
+"GET /static/stock_smart/js/theme.js HTTP/1.1" 304 0

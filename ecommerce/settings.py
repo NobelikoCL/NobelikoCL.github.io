@@ -129,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'stock_smart', 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -334,6 +334,9 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
@@ -341,9 +344,9 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django.security': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
             'propagate': True,
         },
     },
@@ -367,4 +370,11 @@ if DEBUG:
 else:
     # Production
     SITE_URL = 'https://nobelikoclgithubio-production.up.railway.app'  # Reemplaza con tu dominio de producción
+
+# Crear directorios si no existen
+import os
+os.makedirs(STATIC_ROOT, exist_ok=True)
+os.makedirs(MEDIA_ROOT, exist_ok=True)
+for static_dir in STATICFILES_DIRS:
+    os.makedirs(static_dir, exist_ok=True)
 
